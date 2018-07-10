@@ -12,7 +12,8 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
-    "webpack": "^4.15.1"
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
