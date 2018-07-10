@@ -3,8 +3,9 @@ import React from 'react';
 // import configureStore from './store/store';
 
 
-
+console.log("hello");
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("world");
   let preloadedState = {}
   if (window.currentUser) {
     preloadedState = {
