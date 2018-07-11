@@ -34,7 +34,7 @@ class Api::UsersController < ApplicationController
       render json: ["DESTROYEEEDDDDDD"]
     else
       render json: ["Can't delete users when not logged in"]
-    end 
+    end
   end
 
   private

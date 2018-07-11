@@ -1,8 +1,9 @@
 class User < ApplicationRecord
 
-  after_initialize :ensure_session_token
+  after_initialize :ensure_session_token, :default_nickname
 
-  validates :username, :session_token, :password_digest, presence: true
+  validates :username, :session_token, :password_digest, :nickname, presence: true
+  validates :username, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, allow_nil: true
 
   attr_reader :password
@@ -37,6 +38,10 @@ class User < ApplicationRecord
 
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
+  end
+
+  def default_nickname
+    self.nickname = self.username
   end
 
 end

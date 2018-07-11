@@ -1,11 +1,10 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-// import configureStore from './store/store';
+import configureStore from './store/store';
+import Root from './components/root';
 
 
-console.log("hello");
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("world");
   let preloadedState = {}
   if (window.currentUser) {
     preloadedState = {
@@ -20,8 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // const store = configureStore(preloadedState);
+  const store = configureStore(preloadedState);
   delete window.currentUser;
+  window.dispatch = store.dispatch;
+  window.getState = store.getState;
   const root = document.getElementById("root");
-  ReactDOM.render(<p>We out here</p>, root);
+  ReactDOM.render(<Root store={ store } />, root);
 });
