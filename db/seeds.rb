@@ -9,3 +9,4 @@
 User.destroy_all
 
 User.create(username: "nick", password: "asdfasdf", location: "New York, NY", nickname: "baircave", bio: "I'm the first user whattup")
+User.create(username: "guest", password: "asdfasdf", location: "New York, NY", nickname: "guest", bio: "I'm your friendly neighborhood Guest user!")

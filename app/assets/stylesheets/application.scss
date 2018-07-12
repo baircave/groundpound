@@ -13,71 +13,21 @@
  *= require_tree .
  *= require_self
  */
-.session_form_wrapper {
-  position: absolute;
-  background-color: rgba(245, 245, 245, 0.9);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: auto;
-}
 
-.session_form {
-  margin: 50px auto;
-  width: 400px;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 50px;
-  background-color: white;
-}
+ .transButton {
+   padding: 9px 14px 9px 14px;
+   background: none;
+   border: 1px solid ;
+   color: rgb(200, 200, 200);
+ }
 
-.cover_scroller {
-  display: flex;
-  margin: auto;
-  width: 1080px;
-  height: 450px;
-  border-top: 5px solid rgb(255, 90, 0);
-  background-image: image_url("travolta_moonwalk.gif");
-  background-size: cover;
-}
+ .transButton:hover {
+   border: 1px solid white;
+   color: white;
+   transition: 0.5s;
+ }
 
-.cover_scroller_content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-}
-
-.cover_scroller_content button:nth-child(odd) {
-  padding: 9px 14px 9px 14px;
-  background: none;
-  border: 1px solid white;
-}
-
-.cover_scroller_content h1 {
-  color: white;
-  font-size: 60px;
-  font-weight: 100;
-}
-
-.quit_modal {
-  font-size: 40px;
-  position: absolute;
-  right: 19px;
-  top: 7px;
-}
-
-.quit_modal:hover {
-  cursor: pointer;
-}
-
-
-.cover_scroller_content .session_buttons {
-  position: absolute;
-  right: 25px;
-  top: 12px;
-}
+ .transButton:hover, .colorButton:hover {
+   box-shadow: 0px 0px 5px 5px rgba(255, 155, 180, 0.3);
+   transition: 0.5s;
+ }

@@ -1,17 +1,16 @@
 import React from 'react';
 import { logout } from '../util/session_api_util';
 import { connect } from 'react-redux';
-import CoverScroller from './cover_scroller/cover_scroller';
-import NavBar from './navbar';
+import LandingPage from './landing_page/landing_page';
+import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import MainPage from './main_page/main_page';
+import { withRouter } from 'react-router-dom';
 
 function App({ loggedIn, logout }) {
   return (
     <div>
-      { (!loggedIn) ?
-
-        <CoverScroller /> : //need to add Search, Main, CurrentlyPlayingFooter here
-        <NavBar />
-      }
+      <AuthRoute exact path="/" component={LandingPage} />
+      <ProtectedRoute exact path="/stream" component={MainPage} />
     </div>
   );
 };
@@ -28,4 +27,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

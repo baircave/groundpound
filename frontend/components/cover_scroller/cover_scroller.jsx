@@ -1,8 +1,10 @@
 import React from 'react';
 import LoginForm from '../session/login_container';
 import SignupForm from '../session/signup_container';
+import { login, clearErrors } from '../../actions/session_actions';
+import { connect } from 'react-redux';
 
-export default class CoverScroller extends React.Component {
+class CoverScroller extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +13,12 @@ export default class CoverScroller extends React.Component {
     };
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleSignupClick = this.handleSignupClick.bind(this);
+    this.logInGuest = this.logInGuest.bind(this);
     this.removeModal = this.removeModal.bind(this);
+  }
+
+  logInGuest(e) {
+    this.props.login({username: "guest", password:"asdfasdf"});
   }
 
   handleLoginClick(e) {
@@ -30,6 +37,7 @@ export default class CoverScroller extends React.Component {
 
   removeModal(e) {
     e.preventDefault();
+    this.props.clearErrors();
     this.setState({
       showLogin: false,
       showSignup: false
@@ -42,8 +50,9 @@ export default class CoverScroller extends React.Component {
         <div className="cover_scroller_content">
           <h1>Welcome to Groundpound.</h1>
           <div className="session_buttons">
-            <button onClick={this.handleLoginClick}>Sign in</button>
-            <button onClick={this.handleSignupClick}>Create account</button>
+            <button className="transButton" onClick={this.handleLoginClick}>Sign in</button>
+            <button className="colorButton" onClick={this.handleSignupClick}>Create account</button>
+            <button className="transButton" onClick={this.logInGuest}>Guest</button>
           </div>
         </div>
         { (this.state.showLogin || this.state.showSignup) ?
@@ -65,3 +74,12 @@ export default class CoverScroller extends React.Component {
   }
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (user) => dispatch(login(user)),
+    clearErrors: () => dispatch(clearErrors())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CoverScroller);

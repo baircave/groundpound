@@ -1,0 +1,48 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333333;
+}
+
+.navbarContent {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navButton {
+  border: none;
+  background: none;
+  min-width: 100px;
+  color: rgb(240, 240, 240);
+}
+
+.navbar img {
+  width: 69px;
+}
+
+.navButton:hover {
+  color: white;
+  transition: 0.5s
+}
+
+.navbar input[type~="text"] {
+  background-color: #333333;
+  // background-color: #e5e5e5;
+  transition: 0.5s;
+  margin: 0 10px 0 10px;
+  font-size: 14px;
+  padding: 5px 10px 5px 10px;
+  width: 100%;
+  min-width: 180px;
+  height: 20px;
+}
+
+.navbar input:focus {
+  caret-color: black;
+  background-color: #e5e5e5;
+  transition: 0.5s;
+}

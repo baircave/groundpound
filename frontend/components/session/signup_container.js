@@ -4,7 +4,8 @@ import SessionForm from './session_form';
 
 const mapStateToProps = (state) => {
   return {
-    formType: "Create account"
+    formType: "Create account",
+    errors: state.errors.session.responseJSON || {}
   };
 };
 

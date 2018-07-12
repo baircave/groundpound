@@ -10,6 +10,10 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
+  <script type="text/javascript">
+    window.sc_mini_logo = "<%= image_url('sc_mini_logo.png') %>"
+  </script>
+
   <body>
     <%= yield %>
   </body>

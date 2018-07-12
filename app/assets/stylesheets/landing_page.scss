@@ -1,0 +1,70 @@
+.session_form_wrapper {
+  position: absolute;
+  background-color: rgba(245, 245, 245, 0.9);
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  min-width: 1080px;
+  margin: auto;
+}
+
+.session_form {
+  margin: 50px auto;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px;
+  background-color: white;
+}
+
+.session_form span {
+  margin: 10px;
+  color: red;
+  text-align: center;
+}
+
+.cover_scroller {
+  display: flex;
+  margin: auto;
+  width: 1080px;
+  height: 450px;
+  border-top: 5px solid rgb(0, 150, 255);
+  background-image: image_url("travolta_moonwalk.gif");
+  background-size: cover;
+}
+
+.cover_scroller_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+
+.cover_scroller_content h1 {
+  color: white;
+  font-size: 60px;
+  font-weight: 100;
+}
+
+.quit_modal {
+  font-size: 40px;
+  position: absolute;
+  right: 19px;
+  top: 7px;
+}
+
+.quit_modal:hover {
+  cursor: pointer;
+}
+
+
+.cover_scroller_content .session_buttons {
+  position: absolute;
+  right: 25px;
+  top: 12px;
+}
