@@ -6,7 +6,7 @@ const goToUploadForm = (e) => {
   console.log("we here");
 };
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, logout }) => {
   return (
     <div className="navbar">
       <div className="navbarContent">
@@ -26,4 +26,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
