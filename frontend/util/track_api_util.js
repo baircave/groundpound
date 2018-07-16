@@ -7,3 +7,10 @@ export const postTrack = (formData) => {
     processData: false
   });
 };
+
+export const fetchTrack = (trackId) => {
+  return $.ajax({
+    method: "GET",
+    url: `api/tracks/${trackId}`
+  });
+};

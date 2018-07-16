@@ -51,10 +51,19 @@
 }
 
 .form_fields input[type="text"] {
+  font-size: 16px;
   padding: 5px;
   width: 470px;
   margin: 0;
   border-color: lightgray;
+}
+
+.form_fields textarea:focus {
+  border-color: gray;
+}
+
+.form_fields input:focus {
+  border-color: gray;
 }
 
 .form_fields label {
@@ -63,17 +72,30 @@
 }
 
 .track_file_input {
+  visibility: hidden;
   position: absolute;
   width: auto;
   left: 50%;
   top: -100px;
-  margin-left: -80px;
+  margin-left: -92px;
 }
 
 .artwork_file_input {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 3px 8px 3px 8px;
+  visibility: hidden;
   position: absolute;
-  left: 95px;
-  top: 270px;
+  left: 113px;
+  top: 250px;
+  border-radius: 3px;
+  transition: 1s;
+}
+
+.artwork_file_input:hover {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  transition: 1s;
+  background-color: rgb(240, 240, 240);
 }
 
 // .form_fields input[type="file"] {
@@ -131,5 +153,11 @@
 }
 
 .trackSubmitButton:disabled:hover .tool_tip_text {
+  visibility: visible;
+}
+
+.refButton {
+  cursor: pointer;
+  text-align: center;
   visibility: visible;
 }

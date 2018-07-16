@@ -4,8 +4,8 @@ audio = url_for(@track.track_file)
 json.tracks do
   json.set! @track.id do
     json.extract! @track, :title, :description, :track_url, :artist_id, :id
-    json.artwork_url artwork
-    json.track_url audio
+    json.artwork_file artwork
+    json.track_file audio
   end
 end
 

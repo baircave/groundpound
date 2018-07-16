@@ -17,6 +17,8 @@ class UploadTrack extends React.Component {
       imageFile: null,
       trackFile: null
     };
+    this.trackFileInput = React.createRef();
+    this.artworkFileInput = React.createRef();
     this.handleArtFile = this.handleArtFile.bind(this);
     this.handleTrackFile = this.handleTrackFile.bind(this);
     this.updateField = this.updateField.bind(this);
@@ -53,7 +55,9 @@ class UploadTrack extends React.Component {
     formData.append('track[title]', this.state.title);
     formData.append('track[track_url]', this.state.track_url);
     formData.append('track[description]', this.state.description);
-    formData.append('track[artwork]', this.state.imageFile);
+    if (this.state.imageFile) {
+      formData.append('track[artwork]', this.state.imageFile);
+    }
     formData.append('track[track_file]', this.state.trackFile);
     this.props.postTrack(formData);
   }
@@ -71,7 +75,10 @@ class UploadTrack extends React.Component {
         <div className="form_wrapper">
           <h1 className="form_header">Upload to Groundpound</h1>
           <form className="upload_form">
+            <div className="colorButton refButton track_file_input"
+              onClick={(e) => this.trackFileInput.current.click()}>Choose a file to upload</div>
             <input
+              ref={this.trackFileInput}
               accept="audio/*"
               className="track_file_input"
               type="file"
@@ -81,7 +88,8 @@ class UploadTrack extends React.Component {
               <label>Title</label>
               <input type="text"
                 onChange={this.updateField("title")}
-                placeholder="Name your track"></input>
+                placeholder="Name your track"
+                autoFocus></input>
               <div className="url_field">
                 <p>groundpound.herokuapp.com/{this.props.user.username}/</p>
                 <input onChange={this.updateField("track_url")}
@@ -93,7 +101,11 @@ class UploadTrack extends React.Component {
               <textarea placeholder="Describe your track"
                 onChange={this.updateField("description")}></textarea>
 
+              <div className="refButton artwork_file_input"
+                onClick={(e) => this.artworkFileInput.current.click()}>
+                <i className="fa fa-camera"></i> Update image</div>
               <input type="file"
+                ref={this.artworkFileInput}
                 className="artwork_file_input"
                 accept="image/*"
                 onChange={this.handleArtFile}></input>

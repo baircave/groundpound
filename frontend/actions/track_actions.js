@@ -17,6 +17,15 @@ export const receiveErrors = (errorsArray) => {
   };
 };
 
+export const fetchTrack = (trackId) => {
+  return (dispatch) => {
+    return TrackApiUtil.fetchTrack(trackId).then(
+      (payload) => dispatch(receiveTrack(payload)),
+      (errors) => dispatch(receiveErrors(errors))
+    );
+  };
+};
+
 export const postTrack = (trackInfo) => {
   return (dispatch) => {
     return TrackApiUtil.postTrack(trackInfo).then(

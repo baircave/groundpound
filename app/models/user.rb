@@ -11,6 +11,9 @@ class User < ApplicationRecord
   # has_one_attached :profile_photo
   # has_one_attached :cover_photo
 
+  has_many :tracks,
+    foreign_key: :artist_id
+
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
