@@ -8,6 +8,10 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  # has_one_attached :profile_photo
+  # has_one_attached :cover_photo
+
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return user if user && user.is_password?(password)
@@ -41,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def default_nickname
-    self.nickname = self.username
+    self.nickname ||= self.username
   end
 
 end

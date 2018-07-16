@@ -1,0 +1,135 @@
+.form_wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form_header {
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.upload_form {
+  border: 1px solid lightgray;
+  padding: 50px;
+  width: auto;
+  max-width: 1000px;
+  position: relative;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.upload_form img {
+  width: 260px;
+  height: 260px;
+  margin-right: 20px;
+  margin-top: 0;
+}
+
+.form_fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_fields p {
+  margin: 5px;
+  color: gray;
+  font-size: 14px;
+}
+
+.form_fields textarea {
+  border-radius: 5px;
+  min-width: 470px;
+  max-width: 470px;
+  min-height: 20px;
+  width: 470px;
+  height: 130px;
+  border-color: lightgray;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.form_fields input[type="text"] {
+  padding: 5px;
+  width: 470px;
+  margin: 0;
+  border-color: lightgray;
+}
+
+.form_fields label {
+  font-family: sans-serif;
+  margin: 5px;
+}
+
+.track_file_input {
+  position: absolute;
+  width: auto;
+  left: 50%;
+  top: -100px;
+  margin-left: -80px;
+}
+
+.artwork_file_input {
+  position: absolute;
+  left: 95px;
+  top: 270px;
+}
+
+// .form_fields input[type="file"] {
+//   position: absolute;
+//   left: 50%;
+// }
+
+.form_fields button {
+  width: 60px;
+}
+
+.cancel {
+  text-decoration: none;
+  background: none;
+  color: black;
+  width: auto;
+}
+
+.form_buttons {
+  position: absolute;
+  right: 0;
+  bottom: -100px;
+}
+
+.url_field {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.url_field input[type="text"] {
+  width: 100%;
+  font-size: 14px;
+}
+
+.trackSubmitButton {
+  position: relative;
+}
+
+.trackSubmitButton:disabled {
+  cursor: not-allowed;
+  background-color: lightgray;
+}
+
+.tool_tip_text {
+  text-align: center;
+  left: 0;
+  bottom: -15px;
+  width: 200px;
+  position: absolute;
+  visibility: hidden;
+  z-index: 1;
+  color: red;
+}
+
+.trackSubmitButton:disabled:hover .tool_tip_text {
+  visibility: visible;
+}

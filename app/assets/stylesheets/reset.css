@@ -2,7 +2,7 @@ html {
   margin: 0;
 }
 
-button {
+button, a {
   border-radius: 3px;
   background-color: rgb(0, 150, 255);
   cursor: pointer;
