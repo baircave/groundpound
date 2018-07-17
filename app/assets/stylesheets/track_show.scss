@@ -1,20 +1,97 @@
 .showPage {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  align-items: center;
 }
 
 .gradientWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  z-index: -1;
   width: 100%;
   max-width: 1240px;
   min-width: 800px;
+}
+
+.playbackWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 380px;
+  min-height: 380px;
+  max-width: 1240px;
+  min-width: 800px;
   margin: 0 auto;
-  // height: 380px;
+}
+
+.playbackContents {
+  margin-top: 30px;
+  width: calc(100% - 380px);
+  display: flex;
+  flex-direction: row;
 }
 
 .canvas {
   width: 100%;
   height: 380px;
+}
+
+.albumArt {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 340px;
+  height: 340px;
+}
+
+.nameAndTitle {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.nameAndTitle h2, h3 {
+  word-break: break-word;
+  width: fit-content;
+  margin: 1.5px;
+  padding: 3px;
+  background-color: black;
+  color: #fff;
+  font-weight: 100;
+}
+
+.playButton {
+  font-size: 27px;
+  text-align: center;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+.fa-play {
+  margin-left: 5px;
+}
+
+.trackAge {
+  position: absolute;
+  height: 100%;
+  right: 380px;
+  color: #fff;
+  background-color: none;
+  font-weight: 100;
+  font-size: 18px;
+}
+
+.comments {
+  position: relative;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  max-width: 1240px;
+  min-width: 800px;
 }

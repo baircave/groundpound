@@ -1,5 +1,12 @@
 html {
   margin: 0;
+  background-color: #f2f2f2;
+}
+
+.app, body, #root, html, .mainWrapper {
+  height: 100%;
+  /* min-width: 100vw; */
+  /* overflow: visible; */
 }
 
 button, a, .colorButton {

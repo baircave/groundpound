@@ -70,56 +70,63 @@ class UploadTrack extends React.Component {
     }
     const preview = <img src={url}></img>;
     return (
-      <div>
+      <div className="mainWrapper">
         <NavBar></NavBar>
-        <div className="form_wrapper">
-          <h1 className="form_header">Upload to Groundpound</h1>
-          <form className="upload_form">
-            <div className="colorButton refButton track_file_input"
-              onClick={(e) => this.trackFileInput.current.click()}>Choose a file to upload</div>
-            <input
-              ref={this.trackFileInput}
-              accept="audio/*"
-              className="track_file_input"
-              type="file"
-              onChange={this.handleTrackFile}></input>
-            {preview}
-            <div className="form_fields">
-              <label>Title</label>
-              <input type="text"
-                onChange={this.updateField("title")}
-                placeholder="Name your track"
-                autoFocus></input>
-              <div className="url_field">
-                <p>groundpound.herokuapp.com/{this.props.user.username}/</p>
-                <input onChange={this.updateField("track_url")}
-                    placeholder="your-custom-url"
-                    type="text"></input>
-              </div>
+        <section className="centerMain">
+          <div className="form_wrapper">
+            <h1 className="form_header">Upload to Groundpound</h1>
+            <form className="upload_form">
+              <div className="colorButton refButton track_file_input"
+                onClick={(e) => this.trackFileInput.current.click()}>Choose a file to upload</div>
+              <input
+                ref={this.trackFileInput}
+                accept="audio/*"
+                className="track_file_input"
+                type="file"
+                onChange={this.handleTrackFile}></input>
 
-              <label>Description</label>
-              <textarea placeholder="Describe your track"
-                onChange={this.updateField("description")}></textarea>
+              {preview}
 
-              <div className="refButton artwork_file_input"
-                onClick={(e) => this.artworkFileInput.current.click()}>
-                <i className="fa fa-camera"></i> Update image</div>
-              <input type="file"
-                ref={this.artworkFileInput}
-                className="artwork_file_input"
-                accept="image/*"
-                onChange={this.handleArtFile}></input>
-              <div className="form_buttons">
-                <NavLink className="cancel" to="/">Cancel</NavLink>
-                <button onClick={this.handleSubmit}
-                  className="colorButton, trackSubmitButton"
-                  disabled={!Boolean(this.state.title && this.state.trackFile)}>Save
-                  <span className="tool_tip_text">Choose a title and audio file</span>
-                </button>
+              <div className="form_fields">
+                <label>Title</label>
+                <input type="text"
+                  onChange={this.updateField("title")}
+                  placeholder="Name your track"
+                  autoFocus></input>
+
+                <div className="url_field">
+                  <p>groundpound.herokuapp.com/{this.props.user.username}/</p>
+                  <input onChange={this.updateField("track_url")}
+                      placeholder="your-custom-url"
+                      type="text"></input>
+                </div>
+
+                <label>Description</label>
+                <textarea placeholder="Describe your track"
+                  onChange={this.updateField("description")}></textarea>
+
+                <div className="refButton artwork_file_input"
+                  onClick={(e) => this.artworkFileInput.current.click()}>
+                  <i className="fa fa-camera"></i> Update image</div>
+
+                <input type="file"
+                  ref={this.artworkFileInput}
+                  className="artwork_file_input"
+                  accept="image/*"
+                  onChange={this.handleArtFile}></input>
+
+                <div className="form_buttons">
+                  <NavLink className="cancel" to="/">Cancel</NavLink>
+                  <button onClick={this.handleSubmit}
+                    className="colorButton, trackSubmitButton"
+                    disabled={!Boolean(this.state.title && this.state.trackFile)}>Save
+                    <span className="tool_tip_text">Choose a title and audio file</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
+        </section>
       </div>
 
     );

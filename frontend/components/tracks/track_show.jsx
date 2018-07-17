@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from '../main_page/navbar';
 import { connect } from 'react-redux';
 import { fetchTrack } from '../../actions/track_actions';
+import { trackAgeFromMs } from '../../util/helpers';
 
 class TrackShow extends React.Component {
 
@@ -10,7 +11,17 @@ class TrackShow extends React.Component {
     this.canvasRef = React.createRef();
     this.makeGradient = this.makeGradient.bind(this);
     this.state = {
-
+      track: [{
+        title: "",
+        created_at: "",
+        description: "",
+        track_url: "",
+        artwork_file: "",
+        track_file: "",
+        id: null,
+        artist_id: null
+      }],
+      user: [{username: "", nickname: "", profile_url: "", id: null}]
     };
   }
 
@@ -38,25 +49,52 @@ class TrackShow extends React.Component {
 
   componentDidMount() {
     this.makeGradient();
-    this.props.fetchTrack(this.props.match.params.id);
+    this.props.fetchTrack(this.props.match.params.id).then((response) => {
+      this.setState({
+        user: Object.values(response.payload.users),
+        track: Object.values(response.payload.tracks)
+      });
+    });
+
   }
 
-
   render() {
+    const track = this.state.track[0];
+    const d1 = new Date(track.created_at);
+    const d2 = new Date();
+    const trackAge = trackAgeFromMs(d2 - d1);
     return (
-      <div className="showPage">
+      <div className="mainWrapper">
         <NavBar></NavBar>
-        <div className="gradientWrapper">
-          <canvas className="canvas" ref={this.canvasRef} width="300" height="300"></canvas>
-          <script type="text/javascript">
+        <div className="showPage">
+          <div className="playbackWrapper">
+            <div className="gradientWrapper">
+              <canvas className="canvas" ref={this.canvasRef} width="300" height="300"></canvas>
+            </div>
+            <section className="playbackContents">
+              <button className="playButton"><i className="fas fa-play"></i></button>
+              <div className="nameAndTitle">
+                <h3>{this.state.user[0].nickname}</h3>
+                <h2>{track.title}</h2>
+              </div>
+              <img className="albumArt" src={track.artwork_file}></img>
+              <h4 className="trackAge">{trackAge}</h4>
+            </section>
+          </div>
+          <div className="comments">
+          </div>
 
-          </script>
         </div>
-
       </div>
     );
   }
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     track: state.entities.tracks[]
+//   }
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {

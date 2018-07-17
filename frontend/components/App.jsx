@@ -10,7 +10,7 @@ import TrackShow from './tracks/track_show';
 
 function App({ loggedIn, logout }) {
   return (
-    <div>
+    <div className="app">
       <AuthRoute exact path="/" component={LandingPage} />
       <ProtectedRoute exact path="/stream" component={MainPage} />
       <ProtectedRoute exact path="/upload" component={UploadTrack} />

@@ -2,6 +2,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  max-width: 1240px;
+  min-width: 800px;
+  margin: 0;
 }
 
 .form_header {
@@ -160,4 +166,10 @@
   cursor: pointer;
   text-align: center;
   visibility: visible;
+}
+
+.centerMain {
+  display: flex;
+  justify-content: center;
+  height: 100%;
 }

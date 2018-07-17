@@ -3,11 +3,14 @@
   align-items: center;
   justify-content: center;
   background-color: #333333;
+  min-height: 46px;
+  width: 100vw;
 }
 
 .navbarContent {
-  width: 100%;
+  width: 100vw;
   max-width: 1240px;
+  min-width: 800px;
   display: flex;
   justify-content: space-between;
   align-items: center;
