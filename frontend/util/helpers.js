@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const trackAgeFromMs = (ms) => {
   const minutes = Math.floor(ms / 60000.0);
   const hours = Math.floor(minutes / 60.0);
@@ -44,3 +46,45 @@ export const trackAgeFromMs = (ms) => {
     }
   }
 };
+
+export function generateRGB() {
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  return `rgba(${getRandomInt(255)}, ${getRandomInt(255)}, ${getRandomInt(255)}, 1.000)`;
+}
+
+export function makeGradient() {
+  const canvas = this.canvasRef.current;
+  const ctx = canvas.getContext('2d');
+  let grd;
+
+  grd = ctx.createLinearGradient(0.000, 150.000, 300.000, 150.000);
+
+  grd.addColorStop(0.000, generateRGB());
+  grd.addColorStop(1.000, generateRGB());
+
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, 300.000, 300.000);
+}
+
+export function secondsToTimeString(seconds) {
+  //for formatting into a time string
+  function addZeroChar(int) {
+    if (int < 10) {
+      return `0${int}`;
+    }
+    return `${int}`;
+  }
+  const hours = Math.floor(seconds / 3600);
+  const hoursRemainder = seconds % 3600;
+  const minutes = Math.floor(hoursRemainder / 60);
+  const minutesRemainder = Math.floor(hoursRemainder % 60);
+  if (hours > 0) {
+    return `${hours}:${addZeroChar(minutes)}:${addZeroChar(minutesRemainder)}`;
+  } else if (minutes > 0) {
+    return `${minutes}:${addZeroChar(minutesRemainder)}`;
+  } else {
+    return `0:${addZeroChar(minutesRemainder)}`;
+  }
+}

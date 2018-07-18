@@ -1,0 +1,25 @@
+.commentFormWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.commentForm {
+  margin: 10px;
+  padding: 3px;
+  width: 100%;
+  min-width: 400px;
+  max-width: 830px;
+  background-color: #f2f2f2;
+}
+
+.commentForm input[type~="text"] {
+  display: flex;
+  font-size: 15px;
+  width: 100%;
+  max-width: 800px;
+  margin: 5px;
+}
+
+.commentField {
+}

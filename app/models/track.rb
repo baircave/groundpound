@@ -12,7 +12,7 @@ class Track < ApplicationRecord
     class_name: 'User',
     dependent: :destroy
 
-  # has_many :comments
+  has_many :comments
 
   has_one_attached :artwork
 

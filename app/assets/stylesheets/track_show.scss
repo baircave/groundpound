@@ -1,4 +1,6 @@
 .showPage {
+  position: relative;
+  margin-top: 46px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -6,8 +8,6 @@
 }
 
 .gradientWrapper {
-  position: absolute;
-  z-index: -1;
   width: 100%;
   max-width: 1240px;
   min-width: 800px;
@@ -27,7 +27,9 @@
 
 .playbackContents {
   margin-top: 30px;
-  width: calc(100% - 380px);
+  position: absolute;
+  justify-content: space-between;
+  width: 100%;
   display: flex;
   flex-direction: row;
 }
@@ -37,10 +39,15 @@
   height: 380px;
 }
 
+.throwLeftRight {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+
 .albumArt {
-  position: absolute;
-  right: 20px;
-  top: 20px;
+  margin-top: -10px;
+  margin-right: 20px;
   width: 340px;
   height: 340px;
 }
@@ -62,32 +69,64 @@
 }
 
 .playButton {
+  display: flex;
+  justify-content: center;
   font-size: 27px;
-  text-align: center;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   min-width: 60px;
   min-height: 60px;
   margin-left: 30px;
-  margin-right: 10px;
+  margin-right: 15px;
+}
+
+.playButton img {
+  filter: invert(1);
+  margin-top: 0.5px;
 }
 
 .fa-play {
-  margin-left: 5px;
+  margin-left: 7px;
 }
 
 .trackAge {
-  position: absolute;
-  height: 100%;
-  right: 380px;
+  line-height: 1;
+  margin: 0 25px 0 25px;
   color: #fff;
   background-color: none;
   font-weight: 100;
   font-size: 18px;
 }
 
+.commentsWrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 1240px;
+  min-width: 800px;
+  background-color: #ffffff;
+}
+
+
+.trackDescription {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-top: 1px solid #f2f2f2;
+  color: black;
+  font-size: 20px;
+}
+
+.trackDescription p {
+  color: black;
+  font-size: 17px;
+
+}
+
 .comments {
+  border-top: 1px solid #f2f2f2;
   position: relative;
   background-color: #ffffff;
   width: 100%;

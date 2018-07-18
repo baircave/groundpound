@@ -2,67 +2,43 @@ import React from 'react';
 import NavBar from '../main_page/navbar';
 import { connect } from 'react-redux';
 import { fetchTrack } from '../../actions/track_actions';
-import { trackAgeFromMs } from '../../util/helpers';
+import { trackAgeFromMs, generateRGB, makeGradient } from '../../util/helpers';
+import AudioFooter from '../audio_footer/audio_footer';
+import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
+import CommentForm from '../comments/comment_form'
 
 class TrackShow extends React.Component {
 
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
-    this.makeGradient = this.makeGradient.bind(this);
-    this.state = {
-      track: [{
-        title: "",
-        created_at: "",
-        description: "",
-        track_url: "",
-        artwork_file: "",
-        track_file: "",
-        id: null,
-        artist_id: null
-      }],
-      user: [{username: "", nickname: "", profile_url: "", id: null}]
-    };
-  }
-
-  makeGradient() {
-
-    const canvas = this.canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let grd;
-
-    grd = ctx.createLinearGradient(0.000, 150.000, 300.000, 150.000);
-
-    grd.addColorStop(0.000, this.generateRGB());
-    grd.addColorStop(1.000, this.generateRGB());
-
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, 300.000, 300.000);
-  }
-
-  generateRGB() {
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
-    }
-    return `rgba(${getRandomInt(255)}, ${getRandomInt(255)}, ${getRandomInt(255)}, 1.000)`;
+    this.playPauseTrack = this.playPauseTrack.bind(this);
   }
 
   componentDidMount() {
-    this.makeGradient();
-    this.props.fetchTrack(this.props.match.params.id).then((response) => {
-      this.setState({
-        user: Object.values(response.payload.users),
-        track: Object.values(response.payload.tracks)
-      });
-    });
+    makeGradient.call(this);
+    this.props.fetchTrack(this.props.match.params.id);
+  }
 
+  playPauseTrack() {
+    this.props.togglePlayPause();
+    this.props.receiveCurTrack(this.props.track.id);
   }
 
   render() {
-    const track = this.state.track[0];
+    const track = this.props.track;
     const d1 = new Date(track.created_at);
     const d2 = new Date();
-    const trackAge = trackAgeFromMs(d2 - d1);
+    let trackAge = "";
+    if (d2 - d1) {
+      trackAge = trackAgeFromMs(d2 - d1) || "";
+    }
+    let playPauseIcon;
+    if (this.props.playing) {
+      playPauseIcon = <img src={window.pause}></img>;
+    } else {
+      playPauseIcon = <img src={window.play_button}></img>;
+    }
     return (
       <div className="mainWrapper">
         <NavBar></NavBar>
@@ -72,16 +48,28 @@ class TrackShow extends React.Component {
               <canvas className="canvas" ref={this.canvasRef} width="300" height="300"></canvas>
             </div>
             <section className="playbackContents">
-              <button className="playButton"><i className="fas fa-play"></i></button>
-              <div className="nameAndTitle">
-                <h3>{this.state.user[0].nickname}</h3>
-                <h2>{track.title}</h2>
+              <div className="throwLeftRight">
+                <button className="playButton"
+                  onClick={this.playPauseTrack}>
+                  {playPauseIcon}
+                </button>
+                <div className="nameAndTitle">
+                  <h3>{this.props.user.nickname}</h3>
+                  <h2>{track.title}</h2>
+                </div>
               </div>
-              <img className="albumArt" src={track.artwork_file}></img>
-              <h4 className="trackAge">{trackAge}</h4>
+              <div className="throwLeftRight">
+                <h4 className="trackAge">{trackAge}</h4>
+                <img className="albumArt" src={track.artwork_file}></img>
+              </div>
             </section>
           </div>
-          <div className="comments">
+          <div className="commentsWrapper">
+            <CommentForm trackId={track.id}></CommentForm>
+            <div className="trackDescription">
+              <p>{track.description}</p>
+            </div>
+            <div className="comments"></div>
           </div>
 
         </div>
@@ -90,16 +78,22 @@ class TrackShow extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     track: state.entities.tracks[]
-//   }
-// };
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state, ownProps) => {
+  const track = state.entities.tracks[ownProps.match.params.id] || {};
+  const userId = track.artist_id;
   return {
-    fetchTrack: (trackId) => dispatch(fetchTrack(trackId))
+    track,
+    user: state.entities.users[userId] || {},
+    playing: state.ui.playbar.playing
   };
 };
 
-export default connect(null, mapDispatchToProps)(TrackShow);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchTrack: (trackId) => dispatch(fetchTrack(trackId)),
+    receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
+    togglePlayPause: () => dispatch(togglePlayPause())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrackShow);
