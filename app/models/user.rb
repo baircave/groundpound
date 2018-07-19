@@ -12,7 +12,11 @@ class User < ApplicationRecord
   # has_one_attached :cover_photo
 
   has_many :tracks,
-    foreign_key: :artist_id
+    foreign_key: :artist_id,
+    dependent: :destroy
+
+  has_many :comments,
+    dependent: :destroy
 
 
   def self.find_by_credentials(username, password)

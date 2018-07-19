@@ -49,6 +49,10 @@ class UploadTrack extends React.Component {
     reader.onloadend = () => this.setState({trackFile: file});
   }
 
+  redirectToShow(action) {
+    this.props.history.push(`/tracks/${Object.keys(action.payload.tracks)[0]}`)
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
@@ -59,12 +63,12 @@ class UploadTrack extends React.Component {
       formData.append('track[artwork]', this.state.imageFile);
     }
     formData.append('track[track_file]', this.state.trackFile);
-    this.props.postTrack(formData);
+    this.props.postTrack(formData).then(this.redirectToShow.bind(this));
   }
 
 
   render() {
-    let url = window.sc_default_artwork;
+    let url = window.gp_square;
     if (this.state.imageUrl) {
       url = this.state.imageUrl;
     }

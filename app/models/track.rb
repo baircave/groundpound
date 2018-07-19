@@ -9,10 +9,10 @@ class Track < ApplicationRecord
 
   belongs_to :artist,
     foreign_key: :artist_id,
-    class_name: 'User',
+    class_name: 'User'
+    
+  has_many :comments,
     dependent: :destroy
-
-  has_many :comments
 
   has_one_attached :artwork
 

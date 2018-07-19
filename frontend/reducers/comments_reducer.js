@@ -3,7 +3,6 @@ import { RECEIVE_COMMENT } from '../actions/comment_actions';
 import { merge } from 'lodash';
 
 export default (state = {}, action) => {
-  debugger
   Object.freeze(state);
   let comments;
   const newState = merge({}, state);

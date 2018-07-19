@@ -1,11 +1,11 @@
 import React from 'react';
-import NavBar from '../main_page/navbar';
 import { connect } from 'react-redux';
 import { fetchTrack } from '../../actions/track_actions';
 import { trackAgeFromMs, generateRGB, makeGradient } from '../../util/helpers';
-import AudioFooter from '../audio_footer/audio_footer';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
-import CommentForm from '../comments/comment_form'
+import CommentForm from '../comments/comment_form';
+import { openModal } from '../../actions/modal_actions';
+import Modal from '../modal';
 
 class TrackShow extends React.Component {
 
@@ -21,12 +21,18 @@ class TrackShow extends React.Component {
   }
 
   playPauseTrack() {
+    // if (isPlaying) {
+    //   if currenttrack is me {
+    //     togglePlayPause
+    //   } else {
+    //     receiveCurTrack(me)
+    //   }
+    // }
     this.props.togglePlayPause();
     this.props.receiveCurTrack(this.props.track.id);
   }
 
   render() {
-    debugger
     const track = this.props.track;
     const d1 = new Date(track.created_at);
     const d2 = new Date();
@@ -40,9 +46,13 @@ class TrackShow extends React.Component {
     } else {
       playPauseIcon = <img src={window.play_button}></img>;
     }
+    let plural = "s";
+    if (track.comment_ids.length === 1) {
+      plural = "";
+    }
     return (
       <div className="mainWrapper">
-        <NavBar></NavBar>
+        <Modal artworkUrl={track.artwork_file} title={track.title}/>
         <div className="showPage">
           <div className="playbackWrapper">
             <div className="gradientWrapper">
@@ -61,7 +71,9 @@ class TrackShow extends React.Component {
               </div>
               <div className="throwLeftRight">
                 <h4 className="trackAge">{trackAge}</h4>
-                <img className="albumArt" src={track.artwork_file}></img>
+                <img className="albumArt"
+                  src={track.artwork_file}
+                  onClick={() => this.props.openModal("viewArtwork")}></img>
               </div>
             </section>
           </div>
@@ -71,7 +83,7 @@ class TrackShow extends React.Component {
               <p>{track.description}</p>
             </div>
             <div className="comments">
-              <h3><i className="fa fa-comment"></i>{track.comment_ids.length} comments</h3>
+              <h3><i className="fa fa-comment"></i>{track.comment_ids.length} comment{plural}</h3>
               <ul>
                 {track.comment_ids.map((comment_id) => {
                   const comment = this.props.comments[comment_id];
@@ -99,7 +111,6 @@ class TrackShow extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
   const track = state.entities.tracks[ownProps.match.params.id] || { comment_ids: [] };
   const userId = track.artist_id;
   const comments = state.entities.comments;
@@ -117,7 +128,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchTrack: (trackId) => dispatch(fetchTrack(trackId)),
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
-    togglePlayPause: () => dispatch(togglePlayPause())
+    togglePlayPause: () => dispatch(togglePlayPause()),
+    openModal: (modal) => dispatch(openModal(modal))
   };
 };
 

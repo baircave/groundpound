@@ -10,6 +10,7 @@ export default class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.formAction(Object.assign({}, this.state));
+    this.props.closeModal();
   }
 
   updateField(field) {
@@ -18,11 +19,9 @@ export default class SessionForm extends React.Component {
     };
   }
 
-
   render() {
     return (
-        <form onClick={(e) => e.stopPropagation()}
-              className="session_form"
+        <form className="session_form"
               onSubmit={this.handleSubmit}>
           { (this.props.formType === "Sign in") ?
             <h1>Sign in to Groundpound</h1> :

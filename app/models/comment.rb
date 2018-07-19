@@ -4,16 +4,13 @@ class Comment < ApplicationRecord
 
   belongs_to :author,
     foreign_key: :author_id,
-    class_name: 'User',
-    dependent: :destroy
+    class_name: 'User'
 
   belongs_to :parent_comment,
     foreign_key: :parent_comment_id,
     class_name: 'Comment',
-    optional: true,
-    dependent: :destroy
+    optional: true
 
-  belongs_to :track,
-    dependent: :destroy
+  belongs_to :track
 
 end

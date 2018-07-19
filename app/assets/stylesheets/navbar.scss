@@ -20,6 +20,7 @@
   align-items: center;
 }
 
+
 .navButton {
   padding: 0;
   text-align: center;
@@ -32,7 +33,8 @@
 }
 
 .navbar img {
-  width: 69px;
+  height: 46px;
+  min-width: 67px;
 }
 
 .navButton:hover {
@@ -56,4 +58,8 @@
   caret-color: black;
   background-color: #e5e5e5;
   transition: 0.5s;
+}
+
+.session-navbar-button {
+  min-width: fit-content;
 }
