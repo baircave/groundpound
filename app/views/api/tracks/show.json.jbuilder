@@ -1,10 +1,14 @@
 artwork = url_for(@track.artwork)
 audio = url_for(@track.track_file)
 
+track_comments = @track.comments.includes(:author)
+comment_authors = []
+track_comments.each { |comment| comment_authors << comment.author }
+
 json.tracks do
   json.set! @track.id do
     json.extract! @track, :title, :description, :track_url, :artist_id, :id, :created_at
-    json.commentIds @track.comments.order('created_at DESC').ids
+    json.comment_ids @track.comments.order('created_at DESC').ids
     json.artwork_file artwork
     json.track_file audio
   end
@@ -14,9 +18,14 @@ json.users do
   json.set! @track.artist_id do
     json.extract! @track.artist, :username, :nickname, :profile_url, :id
   end
+  comment_authors.each do |author|
+    json.set! author.id do
+      json.extract! author, :id, :username
+    end
+  end
 end
 
-track_comments = @track.comments
+
 json.comments do
   track_comments.each do |comment|
     json.set! comment.id do

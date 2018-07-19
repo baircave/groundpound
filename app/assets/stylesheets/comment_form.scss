@@ -1,7 +1,7 @@
 .commentFormWrapper {
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .commentForm {
@@ -19,7 +19,4 @@
   width: 100%;
   max-width: 800px;
   margin: 5px;
-}
-
-.commentField {
 }

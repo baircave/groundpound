@@ -4,10 +4,11 @@ export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const RECEIVE_COMMENT_ERRORS = 'RECEIVE_COMMENT_ERRORS';
 
-export const receiveComment = (comment) => {
+export const receiveComment = (payload) => {
   return {
     type: RECEIVE_COMMENT,
-    comment
+    trackId: Object.values(payload.comments)[0].track_id,
+    comment: payload.comments
   };
 };
 
@@ -34,11 +35,11 @@ export const postComment = (trackId, comment) => {
   };
 };
 
-export const getComments = (trackId) => {
-  return (dispatch) => {
-    return CommentApiUtil.getComments(trackId).then(
-      (payload) => dispatch(receiveComments(payload)),
-      (errors) => dispatch(receiveErrors(errors))
-    );
-  };
-};
+// export const getComments = (trackId) => {
+//   return (dispatch) => {
+//     return CommentApiUtil.getComments(trackId).then(
+//       (payload) => dispatch(receiveComments(payload)),
+//       (errors) => dispatch(receiveErrors(errors))
+//     );
+//   };
+// };

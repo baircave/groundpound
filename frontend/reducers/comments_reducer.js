@@ -2,18 +2,17 @@ import { RECEIVE_TRACK } from '../actions/track_actions';
 import { RECEIVE_COMMENT } from '../actions/comment_actions';
 import { merge } from 'lodash';
 
-
 export default (state = {}, action) => {
+  debugger
   Object.freeze(state);
-  let tracks;
+  let comments;
   const newState = merge({}, state);
   switch (action.type) {
     case RECEIVE_TRACK:
-      tracks = action.payload.tracks;
-      return merge(newState, tracks);
+      comments = action.payload.comments;
+      return merge(newState, comments);
     case RECEIVE_COMMENT:
-      newState[action.trackId].comment_ids.unshift(Object.keys(action.comment)[0]);
-      return newState;
+      return merge(newState, action.comment);
     default:
       return state;
   }

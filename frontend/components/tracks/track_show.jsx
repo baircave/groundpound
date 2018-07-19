@@ -26,6 +26,7 @@ class TrackShow extends React.Component {
   }
 
   render() {
+    debugger
     const track = this.props.track;
     const d1 = new Date(track.created_at);
     const d2 = new Date();
@@ -69,7 +70,26 @@ class TrackShow extends React.Component {
             <div className="trackDescription">
               <p>{track.description}</p>
             </div>
-            <div className="comments"></div>
+            <div className="comments">
+              <h3><i className="fa fa-comment"></i>{track.comment_ids.length} comments</h3>
+              <ul>
+                {track.comment_ids.map((comment_id) => {
+                  const comment = this.props.comments[comment_id];
+                  const d3 = new Date(comment.created_at);
+                  const d4 = new Date();
+                  let commentAge = trackAgeFromMs(d4 - d3);
+                  return (
+                    <li className="comment" key={comment_id}>
+                      <div className="commentMeat">
+                        <h4 className="commentAge">{this.props.users[comment.author_id].username}</h4>
+                        <p className="commentBody">{comment.body}</p>
+                      </div>
+                      <h4 className="commentAge">{commentAge}</h4>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -79,10 +99,15 @@ class TrackShow extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const track = state.entities.tracks[ownProps.match.params.id] || {};
+  debugger
+  const track = state.entities.tracks[ownProps.match.params.id] || { comment_ids: [] };
   const userId = track.artist_id;
+  const comments = state.entities.comments;
+  const users = state.entities.users || {};
   return {
     track,
+    users,
+    comments,
     user: state.entities.users[userId] || {},
     playing: state.ui.playbar.playing
   };

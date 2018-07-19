@@ -7,7 +7,9 @@ class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: ""
+      body: "",
+      parent_comment_id: props.parent_comment_id,
+      track_id: props.trackId
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateField = this.updateField.bind(this);
@@ -15,6 +17,7 @@ class CommentForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.postComment(this.props.trackId, this.state)
     console.log(`trackId: ${this.props.trackId}  comment: ${this.state.body}`);
   }
 
@@ -42,7 +45,7 @@ class CommentForm extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postComment: (comment, trackId) => dispatch(postComment(comment, trackId))
+    postComment: (trackId, comment) => dispatch(postComment(trackId, comment))
   };
 };
 
