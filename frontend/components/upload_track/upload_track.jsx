@@ -75,7 +75,6 @@ class UploadTrack extends React.Component {
     const preview = <img src={url}></img>;
     return (
       <div className="mainWrapper">
-        <NavBar></NavBar>
         <section className="centerMain">
           <div className="form_wrapper">
             <h1 className="form_header">Upload to Groundpound</h1>

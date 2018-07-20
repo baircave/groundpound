@@ -9,3 +9,7 @@ export const selectCommentAuthors = (state, comments) => {
   );
   return users;
 };
+
+export const selectUserTracks = (state, trackIds) => {
+  return trackIds.map((id) => state.entities.tracks[id]);
+};

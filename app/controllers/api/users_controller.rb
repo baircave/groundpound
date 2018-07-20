@@ -1,8 +1,12 @@
 class Api::UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
-    render :show
+    @user = User.includes(:tracks).find(params[:id])
+    if @user
+      render :show
+    else
+      render json: ["No user found with that id"], status: 404
+    end
   end
 
   def create

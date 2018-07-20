@@ -10,6 +10,7 @@ import Modal from './modal';
 import Navbar from './main_page/navbar';
 import { togglePlayPause } from '../actions/playbar_actions';
 import { connect } from 'react-redux';
+import UserProfile from './users/user_profile'
 
 class App extends React.Component {
 
@@ -35,6 +36,7 @@ class App extends React.Component {
         <ProtectedRoute exact path="/stream" component={MainPage} />
         <ProtectedRoute exact path="/upload" component={UploadTrack} />
         <Route exact path="/tracks/:id" component={TrackShow} />
+        <Route exact path="/users/:id" component={UserProfile} />
         <AudioFooter />
       </div>
     );

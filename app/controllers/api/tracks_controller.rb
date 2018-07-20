@@ -7,7 +7,11 @@ class Api::TracksController < ApplicationController
 
   def show
     @track = Track.includes(comments: [:author]).find(params[:id])
-    render :show
+    if @track
+      render :show
+    else
+      render json: ["No track found with that id"], status: 404
+    end
   end
 
   def create

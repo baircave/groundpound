@@ -8,6 +8,7 @@ class TrackIndexItem extends React.Component {
     super(props);
     this.playPauseTrack = this.playPauseTrack.bind(this);
     this.redirectToTrackShow = this.redirectToTrackShow.bind(this);
+    this.redirectToUserProfile = this.redirectToUserProfile.bind(this);
   }
 
   playPauseTrack() {
@@ -30,6 +31,10 @@ class TrackIndexItem extends React.Component {
     this.props.history.push(`/tracks/${this.props.track.id}`)
   }
 
+  redirectToUserProfile() {
+    this.props.history.push(`/users/${this.props.track.artist_id}`)
+  }
+
   render() {
     let playPauseIcon;
     if (this.props.playbar.playing &&
@@ -50,7 +55,7 @@ class TrackIndexItem extends React.Component {
           </button>
         </div>
         <h4 onClick={this.redirectToTrackShow}>{this.props.track.title}</h4>
-        <h4>{this.props.user.username}</h4>
+        <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
       </li>
     );
   }

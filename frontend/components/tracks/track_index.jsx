@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TrackIndexItem from './track_index_item';
 import { fetchTracks } from '../../actions/track_actions';
+import { selectUserTracks } from '../../reducers/selectors';
+import { withRouter } from 'react-router-dom';
 
 class TrackIndex extends React.Component {
 
@@ -10,7 +12,9 @@ class TrackIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTracks();
+    if (this.props.match.path === "/") {
+      this.props.fetchTracks();
+    }
   }
 
   render() {
@@ -19,7 +23,10 @@ class TrackIndex extends React.Component {
     }
     return (
       <div className="track-index">
-        <h1>Hear what’s trending for free in the Groundpound community</h1>
+        { this.props.match.path === "/" ?
+          <h1>Hear what’s trending for free in the Groundpound community</h1> :
+          null
+        }
         <ul>
           {this.props.tracks.map((track) => {
             return (
@@ -35,9 +42,13 @@ class TrackIndex extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  let tracks = Object.values(state.entities.tracks) || [];
+  if (ownProps.trackIds) {
+    tracks = selectUserTracks(state, ownProps.trackIds);
+  }
   return {
-    tracks: Object.values(state.entities.tracks) || [],
+    tracks,
     users: state.entities.users
   };
 };
@@ -48,4 +59,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackIndex);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TrackIndex));

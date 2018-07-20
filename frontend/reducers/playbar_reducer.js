@@ -1,5 +1,6 @@
 import { RECEIVE_CUR_TRACK, TOGGLE_PLAY_PAUSE } from '../actions/playbar_actions';
 import { RECEIVE_TRACK, RECEIVE_TRACKS } from '../actions/track_actions';
+import { RECEIVE_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 
 const defaultState = {
@@ -15,9 +16,9 @@ export default (state = defaultState, action) => {
   const newState = merge({}, state);
   let newPlayQueue;
   switch (action.type) {
+    case RECEIVE_USER:
     case RECEIVE_TRACKS:
-      newPlayQueue = newState.playQueue.concat(Object.keys(action.payload.tracks));
-      newState.playQueue = newPlayQueue;
+      newState.playQueue = Object.keys(action.payload.tracks);
       return newState;
     case RECEIVE_TRACK:
       if (newState.playQueue[newState.playQueue.length - 1] != action.payload.track.id) {
