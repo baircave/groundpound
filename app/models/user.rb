@@ -9,7 +9,7 @@ class User < ApplicationRecord
   attr_reader :password
 
   has_one_attached :profile_photo
-  
+
   has_one_attached :cover_photo
 
   has_many :tracks,
@@ -17,6 +17,7 @@ class User < ApplicationRecord
     dependent: :destroy
 
   has_many :comments,
+    foreign_key: :author_id,
     dependent: :destroy
 
 

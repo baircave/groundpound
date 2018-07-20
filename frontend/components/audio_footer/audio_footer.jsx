@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { secondsToTimeString } from '../../util/helpers';
+import { withRouter } from 'react-router-dom';
 
 class AudioFooter extends React.Component {
 
@@ -112,6 +113,14 @@ class AudioFooter extends React.Component {
     }
   }
 
+  redirectToTrackShow() {
+    this.props.history.push(`/tracks/${this.props.track.id}`)
+  }
+
+  redirectToUserProfile() {
+    this.props.history.push(`/users/${this.props.track.artist_id}`)
+  }
+
   render() {
     let volumeIcon = <i className="fa fa-volume-off"></i>;
     if (this.state.volumeLevel > 0.0 && this.state.volumeLevel < 0.65) {
@@ -151,8 +160,8 @@ class AudioFooter extends React.Component {
             <div className="trackInfo">
               <img src={this.props.track.artwork_file}></img>
               <div className="artistAndTitle">
-                <span>{this.props.user.username}</span>
-                <span>{this.props.track.title}</span>
+                <span onClick={this.redirectToUserProfile.bind(this)}>{this.props.user.username}</span>
+                <span onClick={this.redirectToTrackShow.bind(this)}>{this.props.track.title}</span>
               </div>
             </div>
             <audio className="audioEl"
@@ -191,4 +200,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AudioFooter);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AudioFooter));

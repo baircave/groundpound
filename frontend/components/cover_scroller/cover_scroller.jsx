@@ -45,8 +45,6 @@ class CoverScroller extends React.Component {
           </div>
         </div>
         <h1 className="landing-header">Welcome to Groundpound.</h1>
-        <TrackIndex />
-
       </section>
     );
   }

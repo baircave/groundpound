@@ -1,0 +1,26 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.track-index-wrapper {
+  height: 100%;
+  width: 100%;
+  max-width: 1240px;
+  background: #fff;
+}
+
+.track-index-wrapper ul {
+  padding: 25px;
+  margin: 0;
+}
+
+.shift-down-div {
+  max-width: 1240px;
+  min-width: 800px;
+  background: #fff;
+  height: 100px;
+  width: 100%;
+}

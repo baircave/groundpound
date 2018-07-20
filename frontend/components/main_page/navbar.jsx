@@ -4,6 +4,7 @@ import { logout, login } from '../../actions/session_actions';
 import { NavLink } from 'react-router-dom';
 import { openModal } from '../../actions/modal_actions';
 
+
 const Navbar = ({ user, login, logout, loggedIn, visible, openModal }) => {
   if (!visible) {
     return null;
