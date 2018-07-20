@@ -1,0 +1,74 @@
+.track-index {
+  background: white;
+  margin-top: 700px;
+  padding-bottom: 60px;
+  width: 100%;
+  max-width: 1240px;
+  min-width: 800px;
+}
+
+.track-index h1 {
+  margin: 50px;
+  font-weight: 100;
+  font-size: 30px;
+}
+
+.track-index ul {
+  padding: inherit;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 0;
+  margin: auto;
+  width: fit-content;
+}
+
+.track-index-item {
+  margin: 0 20px 20px 20px;
+}
+
+.art-thumbnail {
+  position: relative;
+}
+
+.index-artwork {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #999;
+}
+
+.index-artwork:hover ~ .hover-play-button {
+  visibility: visible;
+}
+
+
+.hover-play-button.playButton {
+  visibility: visible;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+.track-index h4:hover {
+  cursor: pointer;
+}
+
+.track-index h4 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 200px;
+}
+
+.track-index h4:first-of-type {
+  font-weight: 100;
+  font-size: 17px;
+}
+
+.track-index h4:last-of-type {
+  font-weight: 100;
+  font-size: 14px;
+  color: #999;
+}

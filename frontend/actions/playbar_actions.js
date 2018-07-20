@@ -8,8 +8,9 @@ export const receiveCurTrack = (trackId) => {
   };
 };
 
-export const togglePlayPause = () => {
+export const togglePlayPause = (bool) => {
   return {
-    type: TOGGLE_PLAY_PAUSE
+    type: TOGGLE_PLAY_PAUSE,
+    playing: bool
   };
 };

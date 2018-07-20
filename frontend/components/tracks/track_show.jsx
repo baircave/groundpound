@@ -4,6 +4,7 @@ import { fetchTrack } from '../../actions/track_actions';
 import { trackAgeFromMs, generateRGB, makeGradient } from '../../util/helpers';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import CommentForm from '../comments/comment_form';
+import CommentIndex from '../comments/comment_index';
 import { openModal } from '../../actions/modal_actions';
 import Modal from '../modal';
 
@@ -20,16 +21,26 @@ class TrackShow extends React.Component {
     this.props.fetchTrack(this.props.match.params.id);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id != this.props.match.params.id) {
+      this.props.fetchTrack(this.props.match.params.id);
+    }
+  }
+
   playPauseTrack() {
-    // if (isPlaying) {
-    //   if currenttrack is me {
-    //     togglePlayPause
-    //   } else {
-    //     receiveCurTrack(me)
-    //   }
-    // }
-    this.props.togglePlayPause();
-    this.props.receiveCurTrack(this.props.track.id);
+    const track = this.props.track;
+    const playbar = this.props.playbar;
+    if (playbar.playing) {
+      if (playbar.currentlyPlayingId === track.id.toString()) {
+        this.props.togglePlayPause(false);
+      } else {
+        this.props.togglePlayPause(true);
+        this.props.receiveCurTrack(track.id.toString());
+      }
+    } else {
+      this.props.togglePlayPause(true);
+      this.props.receiveCurTrack(track.id.toString());
+    }
   }
 
   render() {
@@ -41,15 +52,13 @@ class TrackShow extends React.Component {
       trackAge = trackAgeFromMs(d2 - d1) || "";
     }
     let playPauseIcon;
-    if (this.props.playing) {
+    if (this.props.playbar.playing &&
+      this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {
       playPauseIcon = <img src={window.pause}></img>;
     } else {
       playPauseIcon = <img src={window.play_button}></img>;
     }
-    let plural = "s";
-    if (track.comment_ids.length === 1) {
-      plural = "";
-    }
+
     return (
       <div className="mainWrapper">
         <Modal artworkUrl={track.artwork_file} title={track.title}/>
@@ -82,26 +91,7 @@ class TrackShow extends React.Component {
             <div className="trackDescription">
               <p>{track.description}</p>
             </div>
-            <div className="comments">
-              <h3><i className="fa fa-comment"></i>{track.comment_ids.length} comment{plural}</h3>
-              <ul>
-                {track.comment_ids.map((comment_id) => {
-                  const comment = this.props.comments[comment_id];
-                  const d3 = new Date(comment.created_at);
-                  const d4 = new Date();
-                  let commentAge = trackAgeFromMs(d4 - d3);
-                  return (
-                    <li className="comment" key={comment_id}>
-                      <div className="commentMeat">
-                        <h4 className="commentAge">{this.props.users[comment.author_id].username}</h4>
-                        <p className="commentBody">{comment.body}</p>
-                      </div>
-                      <h4 className="commentAge">{commentAge}</h4>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            <CommentIndex commentIds={track.comment_ids}/>
           </div>
 
         </div>
@@ -112,15 +102,10 @@ class TrackShow extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const track = state.entities.tracks[ownProps.match.params.id] || { comment_ids: [] };
-  const userId = track.artist_id;
-  const comments = state.entities.comments;
-  const users = state.entities.users || {};
   return {
     track,
-    users,
-    comments,
-    user: state.entities.users[userId] || {},
-    playing: state.ui.playbar.playing
+    user: state.entities.users[track.artist_id] || {},
+    playbar: state.ui.playbar
   };
 };
 
@@ -128,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchTrack: (trackId) => dispatch(fetchTrack(trackId)),
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
-    togglePlayPause: () => dispatch(togglePlayPause()),
+    togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
     openModal: (modal) => dispatch(openModal(modal))
   };
 };

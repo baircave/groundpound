@@ -1,12 +1,12 @@
 class Api::TracksController < ApplicationController
 
-  def index    
-    @tracks = Track.all
+  def index
+    @tracks = Track.all.includes(:artist)
     render :index
   end
 
   def show
-    @track = Track.find(params[:id])
+    @track = Track.includes(comments: [:author]).find(params[:id])
     render :show
   end
 

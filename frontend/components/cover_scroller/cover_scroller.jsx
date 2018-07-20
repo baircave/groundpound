@@ -3,6 +3,7 @@ import { login, clearErrors } from '../../actions/session_actions';
 import { connect } from 'react-redux';
 import { openModal } from '../../actions/modal_actions';
 import { removeNavbar, showNavbar } from '../../actions/navbar_actions';
+import TrackIndex from '../tracks/track_index';
 
 class CoverScroller extends React.Component {
   constructor(props) {
@@ -37,13 +38,15 @@ class CoverScroller extends React.Component {
       <section className="cover_scroller">
         <div className="cover_scroller_content">
           <img src={window.gp_logo_wordmark} width="120"></img>
-          <h1>Welcome to Groundpound.</h1>
           <div className="session_buttons">
             <button className="transButton" onClick={this.handleLoginClick}>Sign in</button>
             <button className="colorButton" onClick={this.handleSignupClick}>Create account</button>
             <button className="transButton" onClick={this.logInGuest}>Guest</button>
           </div>
         </div>
+        <h1 className="landing-header">Welcome to Groundpound.</h1>
+        <TrackIndex />
+
       </section>
     );
   }

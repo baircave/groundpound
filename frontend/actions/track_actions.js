@@ -11,6 +11,13 @@ const receiveTrack = (payload) => {
   };
 };
 
+const receiveTracks = (payload) => {
+  return {
+    type: RECEIVE_TRACKS,
+    payload
+  };
+};
+
 export const receiveErrors = (errorsArray) => {
   return {
     type: RECEIVE_TRACK_ERRORS,
@@ -22,6 +29,15 @@ export const fetchTrack = (trackId) => {
   return (dispatch) => {
     return TrackApiUtil.fetchTrack(trackId).then(
       (payload) => dispatch(receiveTrack(payload)),
+      (errors) => dispatch(receiveErrors(errors))
+    );
+  };
+};
+
+export const fetchTracks = () => {
+  return (dispatch) => {
+    return TrackApiUtil.fetchTracks().then(
+      (payload) => dispatch(receiveTracks(payload)),
       (errors) => dispatch(receiveErrors(errors))
     );
   };

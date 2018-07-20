@@ -5,6 +5,7 @@ const MainPage = (props) => {
   return (
     <div>
       <NavBar></NavBar>
+      
     </div>
   );
 };

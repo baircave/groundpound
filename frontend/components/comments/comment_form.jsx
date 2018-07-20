@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { postComment } from '../../actions/comment_actions';
+import { openModal } from '../../actions/modal_actions';
 
 class CommentForm extends React.Component {
 
@@ -17,8 +18,8 @@ class CommentForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.postComment(this.props.trackId, this.state)
-    console.log(`trackId: ${this.props.trackId}  comment: ${this.state.body}`);
+    this.props.postComment(this.props.trackId, this.state);
+    this.setState({body: ""});
   }
 
   updateField(field) {
@@ -27,11 +28,18 @@ class CommentForm extends React.Component {
     };
   }
 
+  ensureSession() {
+    if (!this.props.loggedIn) {
+      this.props.openModal("login");
+    }
+  }
+
   render() {
     return (
       <div className="commentFormWrapper">
         <form className="commentForm" onSubmit={this.handleSubmit}>
-          <input onChange={this.updateField("body")}
+          <input onFocus={this.ensureSession.bind(this)}
+            onChange={this.updateField("body")}
             className="commentField"
             type="text"
             placeholder="Write a comment"
@@ -43,10 +51,17 @@ class CommentForm extends React.Component {
 
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    postComment: (trackId, comment) => dispatch(postComment(trackId, comment))
+    loggedIn: state.session.id
   };
 };
 
-export default connect(null, mapDispatchToProps)(CommentForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postComment: (trackId, comment) => dispatch(postComment(trackId, comment)),
+    openModal: (modal) => dispatch(openModal(modal))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

@@ -14,3 +14,10 @@ export const fetchTrack = (trackId) => {
     url: `api/tracks/${trackId}`
   });
 };
+
+export const fetchTracks = () => {
+  return $.ajax({
+    method: "GET",
+    url: `api/tracks`
+  });
+};

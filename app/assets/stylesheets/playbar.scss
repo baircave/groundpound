@@ -51,7 +51,7 @@
 .volumeSlider {
   -webkit-appearance: none;
   height: 2px;
-  background: orange;
+  background: #43c3d2;
   transform: rotate(-90deg);
 }
 
@@ -127,6 +127,7 @@
 .trackInfo {
   display: flex;
   align-items: center;
+  width: 300px;
 }
 
 .artistAndTitle {
@@ -138,7 +139,10 @@
 }
 
 .artistAndTitle span {
-  width: fit-content;
+  width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   margin: 2px;
   color: gray;
 }

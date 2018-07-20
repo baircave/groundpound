@@ -33,7 +33,9 @@
 }
 
 .cover_scroller {
+  align-items: center;
   display: flex;
+  flex-direction: column;
   margin: auto;
   min-width: 800px;
   max-width: 1240px;
@@ -45,17 +47,20 @@
 }
 
 .cover_scroller_content {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   width: 100%;
 }
 
-.cover_scroller_content h1 {
+.landing-header {
+  position: absolute;
+  top: 310px;
   color: white;
   font-size: 60px;
   font-weight: 100;
+  margin: 0;
 }
 
 .cover_scroller_content img {

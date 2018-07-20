@@ -1,5 +1,5 @@
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
-import { RECEIVE_TRACK } from '../actions/track_actions';
+import { RECEIVE_TRACK, RECEIVE_TRACKS } from '../actions/track_actions';
 import { merge } from 'lodash';
 
 export default (state = {}, action) => {
@@ -10,6 +10,7 @@ export default (state = {}, action) => {
       const newState = merge({}, state);
       newState[action.user.id] = action.user;
       return newState;
+    case RECEIVE_TRACKS:
     case RECEIVE_TRACK:
       users = action.payload.users;
       return merge({}, state, users);

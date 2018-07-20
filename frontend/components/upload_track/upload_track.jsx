@@ -50,7 +50,7 @@ class UploadTrack extends React.Component {
   }
 
   redirectToShow(action) {
-    this.props.history.push(`/tracks/${Object.keys(action.payload.tracks)[0]}`)
+    this.props.history.push(`/tracks/${action.payload.track.id}`);
   }
 
   handleSubmit(e) {

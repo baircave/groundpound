@@ -24,13 +24,19 @@ class AudioFooter extends React.Component {
     this.updateTime = this.updateTime.bind(this);
   }
 
+  componentDidMount() {
+    if (this.audioRef.current) {
+      this.audioRef.current.volume = 0.5;
+    }
+  }
+
   componentDidUpdate() {
     if (!this.audioRef.current) {
       return;
     }
 
     const audioEl = this.audioRef.current;
-    if (this.props.playing) {
+    if (this.props.playbar.playing) {
       audioEl.play();
     } else {
       audioEl.pause();
@@ -40,6 +46,12 @@ class AudioFooter extends React.Component {
 
   updateTime(e) {
     const audioEl = this.audioRef.current;
+
+    if (audioEl.ended) {
+      this.nextTrack();
+      return;
+    }
+
     const decimalPercentage = audioEl.currentTime / audioEl.duration;
     const progPercentage = decimalPercentage * 100;
     this.setState({
@@ -57,12 +69,12 @@ class AudioFooter extends React.Component {
   }
 
   playPauseTrack() {
-    this.props.togglePlayPause();
+    this.props.togglePlayPause(!this.props.playbar.playing);
   }
 
   nextTrack() {
-    const trackIndex = this.props.curTrackIndex;
-    const playQueue = this.props.playQueue;
+    const trackIndex = this.props.playbar.currentlyPlayingIdx;
+    const playQueue = this.props.playbar.playQueue;
     if ((playQueue.length - 1) > trackIndex) {
       this.props.receiveCurTrack(playQueue[trackIndex + 1]);
     } else {
@@ -72,20 +84,18 @@ class AudioFooter extends React.Component {
   }
 
   previousTrack() {
-    const trackIndex = this.props.curTrackIndex;
-    const playQueue = this.props.playQueue;
+    const trackIndex = this.props.playbar.currentlyPlayingIdx;
+    const playQueue = this.props.playbar.playQueue;
     const audioEl = this.audioRef.current;
-    if (trackIndex > 0) {
-      if (audioEl.currentTime < 3.0) {
+
+    if (audioEl.currentTime < 3.0) {
+      if (trackIndex > 0) {
         this.props.receiveCurTrack(playQueue[trackIndex - 1]);
+      } else {
+        audioEl.currentTime = 0.0;
       }
     } else {
-      if (audioEl.currentTime >= 3.0) {
-        audioEl.currentTime = 0.0;
-      } else {
-        console.log("no prior tracks");
-        return;
-      }
+      audioEl.currentTime = 0.0;
     }
   }
 
@@ -109,10 +119,11 @@ class AudioFooter extends React.Component {
     } else if (this.state.volumeLevel >= 0.65) {
       volumeIcon = <i className="fa fa-volume-up"></i>;
     }
-    if (!this.props.visible) {
+
+    if (!this.props.playbar.visible) {
       return null;
     } else {
-      const playPauseSrc = this.props.playing ? window.pause : window.play_button;
+      const playPauseSrc = this.props.playbar.playing ? window.pause : window.play_button;
       return (
         <div className="audioFooterWrapper">
           <div className="audioFooterContent">
@@ -127,7 +138,7 @@ class AudioFooter extends React.Component {
                   style={ {width: this.state.progPercentage}}></div>
               </div>
               <span className="timeString2">{this.audioRef.current ?
-                  secondsToTimeString(this.audioRef.current.duration)
+                  secondsToTimeString(this.audioRef.current.duration || 0)
                   : null}
                 </span>
               <div className="volumeControls">
@@ -140,15 +151,17 @@ class AudioFooter extends React.Component {
             <div className="trackInfo">
               <img src={this.props.track.artwork_file}></img>
               <div className="artistAndTitle">
-                <span>{this.props.user.nickname}</span>
+                <span>{this.props.user.username}</span>
                 <span>{this.props.track.title}</span>
               </div>
             </div>
             <audio className="audioEl"
+              volume="0.5"
               ref={this.audioRef}
               autoPlay
               src={this.props.track.track_file}
-              onTimeUpdate={this.updateTime}></audio>
+              onTimeUpdate={this.updateTime}
+              onEnded={this.nextTrack}></audio>
           </div>
         </div>
       );
@@ -157,19 +170,15 @@ class AudioFooter extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const curTrackId = state.ui.playbar.curTrackId;
+  const currentlyPlayingId = state.ui.playbar.currentlyPlayingId;
   let user = null;
   let track = null;
-  const playQueue = state.ui.playbar.playQueue;
-  if (curTrackId) {
-    track = state.entities.tracks[curTrackId];
+  if (currentlyPlayingId) {
+    track = state.entities.tracks[currentlyPlayingId];
     user = state.entities.users[track.artist_id];
   }
   return {
-    playQueue: state.ui.playbar.playQueue,
-    visible: state.ui.playbar.visible,
-    playing: state.ui.playbar.playing,
-    curTrackIndex: playQueue.findIndex((el) => curTrackId === parseInt(el)),
+    playbar: state.ui.playbar,
     user,
     track
   };
@@ -178,7 +187,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
-    togglePlayPause: () => dispatch(togglePlayPause())
+    togglePlayPause: (bool) => dispatch(togglePlayPause(bool))
   };
 };
 
