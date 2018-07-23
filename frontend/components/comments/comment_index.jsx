@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectComments, selectCommentAuthors } from '../../reducers/selectors';
-import { trackAgeFromMs } from '../../util/helpers';
+import CommentIndexItem from './comment_index_item';
 
-const CommentIndex = ({ comments, users }) => {
+const CommentIndex = ({ comments, users, trackId }) => {
   let plural = "s";
   if (comments.length === 1) {
     plural = "";
@@ -14,17 +14,11 @@ const CommentIndex = ({ comments, users }) => {
       <h3><i className="fa fa-comment"></i>{comments.length} comment{plural}</h3>
       <ul>
         {comments.map((comment) => {
-          const d3 = new Date(comment.created_at);
-          const d4 = new Date();
-          let commentAge = trackAgeFromMs(d4 - d3);
           return (
-            <li className="comment" key={comment.id}>
-              <div className="commentMeat">
-                <h4 className="commentAge">{users[comment.id].username}</h4>
-                <p className="commentBody">{comment.body}</p>
-              </div>
-              <h4 className="commentAge">{commentAge}</h4>
-            </li>
+            <CommentIndexItem comment={comment}
+              trackId={trackId}
+              users={users}
+              key={comment.id}></CommentIndexItem>
           );
         })}
       </ul>

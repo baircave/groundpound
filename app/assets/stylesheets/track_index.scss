@@ -37,6 +37,13 @@
   border: 1px solid #999;
 }
 
+.artwork-mouseover {
+  width: 202px;
+  height: 202px;
+  position: absolute;
+  top: 0;
+}
+
 .index-artwork:hover ~ .hover-play-button {
   visibility: visible;
 }

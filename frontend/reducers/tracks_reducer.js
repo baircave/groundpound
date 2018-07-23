@@ -1,5 +1,5 @@
 import { RECEIVE_TRACK, RECEIVE_TRACKS, DELETE_TRACK } from '../actions/track_actions';
-import { RECEIVE_COMMENT } from '../actions/comment_actions';
+import { RECEIVE_COMMENT, DELETE_COMMENT } from '../actions/comment_actions';
 import { RECEIVE_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 
@@ -21,6 +21,11 @@ export default (state = {}, action) => {
       return newState;
     case DELETE_TRACK:
       delete newState[action.trackId];
+      return newState;
+    case DELETE_COMMENT:
+      newState[action.trackId].comment_ids = newState[action.trackId].comment_ids.filter(
+        (commentId) => commentId !== String(action.commentId)
+      );
       return newState;
     default:
       return state;

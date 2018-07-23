@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchTrack } from '../../actions/track_actions';
+import { fetchTrack, deleteTrack } from '../../actions/track_actions';
 import { trackAgeFromMs, generateRGB, makeGradient } from '../../util/helpers';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import CommentForm from '../comments/comment_form';
@@ -14,6 +14,7 @@ class TrackShow extends React.Component {
     super(props);
     this.canvasRef = React.createRef();
     this.playPauseTrack = this.playPauseTrack.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -43,14 +44,21 @@ class TrackShow extends React.Component {
     }
   }
 
+  handleDelete() {
+    this.props.deleteTrack(this.props.track.id);
+    this.props.history.push("/");
+  }
+
   render() {
     const track = this.props.track;
+
     const d1 = new Date(track.created_at);
     const d2 = new Date();
     let trackAge = "";
     if (d2 - d1) {
       trackAge = trackAgeFromMs(d2 - d1) || "";
     }
+
     let playPauseIcon;
     if (this.props.playbar.playing &&
       this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {
@@ -59,6 +67,11 @@ class TrackShow extends React.Component {
       playPauseIcon = <img src={window.play_button}></img>;
     }
 
+    let deleteButton = null;
+    if (this.props.sessionId === track.artist_id) {
+      deleteButton = (<button onClick={this.handleDelete} className="transButton">
+        <i className="fa fa-trash" aria-hidden="true"></i> Delete track</button>);
+    }
     return (
       <div className="mainWrapper">
         <Modal artworkUrl={track.artwork_file} title={track.title}/>
@@ -88,10 +101,11 @@ class TrackShow extends React.Component {
           </div>
           <div className="commentsWrapper">
             <CommentForm trackId={track.id}></CommentForm>
+            {deleteButton}
             <div className="trackDescription">
               <p>{track.description}</p>
             </div>
-            <CommentIndex commentIds={track.comment_ids}/>
+            <CommentIndex trackId={track.id} commentIds={track.comment_ids}/>
           </div>
 
         </div>
@@ -105,6 +119,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     track,
     user: state.entities.users[track.artist_id] || {},
+    sessionId: state.session.id,
     playbar: state.ui.playbar
   };
 };
@@ -114,7 +129,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchTrack: (trackId) => dispatch(fetchTrack(trackId)),
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
     togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
-    openModal: (modal) => dispatch(openModal(modal))
+    openModal: (modal) => dispatch(openModal(modal)),
+    deleteTrack: (trackId) => dispatch(deleteTrack(trackId))
   };
 };
 

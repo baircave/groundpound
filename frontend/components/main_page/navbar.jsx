@@ -19,7 +19,7 @@ const Navbar = ({ user, login, logout, loggedIn, visible, openModal }) => {
           <img src={window.gp_logo}/>
           <input type="text" placeholder="Search"></input>
           <NavLink className="navButton" to="/upload">Upload</NavLink>
-          <button className="navButton">{user.username}</button>
+          <NavLink className="navButton" to={`/users/${user.id}`}>{user.username}</NavLink>
           <button className="navButton" onClick={logout}>Sign Out</button>
         </div>
       </div>

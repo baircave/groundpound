@@ -8,10 +8,10 @@ export const postComment = (trackId, comment) => {
   });
 };
 
-export const deleteComment = (commentId) => {
+export const deleteComment = (trackId, commentId) => {
   return $.ajax({
     method: "DELETE",
-    url: `api/comments/${commentId}`
+    url: `api/tracks/${trackId}/comments/${commentId}`
   });
 };
 

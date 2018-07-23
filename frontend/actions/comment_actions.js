@@ -3,6 +3,7 @@ import * as CommentApiUtil from '../util/comment_api_util';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const RECEIVE_COMMENT_ERRORS = 'RECEIVE_COMMENT_ERRORS';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const receiveComment = (payload) => {
   return {
@@ -26,11 +27,27 @@ export const receiveErrors = (errorsArray) => {
   };
 };
 
+export const removeComment = (trackId, commentId) => {
+  return {
+    type: DELETE_COMMENT,
+    commentId,
+    trackId
+  };
+};
+
 export const postComment = (trackId, comment) => {
   return (dispatch) => {
     return CommentApiUtil.postComment(trackId, comment).then(
       (payload) => dispatch(receiveComment(payload)),
       (errors) => dispatch(receiveErrors(errors))
+    );
+  };
+};
+
+export const deleteComment = (trackId, commentId) => {
+  return (dispatch) => {
+    return CommentApiUtil.deleteComment(trackId, commentId).then(
+      () => dispatch(removeComment(trackId, commentId))
     );
   };
 };
