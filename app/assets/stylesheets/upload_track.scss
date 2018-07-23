@@ -173,3 +173,10 @@
   justify-content: center;
   height: 100%;
 }
+
+.file-name {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -55px;
+}

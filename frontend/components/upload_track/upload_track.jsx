@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { postTrack } from '../../actions/track_actions';
 
-
 class UploadTrack extends React.Component {
 
   constructor(props) {
@@ -15,7 +14,8 @@ class UploadTrack extends React.Component {
       track_url: "",
       imageUrl: null,
       imageFile: null,
-      trackFile: null
+      trackFile: null,
+      trackFileName: null
     };
     this.trackFileInput = React.createRef();
     this.artworkFileInput = React.createRef();
@@ -46,7 +46,7 @@ class UploadTrack extends React.Component {
     if (file) {
       reader.readAsDataURL(file);
     }
-    reader.onloadend = () => this.setState({trackFile: file});
+    reader.onloadend = () => this.setState({trackFile: file, trackFileName: file.name});
   }
 
   redirectToShow(action) {
@@ -87,6 +87,10 @@ class UploadTrack extends React.Component {
                 className="track_file_input"
                 type="file"
                 onChange={this.handleTrackFile}></input>
+              { this.state.trackFileName ?
+                <div className="file-name w3-animate-opacity">{this.state.trackFileName}</div> :
+                  null
+              }
 
               {preview}
 

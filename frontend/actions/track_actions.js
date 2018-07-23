@@ -3,6 +3,7 @@ import * as TrackApiUtil from '../util/track_api_util';
 export const RECEIVE_TRACK = 'RECEIVE_TRACK';
 export const RECEIVE_TRACKS = 'RECEIVE_TRACKS';
 export const RECEIVE_TRACK_ERRORS = 'RECEIVE_TRACK_ERRORS';
+export const DELETE_TRACK = 'DELETE_TRACK';
 
 const receiveTrack = (payload) => {
   return {
@@ -22,6 +23,13 @@ export const receiveErrors = (errorsArray) => {
   return {
     type: RECEIVE_TRACK_ERRORS,
     errors: errorsArray
+  };
+};
+
+export const removeTrack = (trackId) => {
+  return {
+    type: DELETE_TRACK,
+    trackId: String(trackId)
   };
 };
 
@@ -48,6 +56,14 @@ export const postTrack = (trackInfo) => {
     return TrackApiUtil.postTrack(trackInfo).then(
       (payload) => dispatch(receiveTrack(payload)),
       (errors) => dispatch(receiveErrors(errors))
+    );
+  };
+};
+
+export const deleteTrack = (trackId) => {
+  return (dispatch) => {
+    return TrackApiUtil.deleteTrack(trackId).then(
+      (response) => dispatch(removeTrack(response.trackId))
     );
   };
 };

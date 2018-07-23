@@ -21,3 +21,10 @@ export const fetchTracks = () => {
     url: `api/tracks`
   });
 };
+
+export const deleteTrack = (trackId) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `api/tracks/${trackId}`
+  });
+};

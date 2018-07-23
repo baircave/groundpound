@@ -8,6 +8,13 @@ export const postComment = (trackId, comment) => {
   });
 };
 
+export const deleteComment = (commentId) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `api/comments/${commentId}`
+  });
+};
+
 // export const getComments = (trackId) => {
 //   return $.ajax({
 //     method: "GET",
