@@ -65,6 +65,7 @@ class TrackIndexItem extends React.Component {
     } else {
       playPauseIcon = <img src={window.play_button}></img>;
     }
+
     return (
       <li className="track-index-item">
         <div className="art-thumbnail">
@@ -72,10 +73,16 @@ class TrackIndexItem extends React.Component {
             className="index-artwork"
             src={this.props.track.artwork_file}></img>
           <div className="artwork-mouseover"
-            onMouseEnter={this.showPlayButton.bind(this)("enter")}
+            onClick={this.redirectToTrackShow}
+            onMouseOver={this.showPlayButton.bind(this)("enter")}
             onMouseLeave={this.showPlayButton.bind(this)("exit")}>
             <button className="playButton hover-play-button"
-              onClick={this.playPauseTrack}
+              onMouseOver={e => e.stopPropagation()}
+              onMouseLeave={e => e.stopPropagation()}
+              onClick={e => {
+                e.stopPropagation();
+                this.playPauseTrack();
+              }}
               style={ {visibility: this.state.showPlayButton}}>
               {playPauseIcon}
             </button>

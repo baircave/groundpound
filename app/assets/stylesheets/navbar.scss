@@ -43,6 +43,7 @@
 }
 
 .navbar input[type~="text"] {
+  visibility: hidden;
   background-color: #333333;
   // background-color: #e5e5e5;
   transition: 0.5s;

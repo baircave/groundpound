@@ -1,24 +1,28 @@
-# README
+# Groundpound
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Track Show](https://i.imgur.com/OUaUWAe.png)
 
-Things you may want to cover:
+## Summary
+[Groundpound Live Link](http://groundpound.herokuapp.com)
 
-* Ruby version
+Groundpound is a web application designed to replicate the experience of [Soundcloud](https://soundcloud.com). The back end was created with Ruby on Rails and the front end with React/Redux. The features currently available to explore include:
+* Account creation, login, and guest/demo login
+* Continuous audio play across pages
+* Track uploads and deletion
+* Commenting on tracks
+* User profile pages
 
-* System dependencies
+## Upcoming Features
+* Waveforms
+* Timestamped comments and sub-comments
+* Liking/reposting tracks
+* Following users
+* Scheduled uploads
+* Live A/B comparisons of tracks
+* User statistics
+* Playlists
+* Download gates
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![Account Login](https://i.imgur.com/TwCwVsX.png)
+![Stream Page](https://i.imgur.com/w4ISL3i.png)

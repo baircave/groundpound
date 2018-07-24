@@ -78,9 +78,6 @@ class AudioFooter extends React.Component {
     const playQueue = this.props.playbar.playQueue;
     if ((playQueue.length - 1) > trackIndex) {
       this.props.receiveCurTrack(playQueue[trackIndex + 1]);
-    } else {
-      console.log("end of queue");
-      return;
     }
   }
 

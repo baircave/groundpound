@@ -21,6 +21,7 @@
   padding-bottom: 0;
   margin: auto;
   width: fit-content;
+  justify-content: center;
 }
 
 .track-index-item {
@@ -42,6 +43,7 @@
   height: 202px;
   position: absolute;
   top: 0;
+  cursor: pointer;
 }
 
 .index-artwork:hover ~ .hover-play-button {
