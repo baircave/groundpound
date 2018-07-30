@@ -20,3 +20,11 @@
   max-width: 800px;
   margin: 5px;
 }
+
+.comment-errors {
+  display: block;
+}
+
+.comment-errors:empty {
+  display: none;
+}

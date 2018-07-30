@@ -8,7 +8,7 @@ class Api::CommentsController < ApplicationController
       @author = @comment.author
       render :show
     else
-      render json: @comment.errors.full_messages
+      render json: @comment.errors.full_messages, status: 406
     end
   end
 

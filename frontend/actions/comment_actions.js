@@ -4,6 +4,7 @@ export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const RECEIVE_COMMENT_ERRORS = 'RECEIVE_COMMENT_ERRORS';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 export const receiveComment = (payload) => {
   return {
@@ -35,11 +36,17 @@ export const removeComment = (trackId, commentId) => {
   };
 };
 
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
+};
+
 export const postComment = (trackId, comment) => {
   return (dispatch) => {
     return CommentApiUtil.postComment(trackId, comment).then(
       (payload) => dispatch(receiveComment(payload)),
-      (errors) => dispatch(receiveErrors(errors))
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
     );
   };
 };
