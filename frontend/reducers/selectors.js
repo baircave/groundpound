@@ -3,7 +3,7 @@ export const selectComments = (state, commentIds) => {
 };
 
 export const selectCommentAuthors = (state, comments) => {
-  const users = {}
+  const users = {};
   comments.forEach(
     (comment) => users[comment.id] = state.entities.users[comment.author_id]
   );

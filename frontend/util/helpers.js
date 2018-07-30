@@ -41,8 +41,10 @@ export const trackAgeFromMs = (ms) => {
   } else {
     if (minutes === 1) {
       return `${minutes} minute ago`;
-    } else {
+    } else if (minutes > 1) {
       return `${minutes} minutes ago`;
+    } else {
+      return 'less than a minute ago';
     }
   }
 };

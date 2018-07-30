@@ -155,7 +155,7 @@ class AudioFooter extends React.Component {
               </div>
             </div>
             <div className="trackInfo">
-              <img src={this.props.track.artwork_file}></img>
+              <img onClick={this.redirectToTrackShow.bind(this)} src={this.props.track.artwork_file}></img>
               <div className="artistAndTitle">
                 <span onClick={this.redirectToUserProfile.bind(this)}>{this.props.user.username}</span>
                 <span onClick={this.redirectToTrackShow.bind(this)}>{this.props.track.title}</span>

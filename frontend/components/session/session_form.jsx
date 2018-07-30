@@ -9,8 +9,9 @@ export default class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.formAction(Object.assign({}, this.state));
-    this.props.closeModal();
+    this.props.formAction(Object.assign({}, this.state)).then(
+      () => this.props.closeModal()
+    );
   }
 
   updateField(field) {

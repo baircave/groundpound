@@ -24,7 +24,7 @@ export default (state = {}, action) => {
       return newState;
     case DELETE_COMMENT:
       newState[action.trackId].comment_ids = newState[action.trackId].comment_ids.filter(
-        (commentId) => commentId !== String(action.commentId)
+        (commentId) => String(commentId) !== String(action.commentId)
       );
       return newState;
     default:

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { logout, login } from '../../actions/session_actions';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { openModal } from '../../actions/modal_actions';
 
 
-const Navbar = ({ user, login, logout, loggedIn, visible, openModal }) => {
+const Navbar = ({ user, login, logout, loggedIn, visible, openModal, history }) => {
   if (!visible) {
     return null;
   }
@@ -16,7 +16,7 @@ const Navbar = ({ user, login, logout, loggedIn, visible, openModal }) => {
     navbar = (
       <div className="navbar">
         <div className="navbarContent">
-          <img src={window.gp_logo}/>
+          <img onClick={ () => history.push('/') } src={window.gp_logo}/>
           <input type="text" placeholder="Search"></input>
           <NavLink className="navButton" to="/upload">Upload</NavLink>
           <NavLink className="navButton" to={`/users/${user.id}`}>{user.username}</NavLink>
@@ -28,7 +28,7 @@ const Navbar = ({ user, login, logout, loggedIn, visible, openModal }) => {
     navbar = (
       <div className="navbar">
         <div className="navbarContent">
-          <img src={window.gp_logo}/>
+          <img onClick={ () => history.push('/') } src={window.gp_logo}/>
           <input type="text" placeholder="Search"></input>
           <button className="transButton session-navbar-button"
             onClick={() => openModal("login")}>Sign in</button>
@@ -60,4 +60,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
