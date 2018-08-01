@@ -22,7 +22,7 @@ export default class SessionForm extends React.Component {
 
   render() {
     return (
-        <form className="session_form"
+        <form className="session-form"
               onSubmit={this.handleSubmit}>
           { (this.props.formType === "Sign in") ?
             <h1>Sign in to Groundpound</h1> :
@@ -40,7 +40,7 @@ export default class SessionForm extends React.Component {
             type="password"
             placeholder="Password *"
             value={this.state.password} />
-          <button className="colorButton">{this.props.formType}</button>
+          <button className="color-button">{this.props.formType}</button>
           <p>Do you remember that time I wrote out this entire paragraph element to simulate a whole bunch of legalese? Because I do. Groundpound is about as legally tight as 3 year old spanx owned by a sumo wrestler. Your boy is looking for all kinds of cease and desist action up in here</p>
         </form>
     );

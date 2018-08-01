@@ -19,12 +19,12 @@ const CommentIndexItem = ({ comment, trackId, users, sessionId, deleteComment })
   }
   return (
     <li className="comment">
-      <div className="commentMeat">
-        <h4 className="commentAge">{users[comment.id].username}</h4>
+      <div className="comment-meat">
+        <h4 className="comment-age">{users[comment.id].username}</h4>
         <p className="commentBody">{comment.body}</p>
       </div>
       <div className="comment-right">
-        <h4 className="commentAge">{commentAge}</h4>
+        <h4 className="comment-age">{commentAge}</h4>
         {deleteButton}
       </div>
     </li>

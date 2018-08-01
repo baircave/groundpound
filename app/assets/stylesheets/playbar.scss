@@ -1,4 +1,4 @@
-.audioFooterWrapper {
+.audio-footer-wrapper {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@
   background-color: #f2f2f2;
 }
 
-.audioFooterContent {
+.audio-footer-content {
   display: flex;
   align-items: center;
   max-width: 1240px;
@@ -17,7 +17,7 @@
   width: 100%
 }
 
-.audioFooterWrapper h1 {
+.audio-footer-wrapper h1 {
   margin: 0;
 }
 
@@ -31,106 +31,134 @@
   cursor: pointer;
 }
 
-.volumeControls {
+.volume-controls {
   position: relative;
   justify-content: flex-end;
 }
 
-.volumeButton {
-  margin: 0;
-  min-width: 50px;
+.volume-button {
+  display: flex;
+  padding: 0;
+  margin: 5px;
+  min-width: 40px;
   font-size: 23px;
   background: none;
   color: black;
 }
 
-.volumeButton i::before {
-  width: 25px;
+.volume-button i {
+  margin-left: 10px;
 }
 
-.volumeSlider {
+
+.volume-slider {
   -webkit-appearance: none;
   height: 2px;
   background: #43c3d2;
   transform: rotate(-90deg);
 }
 
-.volumeSlider::-webkit-slider-runnable-track {
+.volume-slider::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   color: black
 }
 
-.sliderBG {
+.slider-bg {
   display: none;
   position: absolute;
   width: 30px;
   height: 150px;
   border: 1px solid lightgray;
-  background: white;
-  left: 50%;
+  background: #f2f2f2;
+  left: 43%;
   transform: translateX(-50%);
   top: 0;
   margin-top: -153px;
 }
 
-.volumeControls:hover .sliderBG {
+.volume-controls:hover .slider-bg {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.timeString1, .timeString2 {
+.time-string-1, .time-string-2 {
   font-size: 13px;
   margin: 10px;
 }
 
-.timeString1 {
+.time-string-1 {
   color: #43c3d2;
 }
 
-.timeString2 {
+.time-string-2 {
   transition: 3s;
   min-width: 20px;
 }
 
-.progressBar {
+.progress-bar {
+  height: 20px;
+  display: flex;
+  align-items: center;
   position: relative;
   width: 100%;
 }
 
-.bgProgBar {
+.progress-bar:hover {
+  cursor: pointer;
+}
+
+.progress-ball {
+  opacity: 0;
+  // display: none;
+  position: absolute;
+  background-color: #43c3d2;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: 0.25s;
+}
+
+.progress-bar:hover .progress-ball {
+  // display: block;
+  opacity: 1;
+  transition: 0.25s;
+}
+
+.bg-progress-bar {
   position: absolute;
   width: 100%;
   height: 2px;
   background-color: lightgray;
 }
 
-.colorProgBar {
+.color-progress-bar {
   position: absolute;
   height: 2px;
   background-color: #43c3d2;
+  transition: width 0.25s;
 }
 
-.playBackControls {
+.playback-controls {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
 }
 
-.trackInfo img {
+.track-info img {
   width: 35px;
   height: 35px;
   margin: 3px;
 }
 
-.trackInfo {
+.track-info {
   display: flex;
   align-items: center;
   width: 300px;
 }
 
-.artistAndTitle {
+.artist-and-title {
   margin: 1px 3px 1px 3px;
   font-size: 12px;
   display: flex;
@@ -138,7 +166,7 @@
   width: max-content;
 }
 
-.artistAndTitle span {
+.artist-and-title span {
   width: 250px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -147,7 +175,7 @@
   color: gray;
 }
 
-.artistAndTitle span:hover {
+.artist-and-title span:hover {
   margin: 2px;
   color: black;
   cursor: pointer;

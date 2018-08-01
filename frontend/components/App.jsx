@@ -5,12 +5,12 @@ import MainPage from './main_page/main_page';
 import { withRouter, Route } from 'react-router-dom';
 import UploadTrack from './upload_track/upload_track';
 import TrackShow from './tracks/track_show';
-import AudioFooter from './audio_footer/audio_footer';
+import AudioFooter from './playbar/playbar';
 import Modal from './modal';
 import Navbar from './main_page/navbar';
 import { togglePlayPause } from '../actions/playbar_actions';
 import { connect } from 'react-redux';
-import UserProfile from './users/user_profile'
+import UserProfile from './users/user_profile';
 
 class App extends React.Component {
 
@@ -21,6 +21,7 @@ class App extends React.Component {
   handleKeyPress(e) {
     // console.log("here");
     // if (this.props.visible) {
+    //   debugger
     //   if (e.key === ' ') {
     //     this.props.togglePlayPause(!this.props.playing);
     //   }
@@ -29,7 +30,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div onKeyPress={this.handleKeyPress.bind(this)} className="app">
+      <div onKeyDown={this.handleKeyPress.bind(this)} className="app">
         <Modal />
         <Navbar />
         <AuthRoute exact path="/" component={LandingPage} />

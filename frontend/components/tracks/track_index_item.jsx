@@ -2,34 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
+import { playPauseTrack } from '../../util/helpers';
 
 class TrackIndexItem extends React.Component {
   constructor(props) {
     super(props);
-    this.playPauseTrack = this.playPauseTrack.bind(this);
+    this.playPauseTrack = playPauseTrack.bind(this);
     this.redirectToTrackShow = this.redirectToTrackShow.bind(this);
     this.redirectToUserProfile = this.redirectToUserProfile.bind(this);
     this.state = {
-      showPlayButton: "hidden"
+      showPlayButton: "hidden",
+      mouseOver: false
     };
   }
 
-  playPauseTrack() {
-    const track = this.props.track;
-    const playbar = this.props.playbar;
-    if (playbar.playing) {
-      if (playbar.currentlyPlayingId === track.id.toString()) {
-        this.props.togglePlayPause(false);
+  componentDidUpdate(prevProps) {
+    const trackId = this.props.track.id.toString();
+    const previouslyPlayingId = prevProps.playbar.currentlyPlayingId;
+    const currentlyPlayingId = this.props.playbar.currentlyPlayingId;
+    if (previouslyPlayingId !== currentlyPlayingId) {
+      if (currentlyPlayingId && currentlyPlayingId !== trackId) {
         this.setState({showPlayButton: "hidden"});
-      } else {
-        this.props.togglePlayPause(true);
-        this.props.receiveCurTrack(track.id.toString());
-        this.setState({showPlayButton: "visible"});
       }
-    } else {
-      this.props.togglePlayPause(true);
-      this.props.receiveCurTrack(track.id.toString());
-      this.setState({showPlayButton: "visible"});
+    }
+
+    if (prevProps.playbar.playing !== this.props.playbar.playing) {
+      if (!this.props.playbar.playing) {
+        this.setState({showPlayButton: "hidden"});
+      }
     }
   }
 
@@ -42,29 +42,36 @@ class TrackIndexItem extends React.Component {
   }
 
   showPlayButton(enterExit) {
-    return () => {
-      const track = this.props.track;
-      const playbar = this.props.playbar;
-      if (playbar.playing && playbar.currentlyPlayingId === track.id.toString()) {
-        this.setState({showPlayButton: "visible"});
+    let mouseOver = true;
+    if (enterExit === "exit") {
+      mouseOver = false;
+    }
+
+    const track = this.props.track;
+    const playbar = this.props.playbar;
+    if (playbar.playing && playbar.currentlyPlayingId === track.id.toString()) {
+      this.setState({showPlayButton: "visible", mouseOver});
+    } else {
+      if (enterExit === "exit") {
+        this.setState({showPlayButton: "hidden", mouseOver});
       } else {
-        if (enterExit === "exit") {
-          this.setState({showPlayButton: "hidden"});
-        } else {
-          this.setState({showPlayButton: "visible"});
-        }
+        this.setState({showPlayButton: "visible", mouseOver});
       }
     }
   }
 
   render() {
     let playPauseIcon;
+    let showPlayButton = this.state.showPlayButton;
     if (this.props.playbar.playing &&
       this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {
       playPauseIcon = <img src={window.pause}></img>;
+      showPlayButton = "visible";
     } else {
       playPauseIcon = <img src={window.play_button}></img>;
     }
+
+    showPlayButton = this.state.mouseOver ? "visible" : showPlayButton;
 
     return (
       <li className="track-index-item">
@@ -74,16 +81,16 @@ class TrackIndexItem extends React.Component {
             src={this.props.track.artwork_file}></img>
           <div className="artwork-mouseover"
             onClick={this.redirectToTrackShow}
-            onMouseOver={this.showPlayButton.bind(this)("enter")}
-            onMouseLeave={this.showPlayButton.bind(this)("exit")}>
-            <button className="playButton hover-play-button"
+            onMouseOver={this.showPlayButton.bind(this, "enter")}
+            onMouseLeave={this.showPlayButton.bind(this, "exit")}>
+            <button className="play-button hover-play-button"
               onMouseOver={e => e.stopPropagation()}
               onMouseLeave={e => e.stopPropagation()}
               onClick={e => {
                 e.stopPropagation();
                 this.playPauseTrack();
               }}
-              style={ {visibility: this.state.showPlayButton}}>
+              style={ {visibility: showPlayButton}}>
               {playPauseIcon}
             </button>
           </div>

@@ -28,7 +28,7 @@ function Modal(props) {
       <div className="modal-child" onClick={e => e.stopPropagation()}>
         { component }
       </div>
-      <a className="quit_modal">&times;</a>
+      <a className="quit-modal">&times;</a>
     </div>
   );
 }

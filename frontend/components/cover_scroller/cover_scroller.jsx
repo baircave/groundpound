@@ -35,13 +35,13 @@ class CoverScroller extends React.Component {
 
   render() {
     return (
-      <section className="cover_scroller">
-        <div className="cover_scroller_content">
+      <section className="cover-scroller">
+        <div className="cover-scroller-content">
           <img src={window.gp_logo_wordmark} width="120"></img>
-          <div className="session_buttons">
-            <button className="transButton" onClick={this.handleLoginClick}>Sign in</button>
-            <button className="colorButton" onClick={this.handleSignupClick}>Create account</button>
-            <button className="transButton" onClick={this.logInGuest}>Guest</button>
+          <div className="session-buttons">
+            <button className="trans-button" onClick={this.handleLoginClick}>Sign in</button>
+            <button className="color-button" onClick={this.handleSignupClick}>Create account</button>
+            <button className="trans-button" onClick={this.logInGuest}>Guest</button>
           </div>
         </div>
         <h1 className="landing-header">Welcome to Groundpound.</h1>

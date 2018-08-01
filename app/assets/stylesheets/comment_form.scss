@@ -1,10 +1,10 @@
-.commentFormWrapper {
+.comment-form-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.commentForm {
+.comment-form {
   margin: 10px;
   padding: 3px;
   width: 100%;
@@ -13,7 +13,7 @@
   background-color: #f2f2f2;
 }
 
-.commentForm input[type~="text"] {
+.comment-form input[type~="text"] {
   display: flex;
   font-size: 15px;
   width: 100%;

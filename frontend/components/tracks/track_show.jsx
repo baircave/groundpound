@@ -7,13 +7,14 @@ import CommentForm from '../comments/comment_form';
 import CommentIndex from '../comments/comment_index';
 import { openModal } from '../../actions/modal_actions';
 import Modal from '../modal';
+import { playPauseTrack } from '../../util/helpers';
 
 class TrackShow extends React.Component {
 
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
-    this.playPauseTrack = this.playPauseTrack.bind(this);
+    this.playPauseTrack = playPauseTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -25,22 +26,6 @@ class TrackShow extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id != this.props.match.params.id) {
       this.props.fetchTrack(this.props.match.params.id);
-    }
-  }
-
-  playPauseTrack() {
-    const track = this.props.track;
-    const playbar = this.props.playbar;
-    if (playbar.playing) {
-      if (playbar.currentlyPlayingId === track.id.toString()) {
-        this.props.togglePlayPause(false);
-      } else {
-        this.props.togglePlayPause(true);
-        this.props.receiveCurTrack(track.id.toString());
-      }
-    } else {
-      this.props.togglePlayPause(true);
-      this.props.receiveCurTrack(track.id.toString());
     }
   }
 
@@ -69,40 +54,40 @@ class TrackShow extends React.Component {
 
     let deleteButton = null;
     if (this.props.sessionId === track.artist_id) {
-      deleteButton = (<button onClick={this.handleDelete} className="transButton">
+      deleteButton = (<button onClick={this.handleDelete} className="trans-button">
         <i className="fa fa-trash" aria-hidden="true"></i> Delete track</button>);
     }
     return (
-      <div className="mainWrapper">
+      <div className="main-wrapper">
         <Modal artworkUrl={track.artwork_file} title={track.title}/>
-        <div className="showPage">
-          <div className="playbackWrapper">
-            <div className="gradientWrapper">
+        <div className="track-show-page">
+          <div className="playback-wrapper">
+            <div className="gradient-wrapper">
               <canvas className="canvas" ref={this.canvasRef} width="300" height="300"></canvas>
             </div>
-            <section className="playbackContents">
-              <div className="throwLeftRight">
-                <button className="playButton"
+            <section className="playback-contents">
+              <div className="throw-left-right">
+                <button className="play-button"
                   onClick={this.playPauseTrack}>
                   {playPauseIcon}
                 </button>
-                <div className="nameAndTitle">
+                <div className="name-and-title">
                   <h3>{this.props.user.nickname}</h3>
                   <h2>{track.title}</h2>
                 </div>
               </div>
-              <div className="throwLeftRight">
-                <h4 className="trackAge">{trackAge}</h4>
-                <img className="albumArt"
+              <div className="throw-left-right">
+                <h4 className="track-age">{trackAge}</h4>
+                <img className="album-art"
                   src={track.artwork_file}
                   onClick={() => this.props.openModal("viewArtwork")}></img>
               </div>
             </section>
           </div>
-          <div className="commentsWrapper">
+          <div className="comments-wrapper">
             <CommentForm trackId={track.id}></CommentForm>
             {deleteButton}
-            <div className="trackDescription">
+            <div className="track-description">
               <p>{track.description}</p>
             </div>
             <CommentIndex trackId={track.id} commentIds={track.comment_ids}/>

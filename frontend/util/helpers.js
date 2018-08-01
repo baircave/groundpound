@@ -90,3 +90,31 @@ export function secondsToTimeString(seconds) {
     return `0:${addZeroChar(minutesRemainder)}`;
   }
 }
+
+export function getMouse(e) {
+  let element = e.currentTarget, offsetX = 0, offsetY = 0, mx, my;
+
+  while (element.offsetParent) {
+    offsetX += element.offsetLeft;
+    offsetY += element.offsetTop;
+    element = element.offsetParent;
+  }
+
+  mx = e.pageX - offsetX;
+  my = e.pageY - offsetY;
+
+  return {x: mx, y: my};
+}
+
+export function playPauseTrack() {
+  const track = this.props.track;
+  const playbar = this.props.playbar;
+  if (playbar.currentlyPlayingId === track.id.toString()) {
+    this.props.togglePlayPause(!playbar.playing);
+  } else {
+    this.props.receiveCurTrack(track.id.toString());
+    if (!playbar.playing) {
+      this.props.togglePlayPause(true);
+    }
+  }
+}

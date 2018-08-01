@@ -14,24 +14,15 @@
  *= require_self
  */
 
- .transButton {
+ .trans-button {
    padding: 9px 14px 9px 14px;
    background: none;
    border: 1px solid ;
    color: rgb(200, 200, 200);
  }
 
- .transButton:hover {
+ .trans-button:hover {
    border: 1px solid white;
    color: white;
    transition: 0.5s;
- }
-
- .transButton:hover, .colorButton:hover {
-   box-shadow: 0px 0px 5px 5px rgba(255, 155, 180, 0.3);
-   transition: 0.5s;
- }
-
- .colorButton {
-
  }

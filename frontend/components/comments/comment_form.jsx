@@ -47,8 +47,8 @@ class CommentForm extends React.Component {
 
   render() {
     return (
-      <div className="commentFormWrapper">
-        <form className="commentForm" onSubmit={this.handleSubmit}>
+      <div className="comment-form-wrapper">
+        <form className="comment-form" onSubmit={this.handleSubmit}>
           <input onFocus={this.ensureSession.bind(this)}
             onChange={this.updateField("body")}
             className="commentField"

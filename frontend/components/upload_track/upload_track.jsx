@@ -74,17 +74,17 @@ class UploadTrack extends React.Component {
     }
     const preview = <img src={url}></img>;
     return (
-      <div className="mainWrapper">
-        <section className="centerMain">
-          <div className="form_wrapper">
-            <h1 className="form_header">Upload to Groundpound</h1>
-            <form className="upload_form">
-              <div className="colorButton refButton track_file_input"
+      <div className="main-wrapper">
+        <section className="center-main">
+          <div className="form-wrapper">
+            <h1 className="form-header">Upload to Groundpound</h1>
+            <form className="upload-form">
+              <div className="color-button ref-button track-file-input"
                 onClick={(e) => this.trackFileInput.current.click()}>Choose a file to upload</div>
               <input
                 ref={this.trackFileInput}
                 accept="audio/*"
-                className="track_file_input"
+                className="track-file-input"
                 type="file"
                 onChange={this.handleTrackFile}></input>
               { this.state.trackFileName ?
@@ -94,14 +94,14 @@ class UploadTrack extends React.Component {
 
               {preview}
 
-              <div className="form_fields">
+              <div className="form-fields">
                 <label>Title</label>
                 <input type="text"
                   onChange={this.updateField("title")}
                   placeholder="Name your track"
                   autoFocus></input>
 
-                <div className="url_field">
+                <div className="url-field">
                   <p>groundpound.herokuapp.com/{this.props.user.username}/</p>
                   <input onChange={this.updateField("track_url")}
                       placeholder="your-custom-url"
@@ -112,22 +112,22 @@ class UploadTrack extends React.Component {
                 <textarea placeholder="Describe your track"
                   onChange={this.updateField("description")}></textarea>
 
-                <div className="refButton artwork_file_input"
+                <div className="ref-button artwork-file-input"
                   onClick={(e) => this.artworkFileInput.current.click()}>
                   <i className="fa fa-camera"></i> Update image</div>
 
                 <input type="file"
                   ref={this.artworkFileInput}
-                  className="artwork_file_input"
+                  className="artwork-file-input"
                   accept="image/*"
                   onChange={this.handleArtFile}></input>
 
-                <div className="form_buttons">
+                <div className="form-buttons">
                   <NavLink className="cancel" to="/">Cancel</NavLink>
                   <button onClick={this.handleSubmit}
-                    className="colorButton, trackSubmitButton"
+                    className="color-button, track-form-submit-button"
                     disabled={!Boolean(this.state.title && this.state.trackFile)}>Save
-                    <span className="tool_tip_text">Choose a title and audio file</span>
+                    <span className="tool-tip-text">Choose a title and audio file</span>
                   </button>
                 </div>
               </div>

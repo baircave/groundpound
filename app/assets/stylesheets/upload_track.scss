@@ -1,4 +1,4 @@
-.form_wrapper {
+.form-wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -10,12 +10,12 @@
   margin: 0;
 }
 
-.form_header {
+.form-header {
   margin-top: 80px;
   margin-bottom: 20px;
 }
 
-.upload_form {
+.upload-form {
   border: 1px solid lightgray;
   padding: 50px;
   width: auto;
@@ -26,25 +26,25 @@
   flex-direction: row;
 }
 
-.upload_form img {
+.upload-form img {
   width: 260px;
   height: 260px;
   margin-right: 20px;
   margin-top: 0;
 }
 
-.form_fields {
+.form-fields {
   display: flex;
   flex-direction: column;
 }
 
-.form_fields p {
+.form-fields p {
   margin: 5px;
   color: gray;
   font-size: 14px;
 }
 
-.form_fields textarea {
+.form-fields textarea {
   border-radius: 5px;
   min-width: 470px;
   max-width: 470px;
@@ -56,7 +56,7 @@
   padding: 5px;
 }
 
-.form_fields input[type="text"] {
+.form-fields input[type="text"] {
   font-size: 16px;
   padding: 5px;
   width: 470px;
@@ -64,20 +64,20 @@
   border-color: lightgray;
 }
 
-.form_fields textarea:focus {
+.form-fields textarea:focus {
   border-color: gray;
 }
 
-.form_fields input:focus {
+.form-fields input:focus {
   border-color: gray;
 }
 
-.form_fields label {
+.form-fields label {
   font-family: sans-serif;
   margin: 5px;
 }
 
-.track_file_input {
+.track-file-input {
   visibility: hidden;
   position: absolute;
   width: auto;
@@ -86,7 +86,7 @@
   margin-left: -92px;
 }
 
-.artwork_file_input {
+.artwork-file-input {
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(0, 0, 0, 0);
   padding: 3px 8px 3px 8px;
@@ -98,18 +98,13 @@
   transition: 1s;
 }
 
-.artwork_file_input:hover {
+.artwork-file-input:hover {
   border: 1px solid rgba(0, 0, 0, 0.5);
   transition: 1s;
   background-color: rgb(240, 240, 240);
 }
 
-// .form_fields input[type="file"] {
-//   position: absolute;
-//   left: 50%;
-// }
-
-.form_fields button {
+.form-fields button {
   width: 60px;
 }
 
@@ -120,34 +115,34 @@
   width: auto;
 }
 
-.form_buttons {
+.form-buttons {
   position: absolute;
   right: 0;
   bottom: -100px;
 }
 
-.url_field {
+.url-field {
   margin-top: 15px;
   margin-bottom: 15px;
   display: flex;
   flex-direction: row;
 }
 
-.url_field input[type="text"] {
+.url-field input[type="text"] {
   width: 100%;
   font-size: 14px;
 }
 
-.trackSubmitButton {
+.track-form-submit-button {
   position: relative;
 }
 
-.trackSubmitButton:disabled {
+.track-form-submit-button:disabled {
   cursor: not-allowed;
   background-color: lightgray;
 }
 
-.tool_tip_text {
+.tool-tip-text {
   text-align: center;
   left: 0;
   bottom: -15px;
@@ -158,17 +153,17 @@
   color: red;
 }
 
-.trackSubmitButton:disabled:hover .tool_tip_text {
+.track-form-submit-button:disabled:hover .tool-tip-text {
   visibility: visible;
 }
 
-.refButton {
+.ref-button {
   cursor: pointer;
   text-align: center;
   visibility: visible;
 }
 
-.centerMain {
+.center-main {
   display: flex;
   justify-content: center;
   height: 100%;

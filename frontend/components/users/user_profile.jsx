@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
 
   render() {
     let coverPhoto = (
-      <div className="gradientWrapper">
+      <div className="gradient-wrapper">
         <canvas className="canvas" ref={this.canvasRef} width="300" height="300"></canvas>
       </div>
     );

@@ -11,7 +11,7 @@
   z-index: 10;
 }
 
-.navbarContent {
+.navbar-content {
   width: 100vw;
   max-width: 1240px;
   min-width: 800px;
@@ -21,7 +21,7 @@
 }
 
 
-.navButton {
+.nav-button {
   padding: 0;
   text-align: center;
   text-decoration: none;
@@ -37,7 +37,7 @@
   min-width: 67px;
 }
 
-.navButton:hover {
+.nav-button:hover {
   color: white;
   transition: 0.5s
 }
@@ -45,7 +45,6 @@
 .navbar input[type~="text"] {
   visibility: hidden;
   background-color: #333333;
-  // background-color: #e5e5e5;
   transition: 0.5s;
   margin: 0 10px 0 10px;
   font-size: 14px;

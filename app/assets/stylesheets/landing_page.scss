@@ -16,7 +16,7 @@
   margin: auto;
 }
 
-.session_form {
+.session-form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -32,13 +32,13 @@
   background-color: white;
 }
 
-.session_form span {
+.session-form span {
   margin: 10px;
   color: red;
   text-align: center;
 }
 
-.cover_scroller {
+.cover-scroller {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
   background-size: cover;
 }
 
-.cover_scroller_content {
+.cover-scroller-content {
   position: relative;
   display: flex;
   align-items: center;
@@ -69,13 +69,13 @@
   margin: 0;
 }
 
-.cover_scroller_content img {
+.cover-scroller-content img {
   position: absolute;
   left: 25px;
   top: 12px;
 }
 
-.quit_modal {
+.quit-modal {
   font-size: 40px;
   position: absolute;
   right: 19px;
@@ -85,12 +85,11 @@
   color: black;
 }
 
-.quit_modal:hover {
+.quit-modal:hover {
   cursor: pointer;
 }
 
-
-.cover_scroller_content .session_buttons {
+.cover-scroller-content .session-buttons {
   position: absolute;
   right: 25px;
   top: 12px;

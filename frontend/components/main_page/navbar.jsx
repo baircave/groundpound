@@ -15,26 +15,26 @@ const Navbar = ({ user, login, logout, loggedIn, visible, openModal, history }) 
   if (loggedIn) {
     navbar = (
       <div className="navbar">
-        <div className="navbarContent">
+        <div className="navbar-content">
           <img onClick={ () => history.push('/') } src={window.gp_logo}/>
           <input type="text" placeholder="Search"></input>
-          <NavLink className="navButton" to="/upload">Upload</NavLink>
-          <NavLink className="navButton" to={`/users/${user.id}`}>{user.username}</NavLink>
-          <button className="navButton" onClick={logout}>Sign Out</button>
+          <NavLink className="nav-button" to="/upload">Upload</NavLink>
+          <NavLink className="nav-button" to={`/users/${user.id}`}>{user.username}</NavLink>
+          <button className="nav-button" onClick={logout}>Sign Out</button>
         </div>
       </div>
     );
   } else {
     navbar = (
       <div className="navbar">
-        <div className="navbarContent">
+        <div className="navbar-content">
           <img onClick={ () => history.push('/') } src={window.gp_logo}/>
           <input type="text" placeholder="Search"></input>
-          <button className="transButton session-navbar-button"
+          <button className="trans-button session-navbar-button"
             onClick={() => openModal("login")}>Sign in</button>
-          <button className="colorButton session-navbar-button"
+          <button className="color-button session-navbar-button"
             onClick={() => openModal("signup")}>Create account</button>
-          <button className="transButton session-navbar-button"
+          <button className="trans-button session-navbar-button"
             onClick={() => login({username: 'guest', password: 'asdfasdf'})}>Guest</button>
         </div>
       </div>

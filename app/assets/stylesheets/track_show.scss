@@ -1,4 +1,4 @@
-.showPage {
+.track-show-page {
   position: relative;
   margin-top: 46px;
   display: flex;
@@ -7,13 +7,13 @@
   align-items: center;
 }
 
-.gradientWrapper {
+.gradient-wrapper {
   width: 100%;
   max-width: 1240px;
   min-width: 800px;
 }
 
-.playbackWrapper {
+.playback-wrapper {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -25,7 +25,7 @@
   margin: 0 auto;
 }
 
-.playbackContents {
+.playback-contents {
   margin-top: 30px;
   position: absolute;
   justify-content: space-between;
@@ -39,27 +39,27 @@
   height: 380px;
 }
 
-.throwLeftRight {
+.throw-left-right {
   margin-left: 20px;
   display: flex;
   flex-direction: row;
   width: fit-content;
 }
 
-.albumArt {
+.album-art {
   margin-top: -10px;
   margin-right: 20px;
   width: 340px;
   height: 340px;
 }
 
-.nameAndTitle {
+.name-and-title {
   width: fit-content;
   display: flex;
   flex-direction: column;
 }
 
-.nameAndTitle h2, h3 {
+.name-and-title h2, h3 {
   word-break: break-word;
   width: fit-content;
   margin: 1.5px;
@@ -69,7 +69,7 @@
   font-weight: 100;
 }
 
-.playButton {
+.play-button {
   display: flex;
   justify-content: center;
   font-size: 27px;
@@ -81,7 +81,7 @@
   padding: 0;
 }
 
-.playButton img {
+.play-button img {
   filter: invert(1);
   margin-top: 0.5px;
 }
@@ -90,7 +90,7 @@
   margin-left: 7px;
 }
 
-.trackAge {
+.track-age {
   line-height: 1;
   margin: 0 25px 0 25px;
   color: #fff;
@@ -99,7 +99,7 @@
   font-size: 18px;
 }
 
-.commentsWrapper {
+.comments-wrapper {
   width: 100%;
   min-height: calc(100vh - 380px);
   max-width: 1240px;
@@ -108,7 +108,7 @@
 }
 
 
-.trackDescription {
+.track-description {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -119,14 +119,14 @@
   font-size: 20px;
 }
 
-.trackDescription p {
+.track-description p {
   color: black;
   font-size: 17px;
   max-width: 800px;
   white-space: pre-wrap;
 }
 
-.commentsWrapper ul {
+.comments-wrapper ul {
   width: 100%;
   max-width: 800px;
   padding: 0;
@@ -169,7 +169,7 @@
   font-size: 14px;
 }
 
-.commentMeat {
+.comment-meat {
   display: flex;
   flex-direction: column;
 }
@@ -179,23 +179,23 @@
   flex-direction: column;
 }
 
-.commentAge {
+.comment-age {
   color: #999;
   font-size: 12px;
   font-weight: 100;
 }
 
-.commentMeat p {
+.comment-meat p {
   color: black;
 }
 
-.commentsWrapper .transButton {
+.comments-wrapper .trans-button {
   margin: 5px;
   color: black;
   border: 1px solid #f2f2f2;
 }
 
-.commentsWrapper .transButton:hover {
+.comments-wrapper .trans-button:hover {
   margin: 5px;
   color: black;
   border: 1px solid #e5e5e5;
