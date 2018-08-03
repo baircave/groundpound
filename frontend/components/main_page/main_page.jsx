@@ -6,7 +6,6 @@ const MainPage = (props) => {
   return (
     <div className="main-page">
       <NavBar></NavBar>
-      <div className="shift-down-div"></div>
       <div className="track-index-wrapper">
         <TrackIndex></TrackIndex>
       </div>

@@ -15,7 +15,7 @@ class UserProfile extends React.Component {
       coverPhotoFile: null,
       profilePhotoUrl: null,
       profilePhotoFile: null
-    }
+    };
 
     this.coverPhotoInput = React.createRef();
     this.profilePhotoInput = React.createRef();
@@ -91,7 +91,7 @@ class UserProfile extends React.Component {
             </div>
           </div>
         </div>
-        <TrackIndex trackIds={this.props.user.track_ids} />
+        <TrackIndex userProf={true} trackIds={this.props.user.track_ids} />
       </div>
     );
   }

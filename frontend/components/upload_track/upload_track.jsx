@@ -15,7 +15,8 @@ class UploadTrack extends React.Component {
       imageUrl: null,
       imageFile: null,
       trackFile: null,
-      trackFileName: null
+      trackFileName: null,
+      toolTipText: "Choose a title and audio file",
     };
     this.trackFileInput = React.createRef();
     this.artworkFileInput = React.createRef();
@@ -55,6 +56,7 @@ class UploadTrack extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({submitDisabled: true, toolTipText: ""});
     const formData = new FormData();
     formData.append('track[title]', this.state.title);
     formData.append('track[track_url]', this.state.track_url);
@@ -103,9 +105,12 @@ class UploadTrack extends React.Component {
 
                 <div className="url-field">
                   <p>groundpound.herokuapp.com/{this.props.user.username}/</p>
-                  <input onChange={this.updateField("track_url")}
+                  <div>
+                    <input onChange={this.updateField("track_url")}
                       placeholder="your-custom-url"
                       type="text"></input>
+                    <p>(^Coming soon!)</p>
+                  </div>
                 </div>
 
                 <label>Description</label>
@@ -126,8 +131,8 @@ class UploadTrack extends React.Component {
                   <NavLink className="cancel" to="/">Cancel</NavLink>
                   <button onClick={this.handleSubmit}
                     className="color-button, track-form-submit-button"
-                    disabled={!Boolean(this.state.title && this.state.trackFile)}>Save
-                    <span className="tool-tip-text">Choose a title and audio file</span>
+                    disabled={!Boolean(this.state.title && this.state.trackFile) || this.state.submitDisabled}>Save
+                    <span className="tool-tip-text">{this.state.toolTipText}</span>
                   </button>
                 </div>
               </div>

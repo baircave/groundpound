@@ -12,6 +12,7 @@ class TrackIndex extends React.Component {
   }
 
   componentDidMount() {
+    // window.scrollTo(0, 0);
     if (this.props.match.path === "/" || this.props.match.path === "/stream") {
       this.props.fetchTracks();
     }
@@ -43,10 +44,15 @@ class TrackIndex extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let tracks = Object.values(state.entities.tracks) || [];
-  if (ownProps.trackIds) {
-    tracks = selectUserTracks(state, ownProps.trackIds);
+  let tracks = [];
+  if (ownProps.userProf) {
+    if (ownProps.trackIds) {
+      tracks = selectUserTracks(state, ownProps.trackIds);
+    }
+  } else {
+    tracks = Object.values(state.entities.tracks)
   }
+
   return {
     tracks,
     users: state.entities.users

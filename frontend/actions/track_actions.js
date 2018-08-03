@@ -26,10 +26,11 @@ export const receiveErrors = (errorsArray) => {
   };
 };
 
-export const removeTrack = (trackId) => {
+export const removeTrack = (payload) => {
   return {
     type: DELETE_TRACK,
-    trackId: String(trackId)
+    trackId: String(payload.trackId),
+    userId: String(payload.userId)
   };
 };
 
@@ -63,7 +64,7 @@ export const postTrack = (trackInfo) => {
 export const deleteTrack = (trackId) => {
   return (dispatch) => {
     return TrackApiUtil.deleteTrack(trackId).then(
-      (response) => dispatch(removeTrack(response.trackId))
+      (response) => dispatch(removeTrack(response))
     );
   };
 };

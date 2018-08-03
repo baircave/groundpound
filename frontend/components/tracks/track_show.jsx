@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { fetchTrack, deleteTrack } from '../../actions/track_actions';
 import { trackAgeFromMs, generateRGB, makeGradient } from '../../util/helpers';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
@@ -13,6 +14,9 @@ class TrackShow extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      disableDelete: false
+    };
     this.canvasRef = React.createRef();
     this.playPauseTrack = playPauseTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -30,8 +34,11 @@ class TrackShow extends React.Component {
   }
 
   handleDelete() {
-    this.props.deleteTrack(this.props.track.id);
-    this.props.history.push("/");
+    this.setState({disableDelete: true});
+    const userId = this.props.user.id;
+    this.props.deleteTrack(this.props.track.id).then(() => {
+      this.props.history.push(`/users/${userId}`);
+    });
   }
 
   render() {
@@ -54,7 +61,10 @@ class TrackShow extends React.Component {
 
     let deleteButton = null;
     if (this.props.sessionId === track.artist_id) {
-      deleteButton = (<button onClick={this.handleDelete} className="trans-button">
+      deleteButton = (<button
+        onClick={this.handleDelete}
+        className="trans-button"
+        disabled={this.state.disableDelete}>
         <i className="fa fa-trash" aria-hidden="true"></i> Delete track</button>);
     }
     return (
@@ -72,7 +82,9 @@ class TrackShow extends React.Component {
                   {playPauseIcon}
                 </button>
                 <div className="name-and-title">
-                  <h3>{this.props.user.nickname}</h3>
+                  <h3 className="clickable"
+                    onClick={() => this.props.history.push(`/users/${this.props.user.id}`)}>
+                    {this.props.user.nickname}</h3>
                   <h2>{track.title}</h2>
                 </div>
               </div>
@@ -119,4 +131,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackShow);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TrackShow));

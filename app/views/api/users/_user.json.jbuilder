@@ -10,12 +10,16 @@ json.users do
   end
 end
 
-json.tracks do
-  user.tracks.each do |track|
-    json.set! track.id do
-      json.extract! track, :id, :title, :track_url, :created_at, :artist_id
-      json.artwork_file url_for(track.artwork)
-      json.track_file url_for(track.track_file)
+if user.tracks.empty?
+  json.tracks ({})
+else
+  json.tracks do
+    user.tracks.each do |track|
+      json.set! track.id do
+        json.extract! track, :id, :title, :track_url, :created_at, :artist_id
+        json.artwork_file url_for(track.artwork)
+        json.track_file url_for(track.track_file)
+      end
     end
   end
 end

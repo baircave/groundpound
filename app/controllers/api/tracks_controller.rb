@@ -26,8 +26,9 @@ class Api::TracksController < ApplicationController
 
   def destroy
     track = Track.find(params[:id])
+    artist_id = track.artist_id
     track.destroy
-    render json: { trackId: track.id }
+    render json: { trackId: params[:id], userId: artist_id }
   end
 
   private

@@ -64,3 +64,7 @@ p {
 img:hover {
   cursor: pointer;
 }
+
+.clickable:hover {
+  cursor: pointer;
+}
