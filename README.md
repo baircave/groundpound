@@ -30,7 +30,7 @@ For session login/user authentication, Groundpound uses BCrypt to hash and salt 
 
 In order to style the playback bar at the bottom, I needed to have DOM elements refer to the status of the `<audio>` HTML5 element which actually controlled the audio buffer. The following code exemplifies how I used React state to update a track's progress bar (including song duration, current time, and progress percentage to be used as width in CSS styling). This method is the callback for `onTimeUpdate`: 
 
-```
+```javascript
   updateTime(e) {
     const audioEl = this.audioRef.current;
 
