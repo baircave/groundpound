@@ -26,7 +26,10 @@
 }
 
 .track-index-item {
+  height: 238px;
+  width: 204px;
   margin: 0 20px 20px 20px;
+  position: relative;
 }
 
 .art-thumbnail {
@@ -34,9 +37,15 @@
 }
 
 .index-artwork {
+  animation: fadein 0.5s;
   width: 200px;
   height: 200px;
   border: 1px solid #999;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .artwork-mouseover {
@@ -80,4 +89,15 @@
   font-weight: 100;
   font-size: 14px;
   color: #999;
+}
+
+.gradient {
+  position: absolute;
+  width: 202px;
+  height: 202px;
+}
+
+.throw-botton {
+  position: absolute;
+  bottom: 0;
 }

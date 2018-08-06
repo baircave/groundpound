@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
-import { playPauseTrack } from '../../util/helpers';
+import { playPauseTrack, generateRGB } from '../../util/helpers';
 
 class TrackIndexItem extends React.Component {
   constructor(props) {
@@ -10,9 +10,11 @@ class TrackIndexItem extends React.Component {
     this.playPauseTrack = playPauseTrack.bind(this);
     this.redirectToTrackShow = this.redirectToTrackShow.bind(this);
     this.redirectToUserProfile = this.redirectToUserProfile.bind(this);
+    this.randomGradient = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.state = {
       showPlayButton: "hidden",
-      mouseOver: false
+      mouseOver: false,
+      showArt: "none",
     };
   }
 
@@ -60,6 +62,10 @@ class TrackIndexItem extends React.Component {
     }
   }
 
+  imageLoaded() {
+    this.setState({showArt: "block", showGradient: "hidden"});
+  }
+
   render() {
     let playPauseIcon;
     let showPlayButton = this.state.showPlayButton;
@@ -72,12 +78,15 @@ class TrackIndexItem extends React.Component {
     }
 
     showPlayButton = this.state.mouseOver ? "visible" : showPlayButton;
-
     return (
       <li className="track-index-item">
+        <div className="gradient"
+          style={ {background: this.randomGradient}}></div>
         <div className="art-thumbnail">
           <img onClick={this.redirectToTrackShow}
             className="index-artwork"
+            onLoad={this.imageLoaded.bind(this)}
+            style={ {display: this.state.showArt}}
             src={this.props.track.artwork_file}></img>
           <div className="artwork-mouseover"
             onClick={this.redirectToTrackShow}
@@ -95,8 +104,10 @@ class TrackIndexItem extends React.Component {
             </button>
           </div>
         </div>
-        <h4 onClick={this.redirectToTrackShow}>{this.props.track.title}</h4>
-        <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
+        <div className="throw-botton">
+          <h4 onClick={this.redirectToTrackShow}>{this.props.track.title}</h4>
+          <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
+        </div>
       </li>
     );
   }
