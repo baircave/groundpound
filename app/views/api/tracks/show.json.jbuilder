@@ -11,7 +11,6 @@ end
 json.users do
   json.set! @track.artist_id do
     json.extract! @track.artist, :username, :nickname, :profile_url, :id
-    json.track_ids ([@track.id])
   end
   @track.comments.each do |comment|
     json.set! comment.author.id do
