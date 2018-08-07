@@ -16,7 +16,7 @@ class TrackShow extends React.Component {
     super(props);
     this.state = {
       disableDelete: false,
-      showArt: "none",
+      opacityClass: "",
     };
     const randRGB = generateRGB();
     this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
@@ -70,6 +70,9 @@ class TrackShow extends React.Component {
         disabled={this.state.disableDelete}>
         <i className="fa fa-trash" aria-hidden="true"></i> Delete track</button>);
     }
+
+    const artClassnames = `album-art opacity-fade ${this.state.opacityClass}`;
+
     return (
       <div className="main-wrapper">
         <Modal artworkUrl={track.artwork_file} title={track.title}/>
@@ -93,12 +96,12 @@ class TrackShow extends React.Component {
               <div className="throw-left-right">
                 <h4 className="track-age">{trackAge}</h4>
                 <div className="album-art-gradient"
-                  style={ {background: this.randomArtGradient}}></div>
-                <img className="album-art"
-                  src={track.artwork_file}
-                  style={ { display: this.state.showArt}}
-                  onLoad={imageLoaded.bind(this)}
-                  onClick={() => this.props.openModal("viewArtwork")}></img>
+                  style={ {background: this.randomArtGradient}}>
+                  <img className={artClassnames}
+                    src={track.artwork_file}
+                    onLoad={imageLoaded.bind(this)}
+                    onClick={() => this.props.openModal("viewArtwork")}></img>
+                </div>
               </div>
             </section>
           </div>

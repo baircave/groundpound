@@ -14,7 +14,7 @@ class TrackIndexItem extends React.Component {
     this.state = {
       showPlayButton: "hidden",
       mouseOver: false,
-      showArt: "none",
+      opacityClass: "",
     };
   }
 
@@ -73,17 +73,19 @@ class TrackIndexItem extends React.Component {
       playPauseIcon = <img src={window.play_button}></img>;
     }
 
+    const artClassnames = `index-artwork opacity-fade ${this.state.opacityClass}`
+
     showPlayButton = this.state.mouseOver ? "visible" : showPlayButton;
     return (
       <li className="track-index-item">
-        <div className="index-art-gradient"
-          style={ {background: this.randomGradient}}></div>
         <div className="art-thumbnail">
-          <img onClick={this.redirectToTrackShow}
-            className="index-artwork"
-            onLoad={imageLoaded.bind(this)}
-            style={ {display: this.state.showArt}}
-            src={this.props.track.artwork_file}></img>
+          <div className="index-art-gradient"
+            style={ {background: this.randomGradient}}>
+            <img onClick={this.redirectToTrackShow}
+              className={artClassnames}
+              onLoad={imageLoaded.bind(this)}
+              src={this.props.track.artwork_file}></img>
+          </div>
           <div className="artwork-mouseover"
             onClick={this.redirectToTrackShow}
             onMouseOver={this.showPlayButton.bind(this, "enter")}

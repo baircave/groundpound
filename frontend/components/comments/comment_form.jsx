@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postComment, clearErrors } from '../../actions/comment_actions';
 import { openModal } from '../../actions/modal_actions';
+import { generateRGB } from '../../util/helpers';
+import { withRouter } from 'react-router-dom';
 
 class CommentForm extends React.Component {
 
@@ -13,6 +15,7 @@ class CommentForm extends React.Component {
       track_id: props.trackId,
       commentErrors: []
     };
+    this.gradientString = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateField = this.updateField.bind(this);
   }
@@ -49,9 +52,12 @@ class CommentForm extends React.Component {
     return (
       <div className="comment-form-wrapper">
         <form className="comment-form" onSubmit={this.handleSubmit}>
+          <div className="comment-prof-gradient"
+            onClick={() => {if (this.props.loggedIn) this.props.history.push(`/users/${loggedIn}`)}}
+            style={ {background: this.gradientString}}></div>
           <input onFocus={this.ensureSession.bind(this)}
             onChange={this.updateField("body")}
-            className="commentField"
+            className="comment-field"
             type="text"
             placeholder="Write a comment"
             value={this.state.body}></input>
@@ -78,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentForm));

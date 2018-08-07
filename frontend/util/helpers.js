@@ -106,5 +106,5 @@ export function playPauseTrack() {
 }
 
 export function imageLoaded() {
-  this.setState({showArt: "block"});
+  this.setState({opacityClass: "opacity-on"});
 }
