@@ -56,20 +56,6 @@ export function generateRGB() {
   return `rgba(${getRandomInt(255)}, ${getRandomInt(255)}, ${getRandomInt(255)}, 1.000)`;
 }
 
-export function makeGradient() {
-  const canvas = this.canvasRef.current;
-  const ctx = canvas.getContext('2d');
-  let grd;
-
-  grd = ctx.createLinearGradient(0.000, 150.000, 300.000, 150.000);
-
-  grd.addColorStop(0.000, generateRGB());
-  grd.addColorStop(1.000, generateRGB());
-
-  ctx.fillStyle = grd;
-  ctx.fillRect(0, 0, 300.000, 300.000);
-}
-
 export function secondsToTimeString(seconds) {
   //for formatting into a time string
   function addZeroChar(int) {
@@ -117,4 +103,8 @@ export function playPauseTrack() {
       this.props.togglePlayPause(true);
     }
   }
+}
+
+export function imageLoaded() {
+  this.setState({showArt: "block"});
 }

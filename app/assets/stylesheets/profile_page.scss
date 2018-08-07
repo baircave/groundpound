@@ -9,10 +9,13 @@
 }
 
 .profile-page-sub-wrapper {
+  display:  flex;
   position: relative;
   max-width: 1240px;
   min-width: 800px;
-  width: 100%
+  width: 100%;
+  min-height: 260px;
+  align-items: center;
 }
 
 .profile-photo {
@@ -22,11 +25,9 @@
 }
 
 .basic-user-info {
-  margin-top: 70px;
-  position: absolute;
-  top: 0;
-  left: 40px;
+  margin-left: 40px;
   width: 100%;
+  height: fit-content;
   max-width: 1240px;
   min-width: 800px;
   display: flex;
@@ -41,5 +42,12 @@
 .profile-page .track-index {
   margin-top: -4px;
   padding-top: 20px;
+  height: 100%;
+}
+
+.gradient-cover {
+  z-index: -10;
+  position: absolute;
+  width: 100%;
   height: 100%;
 }

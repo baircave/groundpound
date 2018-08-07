@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchTrack, deleteTrack } from '../../actions/track_actions';
-import { trackAgeFromMs, generateRGB, makeGradient } from '../../util/helpers';
+import { trackAgeFromMs, generateRGB, imageLoaded } from '../../util/helpers';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import CommentForm from '../comments/comment_form';
 import CommentIndex from '../comments/comment_index';
@@ -15,15 +15,18 @@ class TrackShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      disableDelete: false
+      disableDelete: false,
+      showArt: "none",
     };
+    const randRGB = generateRGB();
+    this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
+    this.randomArtGradient = `linear-gradient(45deg, #43c3d3, ${randRGB})`;
     this.canvasRef = React.createRef();
     this.playPauseTrack = playPauseTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    makeGradient.call(this);
     this.props.fetchTrack(this.props.match.params.id);
   }
 
@@ -72,9 +75,8 @@ class TrackShow extends React.Component {
         <Modal artworkUrl={track.artwork_file} title={track.title}/>
         <div className="track-show-page">
           <div className="playback-wrapper">
-            <div className="gradient-wrapper">
-              <canvas className="canvas" ref={this.canvasRef} width="300" height="300"></canvas>
-            </div>
+            <div className="gradient-cover"
+              style={ { background: this.randomCoverGradient}}></div>
             <section className="playback-contents">
               <div className="throw-left-right">
                 <button className="play-button"
@@ -90,8 +92,12 @@ class TrackShow extends React.Component {
               </div>
               <div className="throw-left-right">
                 <h4 className="track-age">{trackAge}</h4>
+                <div className="album-art-gradient"
+                  style={ {background: this.randomArtGradient}}></div>
                 <img className="album-art"
                   src={track.artwork_file}
+                  style={ { display: this.state.showArt}}
+                  onLoad={imageLoaded.bind(this)}
                   onClick={() => this.props.openModal("viewArtwork")}></img>
               </div>
             </section>

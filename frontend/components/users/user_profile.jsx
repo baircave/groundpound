@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
-import { generateRGB, makeGradient } from '../../util/helpers';
+import { generateRGB } from '../../util/helpers';
 import TrackIndex from '../tracks/track_index';
 
 
@@ -16,14 +16,27 @@ class UserProfile extends React.Component {
       profilePhotoUrl: null,
       profilePhotoFile: null
     };
-
+    const randRGB = generateRGB();
+    this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
+    this.randomProfileGradient = `linear-gradient(45deg, #43c3d3, ${randRGB})`;
     this.coverPhotoInput = React.createRef();
     this.profilePhotoInput = React.createRef();
-    this.canvasRef = React.createRef();
+  }
+
+  componentDidUpdate(prevProps) {
+    const prevPPFile = prevProps.user.profile_photo_file;
+    const currPPFile = this.props.user.profile_photo_file;
+    const prevCPFile = prevProps.user.cover_photo_file;
+    const currCPFile = this.props.user.cover_photo_file;
+    if (prevPPFile !== currPPFile || prevCPFile !== currPPFile) {
+      this.setState({
+        coverPhotoUrl: currCPFile,
+        profilePhotoUrl: currPPFile
+      });
+    }
   }
 
   componentDidMount() {
-    makeGradient.call(this);
     this.props.fetchUser(this.props.match.params.id);
   }
 
@@ -46,12 +59,11 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    let coverPhoto = (
-      <div className="gradient-wrapper">
-        <canvas className="canvas" ref={this.canvasRef} width="300" height="300"></canvas>
-      </div>
-    );
-    let profilePhoto = <img className="profile-photo" src={window.gp_square}></img>;
+    let coverPhoto = <div className="gradient-cover"
+      style={ { background: this.randomCoverGradient}}></div>;
+
+    let profilePhoto = <div className="profile-photo"
+      style={ { background: this.randomProfileGradient}}></div>;
 
     if (this.state.coverPhotoUrl) {
       coverPhoto = <img className="cover-photo" src={this.state.coverPhotoUrl}></img>;
@@ -88,6 +100,7 @@ class UserProfile extends React.Component {
             {profilePhoto}
             <div className="name-and-location">
               <h3>{this.props.user.nickname}</h3>
+              <h3>{this.props.user.location}</h3>
             </div>
           </div>
         </div>

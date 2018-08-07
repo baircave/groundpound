@@ -1,12 +1,15 @@
-# profile_photo_file = url_for(user.profile_photo)
-# cover_photo_file = url_for(user.cover_photo)
+profile_photo_file = nil
+cover_photo_file = nil
+
+profile_photo_file = url_for(user.profile_photo) if user.profile_photo.attached?
+cover_photo_file = url_for(user.cover_photo) if user.cover_photo.attached?
 
 json.users do
   json.set! user.id do
     json.extract! user, :username, :nickname, :id, :bio, :location
     json.track_ids user.tracks.order('created_at ASC').ids
-    # json.profile_photo_file profile_photo_file
-    # json.cover_photo_file cover_photo_file
+    json.profile_photo_file profile_photo_file
+    json.cover_photo_file cover_photo_file
   end
 end
 

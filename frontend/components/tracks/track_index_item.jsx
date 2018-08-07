@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
-import { playPauseTrack, generateRGB } from '../../util/helpers';
+import { playPauseTrack, generateRGB, imageLoaded } from '../../util/helpers';
 
 class TrackIndexItem extends React.Component {
   constructor(props) {
@@ -62,10 +62,6 @@ class TrackIndexItem extends React.Component {
     }
   }
 
-  imageLoaded() {
-    this.setState({showArt: "block", showGradient: "hidden"});
-  }
-
   render() {
     let playPauseIcon;
     let showPlayButton = this.state.showPlayButton;
@@ -80,12 +76,12 @@ class TrackIndexItem extends React.Component {
     showPlayButton = this.state.mouseOver ? "visible" : showPlayButton;
     return (
       <li className="track-index-item">
-        <div className="gradient"
+        <div className="index-art-gradient"
           style={ {background: this.randomGradient}}></div>
         <div className="art-thumbnail">
           <img onClick={this.redirectToTrackShow}
             className="index-artwork"
-            onLoad={this.imageLoaded.bind(this)}
+            onLoad={imageLoaded.bind(this)}
             style={ {display: this.state.showArt}}
             src={this.props.track.artwork_file}></img>
           <div className="artwork-mouseover"
