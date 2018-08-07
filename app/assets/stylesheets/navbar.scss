@@ -23,18 +23,27 @@
 
 .nav-button {
   padding: 0;
+  margin: 0 10px 0 10px;
   text-align: center;
   text-decoration: none;
   border: none;
   background: none;
-  min-width: 100px;
-
+  width: fit-content;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: rgb(240, 240, 240);
 }
 
 .navbar img {
   height: 46px;
   min-width: 67px;
+}
+
+.navbar-buttons {
+  min-width: fit-content;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
 
 .nav-button:hover {
@@ -62,4 +71,23 @@
 
 .session-navbar-button {
   min-width: fit-content;
+}
+
+.navbar-prof-photo {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.profile-menu-button {
+  display: flex;
+  justify-content: space-around;
+}
+
+.prof-button {
+  margin: 5px;
+}
+
+.profile-menu-button:hover {
+  cursor: pointer;
 }
