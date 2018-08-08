@@ -12,7 +12,6 @@ class TrackIndex extends React.Component {
   }
 
   componentDidMount() {
-    // window.scrollTo(0, 0);
     if (this.props.match.path === "/" || this.props.match.path === "/stream") {
       this.props.fetchTracks();
     }

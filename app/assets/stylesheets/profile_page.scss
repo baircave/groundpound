@@ -52,7 +52,7 @@
   flex-direction: row;
   margin: 0;
   width: 100%;
-  // height: calc(100% - 260px);
+  height: calc(100% - 260px);
   max-width: 1240px;
   min-height: fit-content;
 }
@@ -65,7 +65,8 @@
   background: #fff;
   width: 100%;
   max-width: 360px;
-  // height: 100%;
+  padding-bottom: 50px;
+  height: 100%;
 }
 
 .sidebar .bio {

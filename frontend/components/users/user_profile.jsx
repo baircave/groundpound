@@ -42,7 +42,7 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.match.params.id);
+    this.props.fetchUser(this.props.match.params.id).then(() => window.scrollTo(0, 0));
   }
 
   handleCoverPhotoFile(e) {
