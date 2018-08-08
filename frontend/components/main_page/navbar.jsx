@@ -48,7 +48,7 @@ const Navbar = ({ user, login, logout, loggedIn, visible, openModal, history }) 
     <div className="navbar">
       <div className="navbar-content">
         <img onClick={ () => history.push('/') } src={window.gp_logo}/>
-        <input type="text" placeholder="Search"></input>
+        <input type="text" placeholder="Search **NOT YET FUNCTIONAL"></input>
         {navbarButtons}
       </div>
     </div>

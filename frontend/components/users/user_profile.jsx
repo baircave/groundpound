@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
 import { generateRGB } from '../../util/helpers';
 import TrackIndex from '../tracks/track_index';
+import StreamTrackIndexItem from '../tracks/stream_track_index_item';
 
 
 class UserProfile extends React.Component {
@@ -33,6 +34,10 @@ class UserProfile extends React.Component {
         coverPhotoUrl: currCPFile,
         profilePhotoUrl: currPPFile
       });
+    }
+
+    if (prevProps.match.params.id != this.props.match.params.id) {
+      this.props.fetchUser(this.props.match.params.id);
     }
   }
 
@@ -104,7 +109,15 @@ class UserProfile extends React.Component {
             </div>
           </div>
         </div>
-        <TrackIndex userProf={true} trackIds={this.props.user.track_ids} />
+        <div className="index-and-sidebar">
+          <TrackIndex userProf={true}
+            listType="stream-list"
+            trackIds={this.props.user.track_ids}
+            indexItemComponent={StreamTrackIndexItem}/>
+          <div className="sidebar">
+            <span className="bio">{this.props.user.bio}</span>
+          </div>
+        </div>
       </div>
     );
   }

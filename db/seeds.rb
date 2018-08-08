@@ -11,10 +11,10 @@ Comment.destroy_all
 Track.destroy_all
 User.destroy_all
 
-u1 = User.create!(username: "baircave", password: "asdfasdf", location: "New York, NY", bio: "I'm the first user whattup")
-u2 = User.create!(username: "Justice", password: "asdfasdf", location: "Paris, France", nickname: "Justice", bio: "I'm the first user whattup")
-u3 = User.create!(username: "nick", password: "asdfasdf", location: "New York, NY", nickname: "baircave", bio: "I'm the first user whattup")
-u4 = User.create!(username: "guest", password: "asdfasdf", location: "New York, NY", bio: "I'm your friendly neighborhood Guest user!")
+u1 = User.create!(username: "baircave", password: "asdfasdf", location: "New York, NY", bio: "We're baircave. We like to make music to dance to")
+u2 = User.create!(username: "Justice", password: "asdfasdf", location: "Paris, France", nickname: "Justice", bio: "We made all of our first album in Garageband. This is a miracle considering its limitations, trust us.")
+u3 = User.create!(username: "nick", password: "asdfasdf", location: "New York, NY", nickname: "baircave", bio: "I wrote this app--hopefully there's no bugs.......")
+u4 = User.create!(username: "guest", password: "asdfasdf", location: "New York, NY", bio: "I'm your friendly neighborhood Guest user! If you're checking out Groundpound for the first time, enjoy your stay!")
 
 t1 = Track.new(title: "arthur x medic - Barrier (baircave Vocal Edit)", artist_id: u1.id, track_url: "x", description: "A little while back my talented friend Arthur made an outrageously beautiful instrumental. I loved the chords and melodies and immediately knew I wanted to embellish it with some vocals. I think Ellen did an amazing job with them and hope it's something you all enjoy!")
 artFile = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/Barrier+Art.jpg')

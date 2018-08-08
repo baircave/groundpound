@@ -1,28 +1,36 @@
 .track-index {
   background: white;
-  padding-top: 40px;
-  padding-bottom: 60px;
+  // padding-top: 40px;
   width: 100%;
+  height: 100%;
   max-width: 1240px;
   min-width: 800px;
+  padding-bottom: 50px;
 }
 
 .track-index h1 {
-  padding: 50px;
+  padding: 40px 0 20px 0;
   margin: 0;
   font-weight: 100;
   font-size: 30px;
 }
 
-.track-index ul {
+.grid-list {
+  margin-top: 25px;
   padding: inherit;
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 0;
-  margin: auto;
   width: fit-content;
+  // height: 100%;
   justify-content: center;
+}
+
+.stream-list {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px 0 20px;
 }
 
 .track-index-item {
@@ -39,7 +47,7 @@
 .index-artwork {
   width: 200px;
   height: 200px;
-  border: 1px solid #999;
+  border: 1px solid #e5e5e5;
 }
 
 .artwork-mouseover {
@@ -71,7 +79,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  width: 200px;
+  // width: 200px;
 }
 
 .track-index h4:first-of-type {
@@ -86,12 +94,58 @@
 }
 
 .index-art-gradient {
-  position: absolute;
   width: 202px;
   height: 202px;
 }
 
-.throw-botton {
-  position: absolute;
-  bottom: 0;
+.play-button.stream-play-button {
+  margin-left: 15px;
+  width: 36px;
+  height: 36px;
+}
+
+.stream-play-button {
+  background-color: #43c3d2;
+  cursor: pointer;
+  color: white;
+  margin: 0 4px 0 4px;
+  border: none;
+}
+
+.stream-play-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.stream-track-index-item {
+  // display: flex;
+  // justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.stream-track-item-info {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stream-track-index-item * {
+}
+
+.stream-track-index-item .index-art-gradient{
+  width: 160px;
+  height: 160px;
+}
+
+.stream-track-artwork {
+  border: 1px solid #e3e5db;
+  width: 160px;
+  height: 160px;
+}
+
+.flex-column {
+  display: flex;
+  // width: 100%;
 }

@@ -20,6 +20,15 @@ class AudioFooter extends React.Component {
     this.seekToClick = this.seekToClick.bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener("keypress", (e) => {
+      if (e.key === ' ') {
+        e.preventDefault();
+        this.playPauseTrack.call(this);
+      }
+    });
+  }
+
   componentDidUpdate(prevProps) {
     if (this.audioRef.current && !this.audioEl) {
       this.audioEl = this.audioRef.current;

@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
-import { playPauseTrack, generateRGB, imageLoaded } from '../../util/helpers';
+import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs } from '../../util/helpers';
 
-class TrackIndexItem extends React.Component {
+class StreamTrackIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.playPauseTrack = playPauseTrack.bind(this);
@@ -12,8 +12,6 @@ class TrackIndexItem extends React.Component {
     this.redirectToUserProfile = this.redirectToUserProfile.bind(this);
     this.randomGradient = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.state = {
-      showPlayButton: "hidden",
-      mouseOver: false,
       opacityClass: "",
     };
   }
@@ -64,21 +62,25 @@ class TrackIndexItem extends React.Component {
 
   render() {
     let playPauseIcon;
-    let showPlayButton = this.state.showPlayButton;
     if (this.props.playbar.playing &&
       this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {
       playPauseIcon = <img src={window.pause}></img>;
-      showPlayButton = "visible";
     } else {
       playPauseIcon = <img src={window.play_button}></img>;
     }
 
-    const artClassnames = `index-artwork opacity-fade ${this.state.opacityClass}`
+    const d1 = new Date(this.props.track.created_at);
+    const d2 = new Date();
+    let trackAge = "";
+    if (d2 - d1) {
+      trackAge = trackAgeFromMs(d2 - d1) || "";
+    }
 
-    showPlayButton = this.state.mouseOver ? "visible" : showPlayButton;
+    const artClassnames = `stream-track-artwork opacity-fade ${this.state.opacityClass}`
+
     return (
-      <li className="track-index-item">
-        <div className="art-thumbnail">
+      <li className="stream-track-index-item">
+        <div className="flex-column">
           <div className="index-art-gradient"
             style={ {background: this.randomGradient}}>
             <img onClick={this.redirectToTrackShow}
@@ -86,25 +88,19 @@ class TrackIndexItem extends React.Component {
               onLoad={imageLoaded.bind(this)}
               src={this.props.track.artwork_file}></img>
           </div>
-          <div className="artwork-mouseover"
-            onClick={this.redirectToTrackShow}
-            onMouseOver={this.showPlayButton.bind(this, "enter")}
-            onMouseLeave={this.showPlayButton.bind(this, "exit")}>
-            <div className="play-button hover-play-button"
-              onMouseOver={e => e.stopPropagation()}
-              onMouseLeave={e => e.stopPropagation()}
-              onClick={e => {
-                e.stopPropagation();
-                this.playPauseTrack(e);
-              }}
-              style={ {visibility: showPlayButton}}>
-              {playPauseIcon}
+          <div className="flex-column stream-track-item-info">
+            <div className="flex-column">
+              <div className="play-button stream-play-button"
+                onClick={this.playPauseTrack}>
+                {playPauseIcon}
+              </div>
+              <div className="throw-button">
+                <h4 onClick={this.redirectToTrackShow}>{this.props.track.title}</h4>
+                <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
+              </div>
             </div>
+            <h4 className="track-age">{trackAge}</h4>
           </div>
-        </div>
-        <div className="throw-botton">
-          <h4 onClick={this.redirectToTrackShow}>{this.props.track.title}</h4>
-          <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
         </div>
       </li>
     );
@@ -125,4 +121,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TrackIndexItem));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StreamTrackIndexItem));

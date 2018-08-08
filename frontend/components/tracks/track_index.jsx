@@ -19,6 +19,7 @@ class TrackIndex extends React.Component {
   }
 
   render() {
+    const IndexItemComponent = this.props.indexItemComponent;
     if (this.props.tracks.length === 0) {
       return null;
     }
@@ -28,13 +29,13 @@ class TrackIndex extends React.Component {
           <h1>Hear what’s trending for free in the Groundpound community</h1> :
           null
         }
-        <ul>
+        <ul className={this.props.listType}>
           {this.props.tracks.map((track) => {
             return (
-              <TrackIndexItem key={track.id}
+              <IndexItemComponent key={track.id}
                 user={this.props.users[track.artist_id]}
                 track={track}>
-              </TrackIndexItem>
+              </IndexItemComponent>
             );
           })}
         </ul>

@@ -82,10 +82,10 @@ class TrackShow extends React.Component {
               style={ { background: this.randomCoverGradient}}></div>
             <section className="playback-contents">
               <div className="throw-left-right">
-                <button className="play-button"
+                <div className="play-button"
                   onClick={this.playPauseTrack}>
                   {playPauseIcon}
-                </button>
+                </div>
                 <div className="name-and-title">
                   <h3 className="clickable"
                     onClick={() => this.props.history.push(`/users/${this.props.user.id}`)}>
