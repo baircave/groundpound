@@ -93,7 +93,6 @@ export function getMouse(e) {
 }
 
 export function playPauseTrack(e) {
-  e.preventDefault();
   const track = this.props.track;
   const playbar = this.props.playbar;
   if (playbar.currentlyPlayingId === track.id.toString()) {
