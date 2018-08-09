@@ -22,7 +22,8 @@ class AudioFooter extends React.Component {
 
   componentDidMount() {
     window.addEventListener("keypress", (e) => {
-      if (e.key === ' ') {
+      if (e.key === ' ' && e.target == document.body) {
+        e.preventDefault();
         this.playPauseTrack.call(this);
       }
     });

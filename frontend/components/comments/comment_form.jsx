@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postComment, clearErrors } from '../../actions/comment_actions';
 import { openModal } from '../../actions/modal_actions';
-import { generateRGB } from '../../util/helpers';
+import { generateRGB, imageLoaded } from '../../util/helpers';
 import { withRouter } from 'react-router-dom';
 
 class CommentForm extends React.Component {
@@ -13,7 +13,8 @@ class CommentForm extends React.Component {
       body: "",
       parent_comment_id: props.parent_comment_id,
       track_id: props.trackId,
-      commentErrors: []
+      commentErrors: [],
+      opacityClass: ""
     };
     this.gradientString = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,12 +50,21 @@ class CommentForm extends React.Component {
   }
 
   render() {
+    const profImgClassNames = `opacity-fade comment-form-prof-photo ${this.state.opacityClass}`;
+
     return (
       <div className="comment-form-wrapper">
         <form className="comment-form" onSubmit={this.handleSubmit}>
           <div className="comment-prof-gradient"
             onClick={() => {if (this.props.loggedIn) this.props.history.push(`/users/${this.props.loggedIn}`)}}
-            style={ {background: this.gradientString}}></div>
+            style={ {background: this.gradientString}}>
+            { this.props.loggedIn ?
+              <img className={profImgClassNames}
+                onLoad={imageLoaded.bind(this)}
+                src={this.props.profPhoto}></img> :
+              null
+            }
+          </div>
           <input onFocus={this.ensureSession.bind(this)}
             onChange={this.updateField("body")}
             className="comment-field"
@@ -70,9 +80,12 @@ class CommentForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  let profPhoto = null;
+  if (state.session.id) profPhoto = state.entities.users[state.session.id].profile_photo;
   return {
     loggedIn: state.session.id,
-    commentErrors: state.errors.comments
+    commentErrors: state.errors.comments,
+    profPhoto
   };
 };
 
