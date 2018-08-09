@@ -20,7 +20,7 @@ class TrackIndex extends React.Component {
   render() {
     const IndexItemComponent = this.props.indexItemComponent;
     if (this.props.tracks.length === 0) {
-      return null;
+      return <div className="track-index"><img src={window.nothing_to_hear}></img></div>;
     }
     return (
       <div className="track-index">

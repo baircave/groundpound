@@ -53,7 +53,7 @@ class CommentForm extends React.Component {
       <div className="comment-form-wrapper">
         <form className="comment-form" onSubmit={this.handleSubmit}>
           <div className="comment-prof-gradient"
-            onClick={() => {if (this.props.loggedIn) this.props.history.push(`/users/${loggedIn}`)}}
+            onClick={() => {if (this.props.loggedIn) this.props.history.push(`/users/${this.props.loggedIn}`)}}
             style={ {background: this.gradientString}}></div>
           <input onFocus={this.ensureSession.bind(this)}
             onChange={this.updateField("body")}

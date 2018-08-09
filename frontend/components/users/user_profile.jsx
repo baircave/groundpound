@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
-import { generateRGB } from '../../util/helpers';
+import { generateRGB, imageLoaded } from '../../util/helpers';
 import TrackIndex from '../tracks/track_index';
 import StreamTrackIndexItem from '../tracks/stream_track_index_item';
 
@@ -12,10 +12,11 @@ class UserProfile extends React.Component {
     super(props);
 
     this.state = {
-      coverPhotoUrl: null,
-      coverPhotoFile: null,
-      profilePhotoUrl: null,
-      profilePhotoFile: null
+      coverPhotoUrl: "",
+      coverPhotoFile: "",
+      profilePhotoUrl: "",
+      profilePhotoFile: "",
+      opacityClass: ""
     };
     const randRGB = generateRGB();
     this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
@@ -29,7 +30,7 @@ class UserProfile extends React.Component {
     const currPPFile = this.props.user.profile_photo_file;
     const prevCPFile = prevProps.user.cover_photo_file;
     const currCPFile = this.props.user.cover_photo_file;
-    if (prevPPFile !== currPPFile || prevCPFile !== currPPFile) {
+    if (prevPPFile !== currPPFile || prevCPFile !== currCPFile) {
       this.setState({
         coverPhotoUrl: currCPFile,
         profilePhotoUrl: currPPFile
@@ -65,20 +66,6 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    let coverPhoto = <div className="gradient-cover"
-      style={ { background: this.randomCoverGradient}}></div>;
-
-    let profilePhoto = <div className="profile-photo"
-      style={ { background: this.randomProfileGradient}}></div>;
-
-    if (this.state.coverPhotoUrl) {
-      coverPhoto = <img className="cover-photo" src={this.state.coverPhotoUrl}></img>;
-    }
-
-    if (this.state.profilePhotoUrl) {
-      profilePhoto = <img className="profile-photo" src={this.state.profilePhotoUrl}></img>
-    }
-
     let chooseCoverPhoto = null;
     let chooseProfilePhoto = null;
     if (this.props.loggedIn && this.props.match.params.id === this.props.loggedIn) { //string/int conversion nonsense here
@@ -98,15 +85,28 @@ class UserProfile extends React.Component {
       );
     }
 
+    const profImgClassNames = `profile-photo opacity-fade ${this.state.opacityClass}`;
+    const coverImgClassNames = `cover-photo opacity-fade ${this.state.opacityClass}`;
+
     return (
       <div className="profile-page">
         <div className="profile-page-sub-wrapper">
-          {coverPhoto}
+          <div className="gradient-cover"
+            style={ { background: this.randomCoverGradient}}>
+            <img className={coverImgClassNames}
+              src={this.state.coverPhotoUrl}
+              onLoad={imageLoaded.bind(this)}></img>
+          </div>
           <div className="basic-user-info">
-            {profilePhoto}
+            <div className="profile-photo"
+              style={ { background: this.randomProfileGradient}}>
+              <img className={profImgClassNames}
+                src={this.state.profilePhotoUrl}
+                onLoad={imageLoaded.bind(this)}></img>
+            </div>
             <div className="name-and-location">
               <h3>{this.props.user.nickname}</h3>
-              <h3>{this.props.user.location}</h3>
+              { this.props.user.location ? <h3>{this.props.user.location}</h3> : null }
             </div>
           </div>
         </div>

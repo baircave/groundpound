@@ -28,7 +28,7 @@ export default class SessionForm extends React.Component {
             <h1>Sign in to Groundpound</h1> :
             <h1>Make your new Groundpound account</h1>
           }
-          <span>{Object.values(this.props.errors)}</span>
+          {Object.values(this.props.errors).map((error) => <span>{error}</span>)}
           <input
             onChange={this.updateField("username")}
             type="text"

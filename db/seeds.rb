@@ -13,8 +13,150 @@ User.destroy_all
 
 u1 = User.create!(username: "baircave", password: "asdfasdf", location: "New York, NY", bio: "We're baircave. We like to make music to dance to")
 u2 = User.create!(username: "Justice", password: "asdfasdf", location: "Paris, France", nickname: "Justice", bio: "We made all of our first album in Garageband. This is a miracle considering its limitations, trust us.")
-u3 = User.create!(username: "nick", password: "asdfasdf", location: "New York, NY", nickname: "baircave", bio: "I wrote this app--hopefully there's no bugs.......")
+u3 = User.create!(username: "nick", password: "asdfasdf", location: "New York, NY", bio: "I wrote this app--hopefully there's no bugs.......")
 u4 = User.create!(username: "guest", password: "asdfasdf", location: "New York, NY", bio: "I'm your friendly neighborhood Guest user! If you're checking out Groundpound for the first time, enjoy your stay!")
+u5 = User.create!(username: "Oliver Heldens", password: "asdfasdf", location: "Netherlands", bio: "'King Kong' Out Now! :D heldeep.release.link/king-kong-hi-lo-touch
+
+WWW.OLIVERHELDENS.COM
+With free downloads, exclusive studio sessions & more. Join now! :D
+
+\o/ House Music \o/
+@HeldeepRecords
+@HeldeepRadio
+
+Btw, I make more bassline driven and 'underground' / clubby stuff under my @official-hilo alias
+Enjoy!
+
+MGMT: Lucas Keller, Alex Harrow, Dave Frank | Milk & Honey Music
+heldens@milkhoneyla.com
+
+Bookings North & South America: david@spinartistagency.com
+Bookings ROW: jennifer.hammel@caa.com")
+u6 = User.create!(username: "Basement Jaxx", password: "asdfasdf", location: "London / United Kingdom")
+u7 = User.create!(username: "Audien", password: "asdfasdf", location: "Connecticut / United States", bio: "feelsy music")
+u8 = User.create!(username: "Knife Party", password: "asdfasdf", location: "London", bio: "Seizure Music")
+u9 = User.create!(username: "Unlike Pluto", password: "asdfasdf", location: "Los Angeles, United States", bio: "¿
+
+✚ Management / Booking / Press ✚
+bit.ly/contact-unlikepluto")
+
+profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/oliver-heldens-prof-photo.jpg')
+coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/oliver-heldens-cover-photo.jpg')
+u5.profile_photo.attach(io: profPhoto, filename: 'oliver-heldens-prof-photo.jpg')
+u5.cover_photo.attach(io: coverPhoto, filename: 'oliver-heldens-cover-photo.jpg')
+
+profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/basement-jaxx-prof-photo.jpg')
+coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/basement-jaxx-cover-photo.jpeg')
+u6.profile_photo.attach(io: profPhoto, filename: 'basement-jaxx-prof-photo.jpg')
+u6.cover_photo.attach(io: coverPhoto, filename: 'basement-jaxx-cover-photo.jpg')
+
+profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/audien-prof-photo.jpg')
+coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/audien-cover-photo.jpg')
+u7.profile_photo.attach(io: profPhoto, filename: 'audien-prof-photo.jpg')
+u7.cover_photo.attach(io: coverPhoto, filename: 'audien-cover-photo.jpg')
+
+profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/knife-party-prof-photo.jpg')
+coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/knife-party-cover-photo.jpg')
+u8.profile_photo.attach(io: profPhoto, filename: 'knife-party-prof-photo.jpg')
+u8.cover_photo.attach(io: coverPhoto, filename: 'knife-party-cover-photo.jpg')
+
+profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/unlike-pluto-prof-photo.jpg')
+coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/unlike-pluto-cover-photo.jpg')
+u9.profile_photo.attach(io: profPhoto, filename: 'unlike-pluto-prof-photo.jpg')
+u9.cover_photo.attach(io: coverPhoto, filename: 'unlike-pluto-cover-photo.jpg')
+
+
+t11 = Track.new(title: "Animals (Oliver Heldens Remix)", artist_id: u5.id, track_url: "x", description: "Hey everyone, it's finally out: my official remix for @MartinGarrix - Animals ! :-)
+Really happy with this one and I'm also overwhelmed by the reactions/likes and plays (over 400k!) on the preview.
+It would be so sick if we could hit the top 10 again (like with Gecko, which is #3 atm).
+Support me and get it here: www.beatport.com/track/animals-ol…ns-remix/5050373 or support me by reposting/sharing this :-)
+Thanks!
+~ Oli
+@OliverHeldens
+www.facebook.com/OliverHeldens
+www.twitter.com/OliverHeldens
+www.instagram.com/OliverHeldens
+
+<3 the track on HypeM here: bit.ly/1d1GyWt")
+artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/01+Animals+(Oliver+Heldens+Remix).jpg")
+trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/01+Animals+(Oliver+Heldens+Remix).m4a")
+t11.artwork.attach(io: artFile, filename: "animals-oliver-heldens-remix.jpg")
+t11.track_file.attach(io: trackFile, filename: "animals-oliver-heldens-remix.m4a")
+t11.save!
+
+t12 = Track.new(title: "EDM Trend Machine", artist_id: u8.id, track_url: "x", description: "'EDM Trend Machine' taken from the album 'Abandon Ship' OUT NOW smarturl.it/AbandonShipiTunes")
+artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/03+Boss+Mode.jpg")
+trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/04+EDM+Trend+Machine.m4a")
+t12.artwork.attach(io: artFile, filename: "abandon-ship.jpg")
+t12.track_file.attach(io: trackFile, filename: "edm-trend-machine.m4a")
+t12.save!
+
+t13 = Track.new(title: "Boss mode", artist_id: u8.id, track_url: "x", description: "'Boss Mode' taken from the album 'Abandon Ship' OUT NOW smarturl.it/AbandonShipiTunes")
+artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/03+Boss+Mode.jpg")
+trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/03+Boss+Mode.m4a")
+t13.artwork.attach(io: artFile, filename: "abandon-ship.jpg")
+t13.track_file.attach(io: trackFile, filename: "boss-mode.m4a")
+t13.save!
+
+t14 = Track.new(title: "Never Say Never", artist_id: u6.id, track_url: "x", description: "The GRAMMY nominated single from the album \"Junto\" by Basement Jaxx featuring South London school-leaver sensation ETML.
+
+\"Junto\" is out now !
+Deluxe Digital: smarturl.it/deldigi
+Digital: smarturl.it/juntodigi
+Deluxe CD: smarturl.it/Junto2CD
+CD: smarturl.it/JuntoCD
+2LP: smarturl.it/JuntoLP
+
+www.facebook.com/BasementJaxx
+twitter.com/TheBasementJaxx
+www.youtube.com/BasementJaxx")
+artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/1-04+Never+Say+Never.jpg")
+trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/1-04+Never+Say+Never.m4a")
+t14.artwork.attach(io: artFile, filename: "junto.jpg")
+t14.track_file.attach(io: trackFile, filename: "never-say-never.m4a")
+t14.save!
+
+t15 = Track.new(title: "Unicorn", artist_id: u6.id, track_url: "x", description: "From the new Basement Jaxx album, \"Junto\", out now !
+
+Deluxe Digital: smarturl.it/deldigi
+Digital: smarturl.it/juntodigi
+Deluxe CD: smarturl.it/Junto2CD
+CD: smarturl.it/JuntoCD
+2LP: smarturl.it/JuntoLP")
+artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/1-04+Never+Say+Never.jpg")
+trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/1-03+Unicorn.m4a")
+t15.artwork.attach(io: artFile, filename: "junto.jpg")
+t15.track_file.attach(io: trackFile, filename: "unicorn.m4a")
+t15.save!
+
+t16 = Track.new(title: "Pompeii (Audien Remix)", artist_id: u7.id, track_url: "x", description: "My new official remix of 'Pompeii' by Bastille!
+
+Out Now!
+
+Beatport: btprt.dj/1ly4Ocr
+iTunes: bit.ly/1hvUKxq
+
+www.facebook.com/audienmusic
+www.twitter.com/audien")
+artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/01+Pompeii+(Audien+Remix).jpg")
+trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/01+Pompeii+(Audien+Remix).m4a")
+t16.artwork.attach(io: artFile, filename: "pompeii-audien-remix.jpg")
+t16.track_file.attach(io: trackFile, filename: "pompeii-audien-remix.m4a")
+t16.save!
+
+t17 = Track.new(title: "Revolution (Unlike Pluto Remix)", artist_id: u9.id, track_url: "x", description: "hypem.com/track/28hj1/Diplo+-+…+(Unlike+Pluto+remix)
+
+Get it on iTunes: smarturl.it/revolutionremixes2
+Get it on Amazon: amzn.to/1Hrn6r3
+Get it on Beatport: btprt.dj/1dhPteP
+---
+Stream Revolution (Remixes Part 2) - smarturl.it/streamrevolutionrmxs")
+artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Revolution+(Unlike+Pluto+remix).jpg")
+trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Revolution+(Unlike+Pluto+remix).mp3")
+t17.artwork.attach(io: artFile, filename: "revolution-unlike-pluto-remix.jpg")
+t17.track_file.attach(io: trackFile, filename: "revolution-unlike-pluto-remix.mp3")
+t17.save!
+
 
 t1 = Track.new(title: "arthur x medic - Barrier (baircave Vocal Edit)", artist_id: u1.id, track_url: "x", description: "A little while back my talented friend Arthur made an outrageously beautiful instrumental. I loved the chords and melodies and immediately knew I wanted to embellish it with some vocals. I think Ellen did an amazing job with them and hope it's something you all enjoy!")
 artFile = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/Barrier+Art.jpg')

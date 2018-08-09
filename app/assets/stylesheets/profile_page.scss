@@ -40,7 +40,7 @@
   margin-left: 20px;
 }
 
-.gradient-cover {
+.gradient-cover, .cover-photo {
   z-index: -10;
   position: absolute;
   width: 100%;
@@ -71,4 +71,5 @@
 
 .sidebar .bio {
   margin: 20px 20px 0 20px;
+  white-space: pre-wrap;
 }

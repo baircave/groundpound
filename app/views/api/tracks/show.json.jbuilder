@@ -1,4 +1,5 @@
-artwork = url_for(@track.artwork)
+artwork = nil
+artwork = url_for(@track.artwork) if @track.artwork.attached?
 audio = url_for(@track.track_file)
 
 json.track do
