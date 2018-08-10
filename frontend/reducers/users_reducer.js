@@ -20,7 +20,9 @@ export default (state = {}, action) => {
       return merge({}, state, users);
     case DELETE_TRACK:
       const user = newState[action.userId];
-      user.track_ids = user.track_ids.filter((trackId) => trackId != action.trackId);
+      if (user.track_ids) {
+        user.track_ids = user.track_ids.filter((trackId) => trackId != action.trackId);
+      }
       return newState;
     default:
       return state;

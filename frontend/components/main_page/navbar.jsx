@@ -45,7 +45,7 @@ class Navbar extends React.Component {
             onClick={this.redirectToProfile.bind(this)}>
             <div className="navbar-prof-photo"
               style={ {background: this.gradientString}}>
-              <img src={this.props.user.profile_photo}
+              <img src={this.props.profPhotoUrl}
                 className={profImgClassNames}
                 onLoad={imageLoaded.bind(this)}></img>
             </div>
@@ -70,9 +70,10 @@ class Navbar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.entities.users[state.session.id],
+    user: state.entities.users[state.session.id] || {},
     loggedIn: state.session.id,
-    visible: state.ui.navbar
+    profPhotoUrl: state.session.profPhotoUrl,
+    visible: state.ui.navbar,
   };
 };
 

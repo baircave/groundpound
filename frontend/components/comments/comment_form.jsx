@@ -61,7 +61,7 @@ class CommentForm extends React.Component {
             { this.props.loggedIn ?
               <img className={profImgClassNames}
                 onLoad={imageLoaded.bind(this)}
-                src={this.props.profPhoto}></img> :
+                src={this.props.profPhotoUrl}></img> :
               null
             }
           </div>
@@ -80,12 +80,10 @@ class CommentForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  let profPhoto = null;
-  if (state.session.id) profPhoto = state.entities.users[state.session.id].profile_photo;
   return {
     loggedIn: state.session.id,
     commentErrors: state.errors.comments,
-    profPhoto
+    profPhotoUrl: state.session.profPhotoUrl
   };
 };
 
