@@ -15,7 +15,11 @@ json.users do
   end
   @track.comments.each do |comment|
     json.set! comment.author.id do
+      author = comment.author
+      profile_photo = nil
+      profile_photo = url_for(author.profile_photo) if author.profile_photo.attached?
       json.extract! comment.author, :id, :username
+      json.profile_photo profile_photo
     end
   end
 end

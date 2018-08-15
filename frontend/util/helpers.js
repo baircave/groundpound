@@ -108,3 +108,9 @@ export function playPauseTrack(e) {
 export function imageLoaded() {
   this.setState({opacityClass: "opacity-on"});
 }
+
+export function updateField(field) {
+  return (e) => {
+    this.setState({[field]: e.currentTarget.value});
+  };
+}

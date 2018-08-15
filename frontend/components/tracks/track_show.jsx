@@ -17,6 +17,7 @@ class TrackShow extends React.Component {
     this.state = {
       disableDelete: false,
       opacityClass: "",
+      waveform: null
     };
     const randRGB = generateRGB();
     this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
@@ -32,6 +33,12 @@ class TrackShow extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // if (this.props.track.track_file != prevProps.track.track_file) {
+    //   this.setState({waveform: WaveSurfer.create({
+    //     container: '#waveform'
+    //   }).load(this.props.track.track_file)});
+    // }
+
     if (prevProps.match.params.id != this.props.match.params.id) {
       this.props.fetchTrack(this.props.match.params.id);
     }
@@ -83,6 +90,7 @@ class TrackShow extends React.Component {
               style={ { background: this.randomCoverGradient}}></div>
             <section className="playback-contents">
               <div className="throw-left-right">
+                <div id="waveform"></div>
                 <div className="play-button"
                   onClick={this.playPauseTrack}>
                   {playPauseIcon}

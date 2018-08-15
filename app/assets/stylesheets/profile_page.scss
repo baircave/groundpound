@@ -73,3 +73,24 @@
   margin: 20px 20px 0 20px;
   white-space: pre-wrap;
 }
+
+.show-pages-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1240px;
+  min-width: 800px;
+  background-color: #ffffff;
+}
+
+.show-pages-button-wrapper .edit-button {
+  margin: 5px;
+  color: black;
+  border: 1px solid #f2f2f2;
+}
+
+.show-pages-button-wrapper .edit-button:hover {
+  margin: 5px;
+  color: black;
+  border: 1px solid #c8c8c8;
+}

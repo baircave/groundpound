@@ -1,0 +1,60 @@
+.user-profile-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  min-width: fit-content;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px;
+  background-color: white;
+}
+
+.user-profile-form label {
+  font-size: 14px;
+  margin: 8px 0 2px 0;
+}
+
+.user-profile-form h1 {
+  margin: 18px;
+}
+
+.user-profile-form textarea {
+  font-weight: 100;
+  font-size: 16px;
+}
+
+.edit-profile-form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 5px 0 5px 5px;
+}
+
+.edit-profile-form-buttons * {
+  margin-left: 15px;
+}
+
+.submit-button {
+  min-width: fit-content;
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  background-color: lightgray;
+}
+
+.cancel-button {
+  font-weight: 100;
+}
+
+.cancel-button:hover {
+  cursor: pointer;
+}
+
+.asterisk {
+  color: red;
+}

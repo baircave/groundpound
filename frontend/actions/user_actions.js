@@ -16,3 +16,11 @@ export const fetchUser = (userId) => {
     );
   };
 };
+
+export const updateUser = (userId, user) => {
+  return (dispatch) => {
+    return UserApiUtil.updateUser(userId, user).then(
+      (payload) => dispatch(receiveUser(payload))
+    );
+  };
+};

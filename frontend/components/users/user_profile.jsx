@@ -4,6 +4,8 @@ import { fetchUser } from '../../actions/user_actions';
 import { generateRGB, imageLoaded } from '../../util/helpers';
 import TrackIndex from '../tracks/track_index';
 import StreamTrackIndexItem from '../tracks/stream_track_index_item';
+import { openModal } from '../../actions/modal_actions';
+import Modal from '../modal';
 
 
 class UserProfile extends React.Component {
@@ -66,6 +68,17 @@ class UserProfile extends React.Component {
   }
 
   render() {
+    let editButton = null;
+    if (this.props.loggedIn && this.props.match.params.id == this.props.loggedIn) {
+      editButton = (
+        <button className="trans-button edit-button"
+          onClick={() => this.props.openModal("userProfileForm")}>
+          <i className="fa fa-pencil" aria-hidden="true"></i> Edit
+        </button>
+      );
+    }
+
+
     let chooseCoverPhoto = null;
     let chooseProfilePhoto = null;
     if (this.props.loggedIn && this.props.match.params.id === this.props.loggedIn) { //string/int conversion nonsense here
@@ -87,9 +100,9 @@ class UserProfile extends React.Component {
 
     const profImgClassNames = `profile-photo opacity-fade ${this.state.opacityClass}`;
     const coverImgClassNames = `cover-photo opacity-fade ${this.state.opacityClass}`;
-
     return (
       <div className="profile-page">
+        <Modal user={this.props.user}/>
         <div className="profile-page-sub-wrapper">
           <div className="gradient-cover"
             style={ { background: this.randomCoverGradient}}>
@@ -109,6 +122,9 @@ class UserProfile extends React.Component {
               { this.props.user.location ? <h3>{this.props.user.location}</h3> : null }
             </div>
           </div>
+        </div>
+        <div className="show-pages-button-wrapper">
+          {editButton}
         </div>
         <div className="index-and-sidebar">
           <TrackIndex userProf={true}
@@ -135,7 +151,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUser: (userId) => dispatch(fetchUser(userId))
+    fetchUser: (userId) => dispatch(fetchUser(userId)),
+    openModal: (modal) => dispatch(openModal(modal)),
   };
 };
 

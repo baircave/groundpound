@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   after_initialize :ensure_session_token, :default_nickname
+  before_save :default_nickname
 
   validates :username, :session_token, :password_digest, :nickname, presence: true
   validates :username, presence: true, uniqueness: true

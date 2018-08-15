@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoginContainer from './session/login_container';
 import SignupContainer from './session/signup_container';
 import ArtworkShow from './artwork/artwork_show';
+import UserProfileForm from './users/user_profile_form';
 
 function Modal(props) {
   if (!props.modal) {
@@ -19,6 +20,9 @@ function Modal(props) {
       break;
     case 'viewArtwork':
       component = <ArtworkShow artworkUrl={props.artworkUrl} title={props.title}/>;
+      break;
+    case 'userProfileForm':
+      component = <UserProfileForm user={props.user}/>;
       break;
     default:
       return null;

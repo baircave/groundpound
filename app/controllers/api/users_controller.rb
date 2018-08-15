@@ -21,14 +21,10 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if current_user && current_user.id == params[:id] #only allow edit if logged in user is editing their own profile
-      if @user.update(user_params)
-        render :show
-      else
-        render json: @user.errors.full_messages, status: 422
-      end
+    if @user.update_attributes(user_params)
+      render :show
     else
-      render json: ["Can't edit another user's profile"], status: 401
+      render json: @user.errors.full_messages, status: 422
     end
   end
 
