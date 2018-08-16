@@ -7,6 +7,13 @@ const MainPage = (props) => {
   return (
     <div className="main-page">
       <div className="track-index-wrapper">
+        <div className="max-min-width">
+          <div className="label-select-with-buttons">
+            <div>
+              <h2 className="index-label">Tracks</h2>
+            </div>
+          </div>
+        </div>
         <TrackIndex indexItemComponent={StreamTrackIndexItem}
           listType="stream-list"></TrackIndex>
       </div>

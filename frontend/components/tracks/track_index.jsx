@@ -28,6 +28,7 @@ class TrackIndex extends React.Component {
           <h1>Hear what’s trending for free in the Groundpound community</h1> :
           null
         }
+
         <ul className={this.props.listType}>
           {this.props.tracks.map((track) => {
             return (

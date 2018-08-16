@@ -80,3 +80,10 @@ img:hover {
 .opacity-on {
   opacity: 1;
 }
+
+.max-min-width {
+  width: 100%;
+  min-width: 800px;
+  max-width: 1240px;
+  background: #fff;
+}

@@ -177,8 +177,15 @@ class UserProfile extends React.Component {
             </div>
           </div>
         </div>
-        <div className="show-pages-button-wrapper">
-          {editButton}
+        <div className="max-min-width">
+          <div className="label-select-with-buttons">
+            <div>
+              <h2 className="index-label">Tracks</h2>
+            </div>
+            <div className="show-pages-button-wrapper">
+              {editButton}
+            </div>
+          </div>
         </div>
         <div className="index-and-sidebar">
           <TrackIndex userProf={true}
