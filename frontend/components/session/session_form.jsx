@@ -1,9 +1,13 @@
 import React from 'react';
+import { login } from '../../actions/session_actions';
+import { closeModal } from '../../actions/modal_actions';
+import { connect } from 'react-redux';
 
-export default class SessionForm extends React.Component {
+class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.loginGuest = this.loginGuest.bind(this);
     this.state = { username: "", password: "" };
   }
 
@@ -18,6 +22,12 @@ export default class SessionForm extends React.Component {
     return (e) => {
       this.setState({[field]: e.currentTarget.value});
     };
+  }
+
+  loginGuest() {
+    this.props.login({username: "guest", password: "asdfasdf"}).then(
+      () => this.props.closeModal()
+    );
   }
 
   render() {
@@ -42,7 +52,18 @@ export default class SessionForm extends React.Component {
             value={this.state.password} />
           <button className="color-button">{this.props.formType}</button>
           <p>Do you remember that time I wrote out this entire paragraph element to simulate a whole bunch of legalese? Because I do. Groundpound is about as legally tight as 3 year old spanx owned by a sumo wrestler. Your boy is looking for all kinds of cease and desist action up in here</p>
+          <div className="trans-button guest-login-button"
+            onClick={this.loginGuest}>Guest Login</div>
         </form>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (user) => dispatch(login(user)),
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SessionForm);

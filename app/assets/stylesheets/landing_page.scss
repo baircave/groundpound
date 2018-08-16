@@ -93,3 +93,22 @@
   right: 25px;
   top: 12px;
 }
+
+.guest-login-button {
+  align-self: center;
+  margin-top: 10px;
+  width: 100px;
+  border: 1px solid #f2f2f2;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 100;
+  padding: 8px;
+}
+
+.session-form .guest-login-button:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  color: black;
+  border: 1px solid black;
+}
