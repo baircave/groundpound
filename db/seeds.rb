@@ -40,30 +40,35 @@ u9 = User.create!(username: "Unlike Pluto", password: "asdfasdf", location: "Los
 ✚ Management / Booking / Press ✚
 bit.ly/contact-unlikepluto")
 
-profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/oliver-heldens-prof-photo.jpg')
-coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/oliver-heldens-cover-photo.jpg')
-u5.profile_photo.attach(io: profPhoto, filename: 'oliver-heldens-prof-photo.jpg')
-u5.cover_photo.attach(io: coverPhoto, filename: 'oliver-heldens-cover-photo.jpg')
+prof_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/_H6A9238-2.jpg')
+cover_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/NN+Central+Park+Cropped.jpeg')
+u4.profile_photo.attach(io: prof_photo, filename: 'triple-shirt.jpg')
+u4.cover_photo.attach(io: cover_photo, filename: 'NN.jpeg')
 
-profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/basement-jaxx-prof-photo.jpg')
-coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/basement-jaxx-cover-photo.jpeg')
-u6.profile_photo.attach(io: profPhoto, filename: 'basement-jaxx-prof-photo.jpg')
-u6.cover_photo.attach(io: coverPhoto, filename: 'basement-jaxx-cover-photo.jpg')
+prof_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/oliver-heldens-prof-photo.jpg')
+cover_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/oliver-heldens-cover-photo.jpg')
+u5.profile_photo.attach(io: prof_photo, filename: 'oliver-heldens-prof-photo.jpg')
+u5.cover_photo.attach(io: cover_photo, filename: 'oliver-heldens-cover-photo.jpg')
 
-profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/audien-prof-photo.jpg')
-coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/audien-cover-photo.jpg')
-u7.profile_photo.attach(io: profPhoto, filename: 'audien-prof-photo.jpg')
-u7.cover_photo.attach(io: coverPhoto, filename: 'audien-cover-photo.jpg')
+prof_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/basement-jaxx-prof-photo.jpg')
+cover_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/basement-jaxx-cover-photo.jpeg')
+u6.profile_photo.attach(io: prof_photo, filename: 'basement-jaxx-prof-photo.jpg')
+u6.cover_photo.attach(io: cover_photo, filename: 'basement-jaxx-cover-photo.jpg')
 
-profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/knife-party-prof-photo.jpg')
-coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/knife-party-cover-photo.jpg')
-u8.profile_photo.attach(io: profPhoto, filename: 'knife-party-prof-photo.jpg')
-u8.cover_photo.attach(io: coverPhoto, filename: 'knife-party-cover-photo.jpg')
+prof_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/audien-prof-photo.jpg')
+cover_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/audien-cover-photo.jpg')
+u7.profile_photo.attach(io: prof_photo, filename: 'audien-prof-photo.jpg')
+u7.cover_photo.attach(io: cover_photo, filename: 'audien-cover-photo.jpg')
 
-profPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/unlike-pluto-prof-photo.jpg')
-coverPhoto = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/unlike-pluto-cover-photo.jpg')
-u9.profile_photo.attach(io: profPhoto, filename: 'unlike-pluto-prof-photo.jpg')
-u9.cover_photo.attach(io: coverPhoto, filename: 'unlike-pluto-cover-photo.jpg')
+prof_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/knife-party-prof-photo.jpg')
+cover_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/knife-party-cover-photo.jpg')
+u8.profile_photo.attach(io: prof_photo, filename: 'knife-party-prof-photo.jpg')
+u8.cover_photo.attach(io: cover_photo, filename: 'knife-party-cover-photo.jpg')
+
+prof_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/unlike-pluto-prof-photo.jpg')
+cover_photo = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/unlike-pluto-cover-photo.jpg')
+u9.profile_photo.attach(io: prof_photo, filename: 'unlike-pluto-prof-photo.jpg')
+u9.cover_photo.attach(io: cover_photo, filename: 'unlike-pluto-cover-photo.jpg')
 
 
 t11 = Track.new(title: "Animals (Oliver Heldens Remix)", artist_id: u5.id, track_url: "x", description: "Hey everyone, it's finally out: my official remix for @MartinGarrix - Animals ! :-)
@@ -158,21 +163,21 @@ t17.track_file.attach(io: trackFile, filename: "revolution-unlike-pluto-remix.mp
 t17.save!
 
 
-t1 = Track.new(title: "arthur x medic - Barrier (baircave Vocal Edit)", artist_id: u1.id, track_url: "x", description: "A little while back my talented friend Arthur made an outrageously beautiful instrumental. I loved the chords and melodies and immediately knew I wanted to embellish it with some vocals. I think Ellen did an amazing job with them and hope it's something you all enjoy!")
+t1 = Track.new(title: "arthur x medic - Barrier (baircave Vocal Edit)", artist_id: u4.id, track_url: "x", description: "A little while back my talented friend Arthur made an outrageously beautiful instrumental. I loved the chords and melodies and immediately knew I wanted to embellish it with some vocals. I think Ellen did an amazing job with them and hope it's something you all enjoy!")
 artFile = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/Barrier+Art.jpg')
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Barrier+(baircave+Vocal+Edit).mp3")
 t1.artwork.attach(io: artFile, filename: 'Barrier Art.jpg')
 t1.track_file.attach(io: trackFile, filename: 'Barrier (baircave Vocal Edit).mp3')
 t1.save!
 
-t2 = Track.new(title: "Don't Hold Back", artist_id: u1.id, track_url: "x", description: "I don't always do downtempo disco deep cut flips--but when I do you bet your ass there's a completely overindulgent synth solo")
+t2 = Track.new(title: "Don't Hold Back", artist_id: u4.id, track_url: "x", description: "I don't always do downtempo disco deep cut flips--but when I do you bet your ass there's a completely overindulgent synth solo")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Don't+Hold+Back.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Don't+Hold+Back.mp3")
 t2.artwork.attach(io: artFile, filename: "Don't Hold Back.png")
 t2.track_file.attach(io: trackFile, filename: "Don't Hold Back.mp3")
 t2.save!
 
-t3 = Track.new(title: "baircave x voia - Folds", artist_id: u1.id, track_url: "x")
+t3 = Track.new(title: "baircave x voia - Folds", artist_id: u4.id, track_url: "x")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Screen+Shot+2018-07-20+at+8.24.30+AM.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Folds.wav")
 t3.artwork.attach(io: artFile, filename: "folds.png")
@@ -180,7 +185,7 @@ t3.track_file.attach(io: trackFile, filename: "folds.wav")
 t3.save!
 
 
-t4 = Track.new(title: "Hesitate", artist_id: u1.id, track_url: "x")
+t4 = Track.new(title: "Hesitate", artist_id: u4.id, track_url: "x")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/bair+tub-02.jpg")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Hesitate.mp3")
 t4.artwork.attach(io: artFile, filename: "bair tub-02.jpg")
@@ -222,7 +227,7 @@ t9.artwork.attach(io: artFile, filename: "is_everything_okay.png")
 t9.track_file.attach(io: trackFile, filename: "Is Everything Okay.png")
 t9.save!
 
-t10 = Track.new(title: "Pierce Fulton - Life in Letters (baircave Remix)", artist_id: u1.id, track_url: "x", description: "Made this one for a remix contest. Been a fan of Pierce's since I saw him open for Wolfgang Gartner in 2012. Thought I'd throw it back to that warm electro house feel. Enjoy!")
+t10 = Track.new(title: "Pierce Fulton - Life in Letters (baircave Remix)", artist_id: u4.id, track_url: "x", description: "Made this one for a remix contest. Been a fan of Pierce's since I saw him open for Wolfgang Gartner in 2012. Thought I'd throw it back to that warm electro house feel. Enjoy!")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/pierce+fulton+rmx.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Life+in+Letters+(baircave+Remix).mp3")
 t10.artwork.attach(io: artFile, filename: "pierce fulton remix.png")
