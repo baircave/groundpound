@@ -31,11 +31,14 @@
 }
 
 .comment-prof-gradient {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
   min-width: 49px;
+  max-width: 49px;
   height: 49px;
 }
 
 .comment-form-prof-photo {
-  width: 49px;
   height: 49px;
 }

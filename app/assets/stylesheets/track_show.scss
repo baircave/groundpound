@@ -1,9 +1,10 @@
 .track-show-page {
   position: relative;
   display: flex;
-  flex-direction: column;
-  height: 100%;
   align-items: center;
+  flex-direction: column;
+  min-width: 800px;
+  height: 100%;
 }
 
 .gradient-wrapper {
@@ -74,7 +75,7 @@
   align-items: center;
   font-size: 27px;
   border-radius: 50%;
-  width: 60px;
+  min-width: 60px;
   height: 60px;
   background-color: #43c3d2;
   margin: 0 4px 0 4px;
@@ -127,7 +128,7 @@
 .track-description p {
   color: black;
   font-size: 17px;
-  max-width: 800px;
+  max-width: 755px;
   white-space: pre-wrap;
 }
 
@@ -135,6 +136,7 @@
   width: 100%;
   max-width: 800px;
   padding: 0;
+  margin-bottom: 50px;
 }
 
 .comments {
@@ -146,10 +148,11 @@
   width: 100%;
   // height: 100%;
   max-width: 1240px;
-  min-width: 800px;
+  min-width: 790px;
 }
 
 .comments h3 {
+  padding: 0;
   width: 100%;
   max-width: 800px;
   border-bottom: 1px solid #f2f2f2;

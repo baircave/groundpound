@@ -40,6 +40,7 @@ class TrackShow extends React.Component {
     // }
 
     if (prevProps.match.params.id != this.props.match.params.id) {
+      this.setState({opacityClass: ""});
       this.props.fetchTrack(this.props.match.params.id);
     }
   }

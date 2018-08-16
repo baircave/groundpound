@@ -11,6 +11,7 @@
 
 .profile-page-sub-wrapper {
   display:  flex;
+  justify-content: center;
   position: relative;
   max-width: 1240px;
   min-width: 800px;
@@ -19,9 +20,17 @@
   align-items: center;
 }
 
-.profile-photo {
+.profile-photo-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
   border-radius: 50%;
   width: 200px;
+  height: 200px;
+}
+
+.profile-photo {
   height: 200px;
 }
 
@@ -30,7 +39,7 @@
   width: 100%;
   height: fit-content;
   max-width: 1240px;
-  min-width: 800px;
+  min-width: 760px;
   display: flex;
   flex-direction: row;
 }
@@ -40,11 +49,16 @@
   margin-left: 20px;
 }
 
-.gradient-cover, .cover-photo {
+.gradient-cover {
+  overflow: hidden;
   z-index: -10;
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.cover-photo {
+  width: 1240px;
 }
 
 .index-and-sidebar {
@@ -64,6 +78,7 @@
   border-left: 1px solid #f2f2f2;
   background: #fff;
   width: 100%;
+  min-width: 200px;
   max-width: 360px;
   padding-bottom: 50px;
   height: 100%;
@@ -71,7 +86,9 @@
 
 .sidebar .bio {
   margin: 20px 20px 0 20px;
+  font-weight: 100;
   white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .show-pages-button-wrapper {
@@ -93,4 +110,36 @@
   margin: 5px;
   color: black;
   border: 1px solid #c8c8c8;
+}
+
+.cover-photo-input-button {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 3px 8px 3px 8px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border-radius: 3px;
+  transition: 1s;
+}
+
+.profile-photo-input-button {
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 3px 8px 3px 8px;
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 3px;
+  transition: 1s;
+}
+
+.profile-photo-input {
+  display: none;
+}
+
+.cover-photo-input {
+  display: none;
 }

@@ -27,7 +27,11 @@ class UserProfileForm extends React.Component {
   }
 
   handleSubmit() {
-    this.props.updateUser(this.props.user.id, this.state).then(
+    const formData = new FormData();
+    formData.append('user[bio]', this.state.bio);
+    formData.append('user[location]', this.state.location);
+    formData.append('user[nickname]', this.state.nickname);
+    this.props.updateUser(this.props.user.id, formData).then(
       () => this.props.closeModal()
     );
   }

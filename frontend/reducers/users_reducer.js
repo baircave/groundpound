@@ -8,16 +8,14 @@ export default (state = {}, action) => {
   let users;
   const newState = merge({}, state);
   switch (action.type) {
-    case RECEIVE_USER:
-      return merge({}, state, action.payload.users);
-    case RECEIVE_CURRENT_USER:
-      if (newState[action.user.id]) return newState;
-      newState[action.user.id] = action.user;
-      return newState;
     case RECEIVE_TRACKS:
     case RECEIVE_TRACK:
-      users = action.payload.users;
-      return merge({}, state, users);
+    case RECEIVE_USER:
+    case RECEIVE_CURRENT_USER:
+      return merge(newState, action.payload.users);
+      // if (newState[action.user.id]) return newState;
+      // newState[action.user.id] = action.user;
+      // return newState;
     case DELETE_TRACK:
       const user = newState[action.userId];
       if (user.track_ids) {

@@ -80,10 +80,13 @@ class CommentForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const loggedIn = state.session.id;
+  let profPhotoUrl = null;
+  if (loggedIn) profPhotoUrl = state.entities.users[state.session.id].profile_photo;
   return {
-    loggedIn: state.session.id,
+    loggedIn,
     commentErrors: state.errors.comments,
-    profPhotoUrl: state.session.profPhotoUrl
+    profPhotoUrl
   };
 };
 

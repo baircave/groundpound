@@ -7,6 +7,7 @@
   background-color: #333333;
   min-height: 46px;
   width: 100%;
+  min-width: 800px;
   overflow: hidden;
   z-index: 10;
 }
@@ -73,10 +74,17 @@
   min-width: fit-content;
 }
 
-.navbar-prof-photo {
+.navbar-prof-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
   width: 26px;
   height: 26px;
   border-radius: 50%;
+}
+
+.navbar-prof-photo {
+  height: 26px;
 }
 
 .profile-menu-button {

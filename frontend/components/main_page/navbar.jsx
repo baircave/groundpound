@@ -4,6 +4,7 @@ import { logout, login } from '../../actions/session_actions';
 import { NavLink, withRouter } from 'react-router-dom';
 import { openModal } from '../../actions/modal_actions';
 import { generateRGB, imageLoaded } from '../../util/helpers';
+import { fetchUser } from '../../actions/user_actions';
 
 class Navbar extends React.Component {
 
@@ -13,6 +14,12 @@ class Navbar extends React.Component {
       opacityClass: ""
     };
     this.gradientString = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.loggedIn != this.props.loggedIn) {
+      this.setState({opacityClass: ""});
+    }
   }
 
   redirectToProfile() {
@@ -43,9 +50,9 @@ class Navbar extends React.Component {
           <NavLink className="nav-button" to="/upload">Upload</NavLink>
           <div className="profile-menu-button nav-button"
             onClick={this.redirectToProfile.bind(this)}>
-            <div className="navbar-prof-photo"
+            <div className="navbar-prof-photo-wrapper"
               style={ {background: this.gradientString}}>
-              <img src={this.props.profPhotoUrl}
+              <img src={this.props.user.profile_photo}
                 className={profImgClassNames}
                 onLoad={imageLoaded.bind(this)}></img>
             </div>
@@ -81,7 +88,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     openModal: (modal) => dispatch(openModal(modal)),
     logout: () => dispatch(logout()),
-    login: (credentials) => dispatch(login(credentials))
+    login: (credentials) => dispatch(login(credentials)),
+    fetchUser: (userId) => dispatch(fetchUser(userId))
   }
 }
 
