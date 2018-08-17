@@ -20,8 +20,14 @@ class TrackIndex extends React.Component {
   render() {
     const IndexItemComponent = this.props.indexItemComponent;
     if (this.props.tracks.length === 0) {
-      return <div className="track-index"><img src={window.nothing_to_hear}></img></div>;
+      return (
+        <div className="track-index empty-index">
+          <img src={window.nothing_to_hear}></img>
+          <h2>Nothing to hear here</h2>
+        </div>
+      );
     }
+
     return (
       <div className="track-index">
         { this.props.match.path === "/" ?
