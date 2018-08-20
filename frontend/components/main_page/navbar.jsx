@@ -89,7 +89,7 @@ const mapDispatchToProps = (dispatch) => {
     openModal: (modal) => dispatch(openModal(modal)),
     logout: () => dispatch(logout()),
     login: (credentials) => dispatch(login(credentials)),
-    fetchUser: (userId) => dispatch(fetchUser(userId))
+    fetchUser: (userId) => dispatch(fetchUser(userId)),
   }
 }
 

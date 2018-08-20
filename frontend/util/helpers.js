@@ -99,6 +99,7 @@ export function playPauseTrack(e) {
     this.props.togglePlayPause(!playbar.playing);
   } else {
     this.props.receiveCurTrack(track.id.toString());
+    this.props.incrementPlays(track.id);
     if (!playbar.playing) {
       this.props.togglePlayPause(true);
     }

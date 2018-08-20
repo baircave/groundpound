@@ -91,3 +91,12 @@ img:hover {
   max-width: 1240px;
   background: #fff;
 }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.space-between {
+  justify-content: space-between;
+}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { secondsToTimeString, getMouse } from '../../util/helpers';
 import { withRouter } from 'react-router-dom';
+import { incrementPlays } from '../../actions/track_actions';
 
 class AudioFooter extends React.Component {
 
@@ -95,6 +96,7 @@ class AudioFooter extends React.Component {
     const playQueue = this.props.playbar.playQueue;
     if ((playQueue.length - 1) > trackIndex) {
       this.props.receiveCurTrack(playQueue[trackIndex + 1]);
+      this.props.incrementPlays(playQueue[trackIndex + 1]);
     }
     this.resetTimeState.call(this);
   }
@@ -106,11 +108,13 @@ class AudioFooter extends React.Component {
     if (this.audioEl.currentTime < 3.0) {
       if (trackIndex > 0) {
         this.props.receiveCurTrack(playQueue[trackIndex - 1]);
+        this.props.incrementPlays(playQueue[trackIndex - 1]);
       } else {
         this.audioEl.currentTime = 0.0;
       }
     } else {
       this.audioEl.currentTime = 0.0;
+      this.props.incrementPlays(playQueue[trackIndex]);
     }
     this.resetTimeState.call(this);
   }
@@ -225,7 +229,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
-    togglePlayPause: (bool) => dispatch(togglePlayPause(bool))
+    togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
+    incrementPlays: (trackId) => dispatch(incrementPlays(trackId))
   };
 };
 

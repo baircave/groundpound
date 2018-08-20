@@ -28,3 +28,15 @@ export const deleteTrack = (trackId) => {
     url: `api/tracks/${trackId}`
   });
 };
+
+export const incrementPlays = (trackId) => {
+  return $.ajax({
+    method: "PATCH",
+    url: `api/tracks/${trackId}`,
+    data: {
+      track: {
+        plays: 1
+      }
+    }
+  });
+};

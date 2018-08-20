@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchTrack, deleteTrack } from '../../actions/track_actions';
+import { fetchTrack, deleteTrack, incrementPlays } from '../../actions/track_actions';
 import { trackAgeFromMs, generateRGB, imageLoaded } from '../../util/helpers';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import CommentForm from '../comments/comment_form';
@@ -144,6 +144,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchTrack: (trackId) => dispatch(fetchTrack(trackId)),
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
+    incrementPlays: (trackId) => dispatch(incrementPlays(trackId)),
     togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
     openModal: (modal) => dispatch(openModal(modal)),
     deleteTrack: (trackId) => dispatch(deleteTrack(trackId))

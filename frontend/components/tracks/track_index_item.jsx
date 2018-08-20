@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
+import { incrementPlays } from '../../actions/track_actions';
 import { withRouter } from 'react-router-dom';
 import { playPauseTrack, generateRGB, imageLoaded } from '../../util/helpers';
 
@@ -121,7 +122,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
-    togglePlayPause: (bool) => dispatch(togglePlayPause(bool))
+    togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
+    incrementPlays: (trackId) => dispatch(incrementPlays(trackId))
   };
 };
 

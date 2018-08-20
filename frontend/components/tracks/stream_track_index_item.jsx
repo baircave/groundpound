@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { incrementPlays } from '../../actions/track_actions';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
 import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs } from '../../util/helpers';
@@ -80,7 +81,7 @@ class StreamTrackIndexItem extends React.Component {
 
     return (
       <li className="stream-track-index-item">
-        <div className="flex-column">
+        <div className="flex">
           <div className="index-art-gradient"
             style={ {background: this.randomGradient}}>
             <img onClick={this.redirectToTrackShow}
@@ -88,8 +89,8 @@ class StreamTrackIndexItem extends React.Component {
               onLoad={imageLoaded.bind(this)}
               src={this.props.track.artwork_file}></img>
           </div>
-          <div className="flex-column stream-track-item-info">
-            <div className="flex-column">
+          <div className="flex stream-track-item-info">
+            <div className="flex">
               <div className="play-button stream-play-button"
                 onClick={this.playPauseTrack}>
                 {playPauseIcon}
@@ -99,7 +100,15 @@ class StreamTrackIndexItem extends React.Component {
                 <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
               </div>
             </div>
-            <h4 className="track-age">{trackAge}</h4>
+            <div className="flex-column space-between track-index-info">
+              <h4 className="track-age">{trackAge}</h4>
+              <div className="track-index-counts">
+                <h5><i className="fa fa-play index-play" aria-hidden="true"></i>{this.props.track.plays}</h5>
+                <h5 className="comment-count"
+                  onClick={this.redirectToTrackShow}>
+                  <i className="fa fa-comment comment-play"></i>{this.props.track.comment_count}</h5>
+              </div>
+            </div>
           </div>
         </div>
       </li>
@@ -116,6 +125,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    incrementPlays: (trackId) => dispatch(incrementPlays(trackId)),
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
     togglePlayPause: (bool) => dispatch(togglePlayPause(bool))
   };

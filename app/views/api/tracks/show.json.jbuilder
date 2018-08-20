@@ -3,7 +3,7 @@ artwork = url_for(@track.artwork) if @track.artwork.attached?
 audio = url_for(@track.track_file)
 
 json.track do
-  json.extract! @track, :title, :description, :track_url, :artist_id, :id, :created_at
+  json.extract! @track, :title, :description, :track_url, :artist_id, :id, :created_at, :plays
   json.comment_ids @track.comments.order('created_at DESC').ids
   json.artwork_file artwork
   json.track_file audio

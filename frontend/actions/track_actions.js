@@ -4,6 +4,7 @@ export const RECEIVE_TRACK = 'RECEIVE_TRACK';
 export const RECEIVE_TRACKS = 'RECEIVE_TRACKS';
 export const RECEIVE_TRACK_ERRORS = 'RECEIVE_TRACK_ERRORS';
 export const DELETE_TRACK = 'DELETE_TRACK';
+export const RECEIVE_PLAYCOUNT = 'RECEIVE_PLAYCOUNT';
 
 const receiveTrack = (payload) => {
   return {
@@ -31,6 +32,13 @@ export const removeTrack = (payload) => {
     type: DELETE_TRACK,
     trackId: String(payload.trackId),
     userId: String(payload.userId)
+  };
+};
+
+export const receivePlaycount = (trackId) => {
+  return {
+    type: RECEIVE_PLAYCOUNT,
+    trackId
   };
 };
 
@@ -65,6 +73,14 @@ export const deleteTrack = (trackId) => {
   return (dispatch) => {
     return TrackApiUtil.deleteTrack(trackId).then(
       (response) => dispatch(removeTrack(response))
+    );
+  };
+};
+
+export const incrementPlays = (trackId) => {
+  return (dispatch) => {
+    return TrackApiUtil.incrementPlays(trackId).then(
+      () => dispatch(receivePlaycount(trackId))
     );
   };
 };
