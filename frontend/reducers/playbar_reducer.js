@@ -1,4 +1,4 @@
-import { RECEIVE_CUR_TRACK, TOGGLE_PLAY_PAUSE } from '../actions/playbar_actions';
+import { RECEIVE_CUR_TRACK, TOGGLE_PLAY_PAUSE, SEEK, HTML_PLAYING } from '../actions/playbar_actions';
 import { RECEIVE_TRACK, RECEIVE_TRACKS, DELETE_TRACK } from '../actions/track_actions';
 import { RECEIVE_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
@@ -8,7 +8,9 @@ const defaultState = {
   currentlyPlayingId: null,
   currentlyPlayingIdx: null,
   playQueue: [],
-  playing: false
+  playing: false,
+  audioHTMLPlaying: false,
+  progPercentage: 0
 };
 
 export default (state = defaultState, action) => {
@@ -38,6 +40,12 @@ export default (state = defaultState, action) => {
       return newState;
     case TOGGLE_PLAY_PAUSE:
       newState.playing = action.playing;
+      return newState;
+    case SEEK:
+      newState.progPercentage = action.progPercentage;
+      return newState;
+    case HTML_PLAYING:
+      newState.audioHTMLPlaying = action.bool;
       return newState;
     case DELETE_TRACK:
       newState.playQueue = newState.playQueue.filter((trackId) => trackId !== action.trackId);

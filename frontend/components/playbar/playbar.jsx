@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
+import { receiveCurTrack, togglePlayPause, seek, setHTMLPlaying } from '../../actions/playbar_actions';
 import { secondsToTimeString, getMouse } from '../../util/helpers';
 import { withRouter } from 'react-router-dom';
 import { incrementPlays } from '../../actions/track_actions';
@@ -38,6 +38,12 @@ class AudioFooter extends React.Component {
     }
     this.loadNewTrack.call(this, prevProps);
     this.playPauseAudioEl.call(this, prevProps);
+
+    const playbar = this.props.playbar;
+    if (prevProps.playbar.progPercentage !== playbar.progPercentage) {
+      this.setState({progPercentage: playbar.progPercentage});
+      this.audioEl.currentTime = this.audioEl.duration * playbar.progPercentage;
+    }
   }
 
   playPauseAudioEl(prevProps) {
@@ -47,6 +53,7 @@ class AudioFooter extends React.Component {
         this.audioEl.play();
       } else {
         this.audioEl.pause();
+        this.props.setHTMLPlaying(false);
       }
     }
   }
@@ -69,6 +76,7 @@ class AudioFooter extends React.Component {
     const newPercentage = mouse.x / e.currentTarget.offsetWidth;
     const songLength = this.audioEl.duration;
     this.audioEl.currentTime = songLength * newPercentage;
+    this.props.seek(newPercentage);
     this.updateTime();
   }
 
@@ -202,6 +210,8 @@ class AudioFooter extends React.Component {
               autoPlay
               ref={this.audioRef}
               src={this.props.track.track_file}
+              onPlaying={() => this.props.setHTMLPlaying(true)}
+              onStalled={() => this.props.setHTMLPlaying(false)}
               onTimeUpdate={this.updateTime}
               onEnded={this.nextTrack.bind(this)}></audio>
           </div>
@@ -230,7 +240,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
     togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
-    incrementPlays: (trackId) => dispatch(incrementPlays(trackId))
+    incrementPlays: (trackId) => dispatch(incrementPlays(trackId)),
+    setHTMLPlaying: (bool) => dispatch(setHTMLPlaying(bool)),
+    seek: (percentage) => dispatch(seek(percentage))
   };
 };
 

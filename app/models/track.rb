@@ -13,6 +13,22 @@ class Track < ApplicationRecord
   has_many :comments,
     dependent: :destroy
 
+  has_many :reposts,
+    dependent: :destroy
+
+  has_many :reposters,
+    through: :reposts,
+    source: :user,
+    class_name: 'Repost'
+
+  has_many :likes,
+    dependent: :destroy
+
+  has_many :likers,
+    through: :likes,
+    source: :user,
+    class_name: 'Like'
+
   has_one_attached :artwork
 
   has_one_attached :track_file

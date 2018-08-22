@@ -9,6 +9,7 @@ import CommentIndex from '../comments/comment_index';
 import { openModal } from '../../actions/modal_actions';
 import Modal from '../modal';
 import { playPauseTrack } from '../../util/helpers';
+import Waveform from './waveform';
 
 class TrackShow extends React.Component {
 
@@ -17,12 +18,10 @@ class TrackShow extends React.Component {
     this.state = {
       disableDelete: false,
       opacityClass: "",
-      waveform: null
     };
     const randRGB = generateRGB();
     this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
     this.randomArtGradient = `linear-gradient(45deg, #43c3d3, ${randRGB})`;
-    this.canvasRef = React.createRef();
     this.playPauseTrack = playPauseTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
@@ -33,12 +32,6 @@ class TrackShow extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // if (this.props.track.track_file != prevProps.track.track_file) {
-    //   this.setState({waveform: WaveSurfer.create({
-    //     container: '#waveform'
-    //   }).load(this.props.track.track_file)});
-    // }
-
     if (prevProps.match.params.id != this.props.match.params.id) {
       this.setState({opacityClass: ""});
       this.props.fetchTrack(this.props.match.params.id);
@@ -81,7 +74,6 @@ class TrackShow extends React.Component {
     }
 
     const artClassnames = `album-art opacity-fade ${this.state.opacityClass}`;
-
     return (
       <div className="main-wrapper">
         <Modal artworkUrl={track.artwork_file} title={track.title}/>
@@ -90,17 +82,21 @@ class TrackShow extends React.Component {
             <div className="gradient-cover"
               style={ { background: this.randomCoverGradient}}></div>
             <section className="playback-contents">
-              <div className="throw-left-right">
-                <div id="waveform"></div>
-                <div className="play-button"
-                  onClick={this.playPauseTrack}>
-                  {playPauseIcon}
-                </div>
-                <div className="name-and-title">
-                  <h3 className="clickable"
-                    onClick={() => this.props.history.push(`/users/${this.props.user.id}`)}>
-                    {this.props.user.nickname}</h3>
-                  <h2>{track.title}</h2>
+              <div className="throw-left-right throw-left">
+                <div className="flex-column fill-width space-between">
+                  <div className="flex">
+                    <div className="play-button"
+                      onClick={this.playPauseTrack}>
+                      {playPauseIcon}
+                    </div>
+                    <div className="name-and-title">
+                      <h3 className="clickable"
+                        onClick={() => this.props.history.push(`/users/${this.props.user.id}`)}>
+                        {this.props.user.nickname}</h3>
+                      <h2>{track.title}</h2>
+                    </div>
+                  </div>
+                  <Waveform track={track}></Waveform>
                 </div>
               </div>
               <div className="throw-left-right">

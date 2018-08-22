@@ -41,6 +41,10 @@
   flex-direction: row;
 }
 
+.throw-left {
+  width: 100%;
+}
+
 .album-art {
   width: 340px;
   height: 340px;
@@ -223,4 +227,14 @@
 
 .comment-delete:hover {
   color: black;
+}
+
+.waveform {
+  width: calc(100% + 110px);
+  margin-bottom: 20px;
+  z-index: 10;
+}
+
+.waveform:hover {
+  cursor: pointer;
 }

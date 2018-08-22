@@ -92,6 +92,10 @@ img:hover {
   background: #fff;
 }
 
+.fill-width {
+  width: 100%;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;

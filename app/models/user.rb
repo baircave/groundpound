@@ -21,6 +21,34 @@ class User < ApplicationRecord
     foreign_key: :author_id,
     dependent: :destroy
 
+  has_many :likes,
+    dependent: :destroy
+
+  has_many :liked_tracks,
+    through: :likes,
+    source: :track
+
+  has_many :reposts,
+    dependent: :destroy
+
+  has_many :reposted_tracks,
+    through: :reposts,
+    source: :track
+
+  has_many :follows,
+    dependent: :destroy
+
+  has_many :followed_artists,
+    through: :follows,
+    source: :artist,
+    class_name: 'Follow'
+
+  has_many :followers,
+    through: :follows,
+    source: :user,
+    foreign_key: :artist_id,
+    class_name: 'Follow'
+
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
