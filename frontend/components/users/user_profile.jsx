@@ -4,6 +4,7 @@ import { fetchUser, updateUser } from '../../actions/user_actions';
 import { generateRGB, imageLoaded } from '../../util/helpers';
 import TrackIndex from '../tracks/track_index';
 import StreamTrackIndexItem from '../tracks/stream_track_index_item';
+import ProfileSidebar from './profile_sidebar';
 import { openModal } from '../../actions/modal_actions';
 import Modal from '../modal';
 
@@ -147,7 +148,7 @@ class UserProfile extends React.Component {
 
     const profImgClassNames = `profile-photo opacity-fade ${this.state.profOpacityClass}`;
     const coverImgClassNames = `cover-photo opacity-fade ${this.state.coverOpacityClass}`;
-
+    
     return (
       <div className="profile-page">
         <Modal user={this.props.user}/>
@@ -192,9 +193,7 @@ class UserProfile extends React.Component {
             listType="stream-list"
             trackIds={this.props.user.track_ids}
             indexItemComponent={StreamTrackIndexItem}/>
-          <div className="sidebar">
-            <span className="bio">{this.props.user.bio}</span>
-          </div>
+          <ProfileSidebar user={this.props.user}></ProfileSidebar>
         </div>
       </div>
     );

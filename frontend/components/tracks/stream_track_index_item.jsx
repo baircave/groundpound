@@ -62,6 +62,8 @@ class StreamTrackIndexItem extends React.Component {
   }
 
   render() {
+    if (!this.props.user || !this.props.track) return null;
+
     let playPauseIcon;
     if (this.props.playbar.playing &&
       this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {

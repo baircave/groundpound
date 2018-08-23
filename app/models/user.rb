@@ -55,6 +55,17 @@ class User < ApplicationRecord
     source: :user,
     class_name: 'User'
 
+  def get_tracks_and_reposts
+    sql = "
+      select id, created_at from tracks
+      where tracks.artist_id = #{id}
+      union
+      select track_id, created_at from reposts
+      where reposts.user_id = #{id}
+      order by created_at DESC
+    "
+    ActiveRecord::Base.connection.execute(sql)
+  end
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

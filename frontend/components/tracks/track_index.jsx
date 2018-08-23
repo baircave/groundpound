@@ -37,6 +37,7 @@ class TrackIndex extends React.Component {
 
         <ul className={this.props.listType}>
           {this.props.tracks.map((track) => {
+            debugger
             return (
               <IndexItemComponent key={track.id}
                 user={this.props.users[track.artist_id]}
@@ -55,6 +56,7 @@ const mapStateToProps = (state, ownProps) => {
   if (ownProps.userProf) {
     if (ownProps.trackIds) {
       tracks = selectUserTracks(state, ownProps.trackIds);
+      debugger
     }
   } else {
     tracks = Object.values(state.entities.tracks)

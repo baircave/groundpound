@@ -7,17 +7,19 @@ cover_photo_file = url_for(user.cover_photo) if user.cover_photo.attached?
 json.userId user.id
 
 json.users do
+  debugger
   json.set! user.id do
     json.extract! user, :username, :nickname, :id, :bio, :location
-    json.track_ids user.track_ids
+    json.track_ids tracks_and_reposts
     json.reposted_ids user.reposted_tracks.ids
     json.liked_ids user.liked_tracks.limit(3).ids
     json.followed_ids user.followed_artists.limit(5).ids
     json.follower_count user.followers.length
-    json.follows_count user.followed_artists.length
+    json.following_count user.followed_artists.length
     json.profile_photo profile_photo
     json.cover_photo_file cover_photo_file
   end
+
 end
 
 if user.tracks.empty? && user.reposted_tracks.empty? && user.liked_tracks.empty?
