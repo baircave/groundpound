@@ -7,7 +7,6 @@ cover_photo_file = url_for(user.cover_photo) if user.cover_photo.attached?
 json.userId user.id
 
 json.users do
-  debugger
   json.set! user.id do
     json.extract! user, :username, :nickname, :id, :bio, :location
     json.track_ids tracks_and_reposts
@@ -18,6 +17,12 @@ json.users do
     json.following_count user.followed_artists.length
     json.profile_photo profile_photo
     json.cover_photo_file cover_photo_file
+  end
+
+  user.reposted_tracks.each do |track|
+    json.set! track.artist_id do
+      json.extract! track.artist, :username, :id
+    end
   end
 
 end
