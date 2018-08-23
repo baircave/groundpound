@@ -57,19 +57,6 @@ class Waveform extends React.Component {
 
   loadWaveSurfer() {
     this.state.waveform.load(this.props.track.track_file);
-    // const wave = this.waveRef.current;
-    // const ws = WaveSurfer.create({
-    //   container: wave,
-    //   waveColor: 'rgba(255, 255, 255, 0.9)',
-    //   barWidth: 2,
-    //   progressColor: '#43c3d2',
-    //   responsive: true,
-    //   cursorWidth: 0
-    // });
-    // ws.setMute(true);
-    // ws.on('seek', (percentage) => this.props.seek(percentage));
-
-    // this.setState({waveform: ws});
   }
 
   handleClick() {

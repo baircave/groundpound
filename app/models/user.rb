@@ -35,19 +35,25 @@ class User < ApplicationRecord
     through: :reposts,
     source: :track
 
+  has_many :followings,
+    foreign_key: :user_id,
+    dependent: :destroy,
+    class_name: 'Follow'
+
   has_many :follows,
-    dependent: :destroy
+    foreign_key: :artist_id,
+    dependent: :destroy,
+    class_name: 'Follow'
 
   has_many :followed_artists,
-    through: :follows,
+    through: :followings,
     source: :artist,
-    class_name: 'Follow'
+    class_name: 'User'
 
   has_many :followers,
     through: :follows,
     source: :user,
-    foreign_key: :artist_id,
-    class_name: 'Follow'
+    class_name: 'User'
 
 
   def self.find_by_credentials(username, password)

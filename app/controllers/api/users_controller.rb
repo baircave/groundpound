@@ -1,7 +1,14 @@
 class Api::UsersController < ApplicationController
 
   def show
-    @user = User.includes(tracks: [:comments]).find(params[:id])
+    @user = User.includes(
+      :likes,
+      :liked_tracks,
+      :followed_artists,
+      :followers,
+      :reposted_tracks,
+      tracks: [:comments],
+      comments: [:track]).find(params[:id])
     if @user
       render :show
     else
