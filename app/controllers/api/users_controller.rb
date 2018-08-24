@@ -3,13 +3,14 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.includes(
       :likes,
-      :liked_tracks,
       :followed_artists,
       :followers,
-      :reposted_tracks,
-      tracks: [:comments],
+      liked_tracks: [:likes, :reposts, artwork_attachment: :blob],
+      reposted_tracks: [:likes, :reposts, artwork_attachment: :blob],
+      tracks: [:likes, :reposts, :comments],
       comments: [:track]).find(params[:id])
     @tracks_and_reposts = @user.get_tracks_and_reposts.column_values(0);
+
     if @user
       render :show
     else

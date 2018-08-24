@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import SidebarTrackIndex from '../tracks/sidebar_track_index';
 
 export default class ProfileSidebar extends React.Component {
 
@@ -35,7 +36,8 @@ export default class ProfileSidebar extends React.Component {
             <h3>{trackCount}</h3>
           </div>
         </div>
-        <span className="bio">{this.props.user.bio}</span>
+        <span className="bio">{user.bio}</span>
+        <SidebarTrackIndex trackIds={user.liked_ids} likeCount={user.like_count}/>
       </div>
     );
   }

@@ -11,10 +11,11 @@ json.users do
     json.extract! user, :username, :nickname, :id, :bio, :location
     json.track_ids tracks_and_reposts
     json.reposted_ids user.reposted_tracks.ids
-    json.liked_ids user.liked_tracks.limit(3).ids
-    json.followed_ids user.followed_artists.limit(5).ids
-    json.follower_count user.followers.length
-    json.following_count user.followed_artists.length
+    json.like_count user.liked_tracks.size
+    json.liked_ids user.liked_tracks.order('likes.created_at DESC').limit(3).ids
+    json.followed_ids user.followed_artists.order('follows.created_at DESC').limit(5).ids
+    json.follower_count user.followers.size
+    json.following_count user.followed_artists.size
     json.profile_photo profile_photo
     json.cover_photo_file cover_photo_file
   end
@@ -36,6 +37,8 @@ else
       artwork_file = url_for(track.artwork) if track.artwork.attached?
       json.set! track.id do
         json.comment_count track.comments.size
+        json.like_count track.likes.size
+        json.repost_count track.reposts.size
         json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays
         json.artwork_file artwork_file
         json.track_file url_for(track.track_file)
@@ -47,6 +50,8 @@ else
       artwork_file = url_for(track.artwork) if track.artwork.attached?
       json.set! track.id do
         json.comment_count track.comments.size
+        json.like_count track.likes.size
+        json.repost_count track.reposts.size
         json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays
         json.artwork_file artwork_file
         json.track_file url_for(track.track_file)
@@ -58,6 +63,8 @@ else
       artwork_file = url_for(track.artwork) if track.artwork.attached?
       json.set! track.id do
         json.comment_count track.comments.size
+        json.like_count track.likes.size
+        json.repost_count track.reposts.size
         json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays
         json.artwork_file artwork_file
         json.track_file url_for(track.track_file)
