@@ -6,7 +6,7 @@ cover_photo_file = url_for(user.cover_photo) if user.cover_photo.attached?
 
 json.userId user.id
 
-followed_artists = user.followed_artists.order('follows.created_at DESC').limit(5)
+followed_artists = user.followed_artists.order('follows.created_at DESC')
 
 json.users do
   json.set! user.id do
@@ -15,7 +15,7 @@ json.users do
     json.track_ids tracks_and_reposts
     json.reposted_ids user.reposted_tracks.ids
     json.like_count user.liked_tracks.size
-    json.liked_ids user.liked_tracks.order('likes.created_at DESC').limit(3).ids
+    json.liked_ids user.liked_tracks.order('likes.created_at DESC').ids
     json.followed_ids followed_artists.ids
     json.follower_count user.followers.size
     json.following_count user.followed_artists.size

@@ -115,3 +115,13 @@ export function updateField(field) {
     this.setState({[field]: e.currentTarget.value});
   };
 }
+
+export function ensureSession() {
+  if (!this.props.loggedIn) {
+    this.props.openModal("login");
+  }
+}
+
+export function numberWithCommas(num){
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

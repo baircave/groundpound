@@ -2,8 +2,18 @@
   padding: 0;
 }
 
-.sidebar-profile, .sidebar-profile-gradient {
+.sidebar-profile-gradient {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+
+.sidebar-profile {
+  height: 50px;
+}
+
+.sidebar-profile-gradient {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
 }

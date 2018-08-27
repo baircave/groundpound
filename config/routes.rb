@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :tracks do
       resources :comments, only: [:create, :destroy]
     end
+    resource :reposts, only: [:create, :destroy]
+    resource :likes, only: [:create, :destroy]
+    resource :follows, only: [:create, :destroy]
   end
 
 end

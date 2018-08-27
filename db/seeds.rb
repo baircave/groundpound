@@ -10,6 +10,9 @@ require 'ez_download'
 Comment.destroy_all
 Track.destroy_all
 User.destroy_all
+Follow.destroy_all
+Repost.destroy_all
+Like.destroy_all
 
 u1 = User.create!(username: "baircave", password: "asdfasdf", location: "New York, NY", bio: "We're baircave. We like to make music to dance to")
 u2 = User.create!(username: "Justice", password: "asdfasdf", location: "Paris, France", nickname: "Justice", bio: "We made all of our first album in Garageband. This is a miracle considering its limitations, trust us.")
@@ -71,7 +74,7 @@ u9.profile_photo.attach(io: prof_photo, filename: 'unlike-pluto-prof-photo.jpg')
 u9.cover_photo.attach(io: cover_photo, filename: 'unlike-pluto-cover-photo.jpg')
 
 
-t11 = Track.new(title: "Animals (Oliver Heldens Remix)", artist_id: u5.id, track_url: "x", description: "Hey everyone, it's finally out: my official remix for @MartinGarrix - Animals ! :-)
+t11 = Track.new(title: "Animals (Oliver Heldens Remix)", artist_id: u5.id, track_url: "x", plays: 499211, description: "Hey everyone, it's finally out: my official remix for @MartinGarrix - Animals ! :-)
 Really happy with this one and I'm also overwhelmed by the reactions/likes and plays (over 400k!) on the preview.
 It would be so sick if we could hit the top 10 again (like with Gecko, which is #3 atm).
 Support me and get it here: www.beatport.com/track/animals-ol…ns-remix/5050373 or support me by reposting/sharing this :-)
@@ -89,21 +92,21 @@ t11.artwork.attach(io: artFile, filename: "animals-oliver-heldens-remix.jpg")
 t11.track_file.attach(io: trackFile, filename: "animals-oliver-heldens-remix.m4a")
 t11.save!
 
-t12 = Track.new(title: "EDM Trend Machine", artist_id: u8.id, track_url: "x", description: "'EDM Trend Machine' taken from the album 'Abandon Ship' OUT NOW smarturl.it/AbandonShipiTunes")
+t12 = Track.new(title: "EDM Trend Machine", artist_id: u8.id, track_url: "x", plays: 5982, description: "'EDM Trend Machine' taken from the album 'Abandon Ship' OUT NOW smarturl.it/AbandonShipiTunes")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/03+Boss+Mode.jpg")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/04+EDM+Trend+Machine.m4a")
 t12.artwork.attach(io: artFile, filename: "abandon-ship.jpg")
 t12.track_file.attach(io: trackFile, filename: "edm-trend-machine.m4a")
 t12.save!
 
-t13 = Track.new(title: "Boss mode", artist_id: u8.id, track_url: "x", description: "'Boss Mode' taken from the album 'Abandon Ship' OUT NOW smarturl.it/AbandonShipiTunes")
+t13 = Track.new(title: "Boss mode", artist_id: u8.id, track_url: "x", plays: 80930, description: "'Boss Mode' taken from the album 'Abandon Ship' OUT NOW smarturl.it/AbandonShipiTunes")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/03+Boss+Mode.jpg")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/03+Boss+Mode.m4a")
 t13.artwork.attach(io: artFile, filename: "abandon-ship.jpg")
 t13.track_file.attach(io: trackFile, filename: "boss-mode.m4a")
 t13.save!
 
-t14 = Track.new(title: "Never Say Never", artist_id: u6.id, track_url: "x", description: "The GRAMMY nominated single from the album \"Junto\" by Basement Jaxx featuring South London school-leaver sensation ETML.
+t14 = Track.new(title: "Never Say Never", artist_id: u6.id, track_url: "x", plays: 11895, description: "The GRAMMY nominated single from the album \"Junto\" by Basement Jaxx featuring South London school-leaver sensation ETML.
 
 \"Junto\" is out now !
 Deluxe Digital: smarturl.it/deldigi
@@ -121,7 +124,7 @@ t14.artwork.attach(io: artFile, filename: "junto.jpg")
 t14.track_file.attach(io: trackFile, filename: "never-say-never.m4a")
 t14.save!
 
-t15 = Track.new(title: "Unicorn", artist_id: u6.id, track_url: "x", description: "From the new Basement Jaxx album, \"Junto\", out now !
+t15 = Track.new(title: "Unicorn", artist_id: u6.id, track_url: "x", plays: 14009, description: "From the new Basement Jaxx album, \"Junto\", out now !
 
 Deluxe Digital: smarturl.it/deldigi
 Digital: smarturl.it/juntodigi
@@ -134,7 +137,7 @@ t15.artwork.attach(io: artFile, filename: "junto.jpg")
 t15.track_file.attach(io: trackFile, filename: "unicorn.m4a")
 t15.save!
 
-t16 = Track.new(title: "Pompeii (Audien Remix)", artist_id: u7.id, track_url: "x", description: "My new official remix of 'Pompeii' by Bastille!
+t16 = Track.new(title: "Pompeii (Audien Remix)", artist_id: u7.id, track_url: "x", plays: 1001, description: "My new official remix of 'Pompeii' by Bastille!
 
 Out Now!
 
@@ -149,7 +152,7 @@ t16.artwork.attach(io: artFile, filename: "pompeii-audien-remix.jpg")
 t16.track_file.attach(io: trackFile, filename: "pompeii-audien-remix.m4a")
 t16.save!
 
-t17 = Track.new(title: "Revolution (Unlike Pluto Remix)", artist_id: u9.id, track_url: "x", description: "hypem.com/track/28hj1/Diplo+-+…+(Unlike+Pluto+remix)
+t17 = Track.new(title: "Revolution (Unlike Pluto Remix)", artist_id: u9.id, track_url: "x", plays: 38049502, description: "hypem.com/track/28hj1/Diplo+-+…+(Unlike+Pluto+remix)
 
 Get it on iTunes: smarturl.it/revolutionremixes2
 Get it on Amazon: amzn.to/1Hrn6r3
@@ -163,21 +166,21 @@ t17.track_file.attach(io: trackFile, filename: "revolution-unlike-pluto-remix.mp
 t17.save!
 
 
-t1 = Track.new(title: "arthur x medic - Barrier (baircave Vocal Edit)", artist_id: guest.id, track_url: "x", description: "A little while back my talented friend Arthur made an outrageously beautiful instrumental. I loved the chords and melodies and immediately knew I wanted to embellish it with some vocals. I think Ellen did an amazing job with them and hope it's something you all enjoy!")
+t1 = Track.new(title: "arthur x medic - Barrier (baircave Vocal Edit)", artist_id: guest.id, track_url: "x", plays: 145608, description: "A little while back my talented friend Arthur made an outrageously beautiful instrumental. I loved the chords and melodies and immediately knew I wanted to embellish it with some vocals. I think Ellen did an amazing job with them and hope it's something you all enjoy!")
 artFile = EzDownload.open('https://s3.amazonaws.com/groundpound-pro/Barrier+Art.jpg')
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Barrier+(baircave+Vocal+Edit).mp3")
 t1.artwork.attach(io: artFile, filename: 'Barrier Art.jpg')
 t1.track_file.attach(io: trackFile, filename: 'Barrier (baircave Vocal Edit).mp3')
 t1.save!
 
-t2 = Track.new(title: "Don't Hold Back", artist_id: guest.id, track_url: "x", description: "I don't always do downtempo disco deep cut flips--but when I do you bet your ass there's a completely overindulgent synth solo")
+t2 = Track.new(title: "Don't Hold Back", artist_id: guest.id, track_url: "x", plays: 133325, description: "I don't always do downtempo disco deep cut flips--but when I do you bet your ass there's a completely overindulgent synth solo")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Don't+Hold+Back.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Don't+Hold+Back.mp3")
 t2.artwork.attach(io: artFile, filename: "Don't Hold Back.png")
 t2.track_file.attach(io: trackFile, filename: "Don't Hold Back.mp3")
 t2.save!
 
-t3 = Track.new(title: "baircave x voia - Folds", artist_id: guest.id, track_url: "x")
+t3 = Track.new(title: "baircave x voia - Folds", artist_id: guest.id, track_url: "x", plays: 6959802)
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Screen+Shot+2018-07-20+at+8.24.30+AM.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Folds.wav")
 t3.artwork.attach(io: artFile, filename: "folds.png")
@@ -185,49 +188,49 @@ t3.track_file.attach(io: trackFile, filename: "folds.wav")
 t3.save!
 
 
-t4 = Track.new(title: "Hesitate", artist_id: guest.id, track_url: "x")
+t4 = Track.new(title: "Hesitate", artist_id: guest.id, track_url: "x", plays: 133429)
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/bair+tub-02.jpg")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Hesitate.mp3")
 t4.artwork.attach(io: artFile, filename: "bair tub-02.jpg")
 t4.track_file.attach(io: trackFile, filename: "Hesitate.mp3")
 t4.save!
 
-t5 = Track.new(title: "Sonic Mania - Main Menu Theme", artist_id: u2.id, track_url: "x")
+t5 = Track.new(title: "Sonic Mania - Main Menu Theme", artist_id: u2.id, track_url: "x", plays: 5082485)
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/IMG_0949.JPG")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Main+Menu.m4a")
 t5.artwork.attach(io: artFile, filename: "sonic_art.jpg")
 t5.track_file.attach(io: trackFile, filename: "main_menu.m4a")
 t5.save!
 
-t6 = Track.new(title: "Indulgence", artist_id: u3.id, track_url: "x", description: "The first thing I was ever really proud of")
+t6 = Track.new(title: "Indulgence", artist_id: u3.id, track_url: "x", plays: 765489, description: "The first thing I was ever really proud of")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/BAIR+CIGAR+PHOTO+(Square+Cropped)+SMALL.jpg")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Indulgence.m4a")
 t6.artwork.attach(io: artFile, filename: "bair_cigar.jpg")
 t6.track_file.attach(io: trackFile, filename: "Indulgence.m4a")
 t6.save!
 
-t7 = Track.new(title: "Robot Love", artist_id: guest.id, track_url: "x")
+t7 = Track.new(title: "Robot Love", artist_id: guest.id, track_url: "x", plays: 13492)
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Robot+Love+FUNKBOT+(w%3A+Text)+SMALLFILE.jpg")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Robot+Love.mp3")
 t7.artwork.attach(io: artFile, filename: "robot_love_funkbot.jpg")
 t7.track_file.attach(io: trackFile, filename: "Robot Love.mp3")
 t7.save!
 
-t8 = Track.new(title: "Moophs - Space Travel (feat. Xela) [baircave Remix]", artist_id: u3.id, track_url: "x", description: "This was my first time ever trying to write up-tempo (above 134bpm). Kind of a weird result but I think it's got its own charm. Hope you enjoy!")
+t8 = Track.new(title: "Moophs - Space Travel (feat. Xela) [baircave Remix]", artist_id: u3.id, track_url: "x", plays: 435902, description: "This was my first time ever trying to write up-tempo (above 134bpm). Kind of a weird result but I think it's got its own charm. Hope you enjoy!")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/spacetravelremix.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Space+Travel+(baircave+Remix)+MASTER1.mp3")
 t8.artwork.attach(io: artFile, filename: "spacetravelremix.png")
 t8.track_file.attach(io: trackFile, filename: "spacetravelremix.mp3")
 t8.save!
 
-t9 = Track.new(title: "Is Everything Okay?", artist_id: u2.id, track_url: "x")
+t9 = Track.new(title: "Is Everything Okay?", artist_id: u2.id, track_url: "x", plays: 9503)
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Screen+Shot+2018-07-20+at+8.21.08+AM.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Is+Everything+Okay_.mp3")
 t9.artwork.attach(io: artFile, filename: "is_everything_okay.png")
 t9.track_file.attach(io: trackFile, filename: "Is Everything Okay.png")
 t9.save!
 
-t10 = Track.new(title: "Pierce Fulton - Life in Letters (baircave Remix)", artist_id: guest.id, track_url: "x", description: "Made this one for a remix contest. Been a fan of Pierce's since I saw him open for Wolfgang Gartner in 2012. Thought I'd throw it back to that warm electro house feel. Enjoy!")
+t10 = Track.new(title: "Pierce Fulton - Life in Letters (baircave Remix)", artist_id: guest.id, track_url: "x", plays: 53990, description: "Made this one for a remix contest. Been a fan of Pierce's since I saw him open for Wolfgang Gartner in 2012. Thought I'd throw it back to that warm electro house feel. Enjoy!")
 artFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/pierce+fulton+rmx.png")
 trackFile = EzDownload.open("https://s3.amazonaws.com/groundpound-pro/Life+in+Letters+(baircave+Remix).mp3")
 t10.artwork.attach(io: artFile, filename: "pierce fulton remix.png")

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postComment, clearErrors } from '../../actions/comment_actions';
 import { openModal } from '../../actions/modal_actions';
-import { generateRGB, imageLoaded } from '../../util/helpers';
+import { generateRGB, imageLoaded, ensureSession } from '../../util/helpers';
 import { withRouter } from 'react-router-dom';
 
 class CommentForm extends React.Component {
@@ -16,6 +16,7 @@ class CommentForm extends React.Component {
       commentErrors: [],
       opacityClass: ""
     };
+    this.ensureSession = ensureSession.bind(this);
     this.gradientString = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateField = this.updateField.bind(this);
@@ -41,12 +42,6 @@ class CommentForm extends React.Component {
     return (e) => {
       this.setState({[field]: e.currentTarget.value});
     };
-  }
-
-  ensureSession() {
-    if (!this.props.loggedIn) {
-      this.props.openModal("login");
-    }
   }
 
   render() {
