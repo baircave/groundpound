@@ -6,14 +6,17 @@ cover_photo_file = url_for(user.cover_photo) if user.cover_photo.attached?
 
 json.userId user.id
 
+followed_artists = user.followed_artists.order('follows.created_at DESC').limit(5)
+
 json.users do
   json.set! user.id do
+
     json.extract! user, :username, :nickname, :id, :bio, :location
     json.track_ids tracks_and_reposts
     json.reposted_ids user.reposted_tracks.ids
     json.like_count user.liked_tracks.size
     json.liked_ids user.liked_tracks.order('likes.created_at DESC').limit(3).ids
-    json.followed_ids user.followed_artists.order('follows.created_at DESC').limit(5).ids
+    json.followed_ids followed_artists.ids
     json.follower_count user.followers.size
     json.following_count user.followed_artists.size
     json.profile_photo profile_photo
@@ -23,6 +26,18 @@ json.users do
   user.reposted_tracks.each do |track|
     json.set! track.artist_id do
       json.extract! track.artist, :username, :id
+    end
+  end
+
+  followed_artists.each do |artist|
+    profile_photo = nil
+    profile_photo = url_for(artist.profile_photo) if artist.profile_photo.attached?
+
+    json.set! artist.id do
+      json.extract! artist, :username, :id
+      json.profile_photo profile_photo
+      json.follower_count artist.followers.size
+      json.track_count artist.tracks.size
     end
   end
 
