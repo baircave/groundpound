@@ -229,12 +229,12 @@
   color: black;
 }
 
-.waveform {
+.track-show-waveform {
   width: calc(100% + 110px);
   margin-bottom: 20px;
   z-index: 10;
 }
 
-.waveform:hover {
+.track-show-waveform:hover {
   cursor: pointer;
 }

@@ -18,14 +18,20 @@ class Waveform extends React.Component {
   }
 
   componentDidMount() {
+    let wavecolor = 'rgba(255, 255, 255, 0.9)';
+    if (this.props.color) wavecolor = this.props.color;
+    let height = 128;
+    if (this.props.height) height = this.props.height;
+
     const wave = this.waveRef.current;
     const ws = WaveSurfer.create({
       container: wave,
-      waveColor: 'rgba(255, 255, 255, 0.9)',
+      waveColor: wavecolor,
       barWidth: 2,
       progressColor: '#43c3d2',
       responsive: true,
-      cursorWidth: 0
+      cursorWidth: 0,
+      height
     });
     ws.load(this.props.track.track_file);
     ws.setMute(true);
@@ -72,8 +78,10 @@ class Waveform extends React.Component {
         this.state.waveform.pause();
     }
 
+
+
     return (
-      <div className="waveform"
+      <div className={this.props.waveformClassNames}
         ref={this.waveRef}
         onClick={this.handleClick.bind(this)}></div>
     );

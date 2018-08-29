@@ -96,7 +96,7 @@ class TrackShow extends React.Component {
                       <h2>{track.title}</h2>
                     </div>
                   </div>
-                  <Waveform track={track}></Waveform>
+                  <Waveform track={track} waveformClassNames="track-show-waveform"></Waveform>
                 </div>
               </div>
               <div className="throw-left-right">

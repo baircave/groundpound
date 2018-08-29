@@ -6,6 +6,7 @@
   max-width: 1240px;
   // min-width: fit-content;
   padding-bottom: 50px;
+  overflow: auto;
 }
 
 .track-index h1 {
@@ -171,6 +172,7 @@
 
 .track-index-counts {
   display: flex;
+  justify-content: flex-end;
   color: #999;
   margin-right: 10px;
   white-space: nowrap;
@@ -189,4 +191,8 @@
 .track-index-counts i {
   margin-left: 10px;
   margin: 0 8px 0 0;
+}
+
+.stream-waveform {
+  margin: 10px 0 15px 15px;
 }

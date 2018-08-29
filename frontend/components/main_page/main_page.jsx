@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from './navbar';
 import TrackIndex from '../tracks/track_index';
 import StreamTrackIndexItem from '../tracks/stream_track_index_item';
+import StreamSidebar from '../users/stream_sidebar';
 
 const MainPage = (props) => {
   return (
@@ -14,8 +15,11 @@ const MainPage = (props) => {
             </div>
           </div>
         </div>
-        <TrackIndex indexItemComponent={StreamTrackIndexItem}
-          listType="stream-list"></TrackIndex>
+        <div className="index-and-sidebar">
+          <TrackIndex indexItemComponent={StreamTrackIndexItem}
+            listType="stream-list"></TrackIndex>
+          <StreamSidebar></StreamSidebar>
+        </div>
       </div>
     </div>
   );

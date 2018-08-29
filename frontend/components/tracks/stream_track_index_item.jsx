@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { incrementPlays } from '../../actions/track_actions';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
-import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs } from '../../util/helpers';
+import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs, numberWithCommas } from '../../util/helpers';
+import Waveform from './waveform';
 
 class StreamTrackIndexItem extends React.Component {
   constructor(props) {
@@ -91,25 +92,37 @@ class StreamTrackIndexItem extends React.Component {
               onLoad={imageLoaded.bind(this)}
               src={this.props.track.artwork_file}></img>
           </div>
-          <div className="flex stream-track-item-info">
-            <div className="flex">
-              <div className="play-button stream-play-button"
-                onClick={this.playPauseTrack}>
-                {playPauseIcon}
+          <div className="flex-column fill-width">
+            <div className="flex stream-track-item-info">
+              <div className="flex">
+                <div className="play-button stream-play-button"
+                  onClick={this.playPauseTrack}>
+                  {playPauseIcon}
+                </div>
+                <div className="throw-button">
+                  <h4 onClick={this.redirectToTrackShow}>{this.props.track.title}</h4>
+                  <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
+                </div>
               </div>
-              <div className="throw-button">
-                <h4 onClick={this.redirectToTrackShow}>{this.props.track.title}</h4>
-                <h4 onClick={this.redirectToUserProfile}>{this.props.user.username}</h4>
+              <div className="flex-column space-between track-index-info">
+                <h4 className="track-age">{trackAge}</h4>
               </div>
             </div>
-            <div className="flex-column space-between track-index-info">
-              <h4 className="track-age">{trackAge}</h4>
-              <div className="track-index-counts">
-                <h5><i className="fa fa-play index-play" aria-hidden="true"></i>{this.props.track.plays}</h5>
-                <h5 className="comment-count"
-                  onClick={this.redirectToTrackShow}>
-                  <i className="fa fa-comment comment-play"></i>{this.props.track.comment_count}</h5>
-              </div>
+            <Waveform
+              track={this.props.track}
+              color="#8c8c8c"
+              height={75}
+              waveformClassNames="stream-waveform"></Waveform>
+            <div className="track-index-counts">
+              <h5>
+                <i className="fa fa-play index-play" aria-hidden="true"></i>
+                {numberWithCommas(this.props.track.plays)}
+              </h5>
+              <h5 className="comment-count"
+                onClick={this.redirectToTrackShow}>
+                <i className="fa fa-comment comment-play"></i>
+                {this.props.track.comment_count}
+              </h5>
             </div>
           </div>
         </div>

@@ -148,7 +148,7 @@ class UserProfile extends React.Component {
 
     const profImgClassNames = `profile-photo opacity-fade ${this.state.profOpacityClass}`;
     const coverImgClassNames = `cover-photo opacity-fade ${this.state.coverOpacityClass}`;
-    
+
     return (
       <div className="profile-page">
         <Modal user={this.props.user}/>
@@ -193,7 +193,7 @@ class UserProfile extends React.Component {
             listType="stream-list"
             trackIds={this.props.user.track_ids}
             indexItemComponent={StreamTrackIndexItem}/>
-          <ProfileSidebar user={this.props.user}></ProfileSidebar>
+          <ProfileSidebar></ProfileSidebar>
         </div>
       </div>
     );

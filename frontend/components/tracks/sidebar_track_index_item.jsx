@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { incrementPlays } from '../../actions/track_actions';
 import { withRouter } from 'react-router-dom';
-import { playPauseTrack, generateRGB, imageLoaded } from '../../util/helpers';
+import { playPauseTrack, generateRGB, imageLoaded, numberWithCommas } from '../../util/helpers';
 
 class SidebarTrackIndexItem extends React.Component {
   constructor(props) {
@@ -107,7 +107,10 @@ class SidebarTrackIndexItem extends React.Component {
           <h5 onClick={this.redirectToUserProfile}>{this.props.user.username}</h5>
           <h5 onClick={this.redirectToTrackShow}>{this.props.track.title}</h5>
           <div className="sidebar-index-counts">
-            <h5><i className="fa fa-play index-play" aria-hidden="true"></i>{this.props.track.plays}</h5>
+            <h5>
+              <i className="fa fa-play index-play" aria-hidden="true"></i>
+              {numberWithCommas(this.props.track.plays)}
+            </h5>
             <h5><i className="fas fa-heart"></i>{this.props.track.like_count}</h5>
             <h5><i className="fas fa-retweet"></i>{this.props.track.repost_count}</h5>
           </div>
