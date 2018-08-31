@@ -21,7 +21,13 @@ class UserProfile extends React.Component {
       profOpacityClass: "",
       coverOpacityClass: "",
       showProfButton: "none",
-      showCoverButton: "none"
+      showCoverButton: "none",
+      whichTrackIds: "all",
+      labelClasses: {
+        all: "index-label-selected",
+        tracks: "index-label",
+        reposts: "index-label"
+      }
     };
     const randRGB = generateRGB();
     this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
@@ -141,6 +147,13 @@ class UserProfile extends React.Component {
     } else return null;
   }
 
+  menuSelect(whichTrackIds) {
+    const labelClasses = this.state.labelClasses;
+    labelClasses[this.state.whichTrackIds] = "index-label";
+    labelClasses[whichTrackIds] = "index-label-selected";
+    this.setState({whichTrackIds, labelClasses});
+  }
+
   render() {
     let editButton = this.editButton();
     let chooseCoverPhoto = this.chooseCoverPhoto();
@@ -148,6 +161,10 @@ class UserProfile extends React.Component {
 
     const profImgClassNames = `profile-photo opacity-fade ${this.state.profOpacityClass}`;
     const coverImgClassNames = `cover-photo opacity-fade ${this.state.coverOpacityClass}`;
+
+    let trackIds = this.props.user.track_ids;
+    if (this.state.whichTrackIds === "tracks") trackIds = this.props.user.uploaded_ids;
+    if (this.state.whichTrackIds === "reposts") trackIds = this.props.user.reposted_ids;
 
     return (
       <div className="profile-page">
@@ -180,8 +197,13 @@ class UserProfile extends React.Component {
         </div>
         <div className="max-min-width">
           <div className="label-select-with-buttons">
-            <div>
-              <h2 className="index-label">Tracks</h2>
+            <div className="flex">
+              <h2 className={this.state.labelClasses.all}
+                onClick={this.menuSelect.bind(this, "all")}>All</h2>
+              <h2 className={this.state.labelClasses.tracks}
+                onClick={this.menuSelect.bind(this, "tracks")}>Tracks</h2>
+              <h2 className={this.state.labelClasses.reposts}
+                onClick={this.menuSelect.bind(this, "reposts")}>Reposts</h2>
             </div>
             <div className="show-pages-button-wrapper">
               {editButton}
@@ -191,9 +213,9 @@ class UserProfile extends React.Component {
         <div className="index-and-sidebar">
           <TrackIndex userProf={true}
             listType="stream-list"
-            trackIds={this.props.user.track_ids}
+            trackIds={trackIds}
             indexItemComponent={StreamTrackIndexItem}/>
-          <ProfileSidebar></ProfileSidebar>
+          <ProfileSidebar user={this.props.user}></ProfileSidebar>
         </div>
       </div>
     );

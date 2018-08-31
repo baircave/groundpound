@@ -14,6 +14,7 @@ json.users do
     json.extract! user, :username, :nickname, :id, :bio, :location
     json.track_ids tracks_and_reposts
     json.reposted_ids user.reposted_tracks.ids
+    json.uploaded_ids user.track_ids
     json.like_count user.liked_tracks.size
     json.liked_ids user.liked_tracks.order('likes.created_at DESC').ids
     json.followed_ids followed_artists.ids

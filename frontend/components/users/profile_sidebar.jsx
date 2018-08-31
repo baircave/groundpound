@@ -1,9 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import SidebarTrackIndex from '../tracks/sidebar_track_index';
 import SidebarUserIndex from './sidebar_user_index';
 
-class ProfileSidebar extends React.Component {
+export default class ProfileSidebar extends React.Component {
 
   constructor(props) {
     super(props);
@@ -45,13 +44,3 @@ class ProfileSidebar extends React.Component {
   }
 
 }
-
-const mapStateToProps = (state) => {
-  let user = {};
-  if (state.session.id) user = state.entities.users[state.session.id];
-  return {
-    user
-  }
-}
-
-export default connect(mapStateToProps)(ProfileSidebar);

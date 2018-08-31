@@ -11,7 +11,7 @@ const MainPage = (props) => {
         <div className="max-min-width">
           <div className="label-select-with-buttons">
             <div>
-              <h2 className="index-label">Tracks</h2>
+              <h2 className="index-label-selected">Tracks</h2>
             </div>
           </div>
         </div>

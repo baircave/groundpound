@@ -1,4 +1,10 @@
-import { RECEIVE_CUR_TRACK, TOGGLE_PLAY_PAUSE, SEEK, HTML_PLAYING } from '../actions/playbar_actions';
+import {
+  RECEIVE_CUR_TRACK,
+  TOGGLE_PLAY_PAUSE,
+  SEEK,
+  HTML_PLAYING,
+  RECEIVE_CURR_TIME
+} from '../actions/playbar_actions';
 import { RECEIVE_TRACK, RECEIVE_TRACKS, DELETE_TRACK } from '../actions/track_actions';
 import { RECEIVE_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
@@ -10,7 +16,15 @@ const defaultState = {
   playQueue: [],
   playing: false,
   audioHTMLPlaying: false,
-  progPercentage: 0
+  progPercentage: 0,
+  currTime: 0
+};
+
+const concatUniquesOnly = (arr1, arr2) => {
+  for (let i = 0; i < arr2.length; i++) {
+    if (!arr1.includes(arr2[i])) arr1.push(arr2[i]);
+  }
+  return arr1;
 };
 
 export default (state = defaultState, action) => {
@@ -20,7 +34,7 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case RECEIVE_USER:
     case RECEIVE_TRACKS:
-      newState.playQueue = Object.keys(action.payload.tracks);
+      newState.playQueue = concatUniquesOnly(newState.playQueue, Object.keys(action.payload.tracks));
       return newState;
     case RECEIVE_TRACK:
       if (newState.playQueue[newState.playQueue.length - 1] != action.payload.track.id) {
@@ -36,6 +50,8 @@ export default (state = defaultState, action) => {
       } else {
         newState.currentlyPlayingIdx = newCurrentlyPlayingIdx;
       }
+      newState.progPercentage = 0;
+      newState.currTime = 0;
       newState.visible = true;
       return newState;
     case TOGGLE_PLAY_PAUSE:
@@ -43,6 +59,9 @@ export default (state = defaultState, action) => {
       return newState;
     case SEEK:
       newState.progPercentage = action.progPercentage;
+      return newState;
+    case RECEIVE_CURR_TIME:
+      newState.currTime = action.percentage;
       return newState;
     case HTML_PLAYING:
       newState.audioHTMLPlaying = action.bool;

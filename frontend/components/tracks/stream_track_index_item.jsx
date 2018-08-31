@@ -15,6 +15,7 @@ class StreamTrackIndexItem extends React.Component {
     this.randomGradient = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.state = {
       opacityClass: "",
+      pbId: ""
     };
   }
 
@@ -65,12 +66,15 @@ class StreamTrackIndexItem extends React.Component {
   render() {
     if (!this.props.user || !this.props.track) return null;
 
-    let playPauseIcon;
+    let playPauseIcon = <img src={window.play_button}></img>;
+
     if (this.props.playbar.playing &&
       this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {
-      playPauseIcon = <img src={window.pause}></img>;
-    } else {
-      playPauseIcon = <img src={window.play_button}></img>;
+      if (this.props.playbar.audioHTMLPlaying) {
+        playPauseIcon = <img src={window.pause}></img>;
+      } else {
+        playPauseIcon = <img id={this.state.pbId} src={window.track_loading} onLoad={() => this.setState({pbId: "track-loading-gif"})}></img>;
+      }
     }
 
     const d1 = new Date(this.props.track.created_at);
@@ -112,7 +116,7 @@ class StreamTrackIndexItem extends React.Component {
               track={this.props.track}
               color="#8c8c8c"
               height={75}
-              waveformClassNames="stream-waveform"></Waveform>
+              waveformClassNames="hover-pointer stream-waveform"></Waveform>
             <div className="track-index-counts">
               <h5>
                 <i className="fa fa-play index-play" aria-hidden="true"></i>

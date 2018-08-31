@@ -80,12 +80,14 @@
   font-size: 27px;
   border-radius: 50%;
   min-width: 60px;
+  max-width: 60px;
   height: 60px;
   background-color: #43c3d2;
   margin: 0 4px 0 4px;
   // min-width: 60px;
   // min-height: 60px;
   padding: 0;
+  overflow: hidden;
 }
 
 .play-button img {
@@ -237,4 +239,10 @@
 
 .track-show-waveform:hover {
   cursor: pointer;
+}
+
+#track-loading-gif {
+  filter: none;
+  height: 165%;
+  min-width: 275%;
 }

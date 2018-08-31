@@ -56,12 +56,15 @@ class TrackShow extends React.Component {
       trackAge = trackAgeFromMs(d2 - d1) || "";
     }
 
-    let playPauseIcon;
+    let playPauseIcon = <img src={window.play_button}></img>;
+
     if (this.props.playbar.playing &&
       this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {
-      playPauseIcon = <img src={window.pause}></img>;
-    } else {
-      playPauseIcon = <img src={window.play_button}></img>;
+      if (this.props.playbar.audioHTMLPlaying) {
+        playPauseIcon = <img src={window.pause}></img>;
+      } else {
+        playPauseIcon = <img id={this.state.pbId} src={window.track_loading} onLoad={() => this.setState({pbId: "track-loading-gif"})}></img>;
+      }
     }
 
     let deleteButton = null;

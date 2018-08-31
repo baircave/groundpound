@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { seek } from '../../actions/playbar_actions';
 import { playPauseTrack } from '../../util/helpers';
-
+import { withRouter } from 'react-router-dom';
 
 class Waveform extends React.Component {
 
@@ -36,7 +36,12 @@ class Waveform extends React.Component {
     ws.load(this.props.track.track_file);
     ws.setMute(true);
 
-    ws.on('seek', (percentage) => this.props.seek(percentage));
+    ws.on('seek', this.seek.bind(this));
+    ws.on('ready', this.waveformLoaded.bind(this));
+    ws.on('finish', () => {
+      setTimeout(() => ws.stop(), 50);
+      this.setState({playing: false});
+    });
 
     this.setState({waveform: ws});
   }
@@ -53,11 +58,17 @@ class Waveform extends React.Component {
         this.setState({playing: playbar.audioHTMLPlaying});
       }
 
-      if (playbar.progPercentage !== this.state.progPercentage) {
-        this.setState({progPercentage: playbar.progPercentage});
-        this.state.waveform.seekTo(playbar.progPercentage);
+      const waveform = this.state.waveform;
+      const wsPercentage = waveform.getCurrentTime() / waveform.getDuration();
+
+      if (Math.abs(wsPercentage - this.props.playbar.currTime) > 0.0001) {
+        waveform.seekTo(this.props.playbar.currTime);
       }
 
+    } else {
+      if (this.state.playing) {
+        this.setState({playing: false});
+      }
     }
   }
 
@@ -65,25 +76,41 @@ class Waveform extends React.Component {
     this.state.waveform.load(this.props.track.track_file);
   }
 
-  handleClick() {
-    // if (!this.state.waveform.playing()) {
-    //   playPauseTrack.call(this);
-    // }
+  waveformLoaded() {
+    const playbar = this.props.playbar;
+
+    if (this.props.track.id == playbar.currentlyPlayingId) {
+      if (playbar.audioHTMLPlaying !== this.state.waveform.isPlaying()) {
+        this.setState({playing: playbar.audioHTMLPlaying});
+      }
+
+      this.state.waveform.seekTo(playbar.currTime);
+    }
+  }
+
+  seek(percentage) {
+    if (this.props.playbar.currentlyPlayingId == this.props.track.id) {
+      const seekDiff = Math.abs(this.props.playbar.currTime - percentage);
+      if (seekDiff > 0.0001) {
+        this.props.seek(percentage);
+        this.setState({progPercentage: percentage});
+      }
+    }
   }
 
   render() {
     if (this.state.waveform) {
-      this.state.playing ?
-        this.state.waveform.play() :
+      if (this.state.playing && !this.state.waveform.isPlaying()) {
+        this.state.waveform.play();
+      } else if (!this.state.playing && this.state.waveform.isPlaying()) {
         this.state.waveform.pause();
+      }
     }
-
-
 
     return (
       <div className={this.props.waveformClassNames}
-        ref={this.waveRef}
-        onClick={this.handleClick.bind(this)}></div>
+        ref={this.waveRef}>
+      </div>
     );
   }
 }
@@ -101,4 +128,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Waveform);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Waveform));

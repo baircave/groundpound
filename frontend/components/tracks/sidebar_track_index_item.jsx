@@ -64,14 +64,17 @@ class SidebarTrackIndexItem extends React.Component {
   }
 
   render() {
-    let playPauseIcon;
+    let playPauseIcon = <img src={window.play_button}></img>;
     let showPlayButton = this.state.showPlayButton;
+
     if (this.props.playbar.playing &&
       this.props.track.id === parseInt(this.props.playbar.currentlyPlayingId)) {
-      playPauseIcon = <img src={window.pause}></img>;
-      showPlayButton = "visible";
-    } else {
-      playPauseIcon = <img src={window.play_button}></img>;
+      if (this.props.playbar.audioHTMLPlaying) {
+        playPauseIcon = <img src={window.pause}></img>;
+        showPlayButton = "visible";
+      } else {
+        playPauseIcon = <img id={this.state.pbId} src={window.track_loading} onLoad={() => this.setState({pbId: "track-loading-gif"})}></img>;
+      }
     }
 
     const artClassnames = `sidebar-artwork opacity-fade ${this.state.opacityClass}`

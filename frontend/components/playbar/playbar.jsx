@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { receiveCurTrack, togglePlayPause, seek, setHTMLPlaying } from '../../actions/playbar_actions';
+import { receiveCurTrack, togglePlayPause, seek, setHTMLPlaying, setCurrTime } from '../../actions/playbar_actions';
 import { secondsToTimeString, getMouse } from '../../util/helpers';
 import { withRouter } from 'react-router-dom';
 import { incrementPlays } from '../../actions/track_actions';
@@ -10,6 +10,7 @@ class AudioFooter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      seekValue: 0,
       curTrackTime: 0,
       volumeLevel: 0.5,
       prevVol: 0.5,
@@ -42,7 +43,9 @@ class AudioFooter extends React.Component {
     const playbar = this.props.playbar;
     if (prevProps.playbar.progPercentage !== playbar.progPercentage) {
       this.setState({progPercentage: playbar.progPercentage});
-      this.audioEl.currentTime = this.audioEl.duration * playbar.progPercentage;
+      if (this.audioEl.duration * playbar.progPercentage) {
+        this.audioEl.currentTime = this.audioEl.duration * playbar.progPercentage;
+      }
     }
   }
 
@@ -87,6 +90,7 @@ class AudioFooter extends React.Component {
       curTrackTime: this.audioEl.currentTime,
       progPercentage
     });
+    this.props.setCurrTime(decimalPercentage);
   }
 
   updateVolume(e) {
@@ -105,6 +109,8 @@ class AudioFooter extends React.Component {
     if ((playQueue.length - 1) > trackIndex) {
       this.props.receiveCurTrack(playQueue[trackIndex + 1]);
       this.props.incrementPlays(playQueue[trackIndex + 1]);
+    } else {
+      this.props.togglePlayPause(false);
     }
     this.resetTimeState.call(this);
   }
@@ -122,6 +128,7 @@ class AudioFooter extends React.Component {
       }
     } else {
       this.audioEl.currentTime = 0.0;
+      this.props.receiveCurTrack(playQueue[trackIndex]);
       this.props.incrementPlays(playQueue[trackIndex]);
     }
     this.resetTimeState.call(this);
@@ -242,7 +249,8 @@ const mapDispatchToProps = (dispatch) => {
     togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
     incrementPlays: (trackId) => dispatch(incrementPlays(trackId)),
     setHTMLPlaying: (bool) => dispatch(setHTMLPlaying(bool)),
-    seek: (percentage) => dispatch(seek(percentage))
+    seek: (percentage) => dispatch(seek(percentage)),
+    setCurrTime: (percentage) => dispatch(setCurrTime(percentage))
   };
 };
 

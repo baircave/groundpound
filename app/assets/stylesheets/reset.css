@@ -108,3 +108,7 @@ img:hover {
 .dark-gray {
   color: #999;
 }
+
+.hover-pointer:hover {
+  cursor: pointer;
+}
