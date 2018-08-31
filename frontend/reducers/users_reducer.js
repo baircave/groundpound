@@ -2,6 +2,8 @@ import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { RECEIVE_TRACK, RECEIVE_TRACKS, DELETE_TRACK } from '../actions/track_actions';
 import { RECEIVE_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
+import { RECEIVE_LIKE } from '../actions/like_actions';
+import { RECEIVE_REPOST } from '../actions/repost_actions';
 
 export default (state = {}, action) => {
   Object.freeze(state);
@@ -21,6 +23,12 @@ export default (state = {}, action) => {
       if (user.track_ids) {
         user.track_ids = user.track_ids.filter((trackId) => trackId != action.trackId);
       }
+      return newState;
+    case RECEIVE_LIKE:
+      newState[action.user_id].liked_ids = action.liked_ids;
+      return newState;
+    case RECEIVE_REPOST:
+      newState[action.user_id].reposted_ids = action.reposted_ids;
       return newState;
     default:
       return state;

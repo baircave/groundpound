@@ -16,9 +16,11 @@ class StreamSidebar extends React.Component {
 
   render() {
     const user = this.props.user;
+    if (!user.liked_ids || !user.followed_ids) return null;
+
     return (
       <div className="sidebar">
-        <SidebarTrackIndex trackIds={user.liked_ids} likeCount={user.like_count}/>
+        <SidebarTrackIndex trackIds={user.liked_ids} likeCount={user.liked_ids.length}/>
         <SidebarUserIndex userIds={user.followed_ids} followingCount={user.following_count}/>
       </div>
     );

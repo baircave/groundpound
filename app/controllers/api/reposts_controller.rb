@@ -5,7 +5,12 @@ class Api::RepostsController < ApplicationController
       track_id: params[:track_id],
       user_id: current_user.id})
     if repost.save
-      render json { reposted_ids: current_user.reposted_tracks.ids }
+      tracks_and_reposts = current_user.get_tracks_and_reposts.column_values(0);
+      render json {
+        user_id: current_user.id,
+        reposted_ids: current_user.reposted_tracks.ids
+        track_ids: tracks_and_reposts
+      }
     else
       render json repost.errors.full_messages
     end
@@ -16,7 +21,11 @@ class Api::RepostsController < ApplicationController
       track_id: params[:track_id],
       user_id: current_user.id})
     repost.destroy
-    render json { reposted_ids: current_user.reposted_tracks.ids }
+    render json {
+      user_id: current_user.id,
+      reposted_ids: current_user.reposted_tracks.ids
+      track_ids: tracks_and_reposts
+    }
   end
 
 end

@@ -16,7 +16,7 @@ export default class ProfileSidebar extends React.Component {
 
     if (user.track_ids) {
       followerCount = user.follower_count;
-      followingCount = user.following_count;
+      followingCount = user.followed_ids.length;
       trackCount = user.track_ids.length - user.reposted_ids.length;
     }
 
@@ -37,8 +37,16 @@ export default class ProfileSidebar extends React.Component {
           </div>
         </div>
         <span className="bio">{user.bio}</span>
-        <SidebarTrackIndex trackIds={user.liked_ids} likeCount={user.like_count}/>
-        <SidebarUserIndex userIds={user.followed_ids} followingCount={user.following_count}/>
+        {
+          user.liked_ids ?
+          <SidebarTrackIndex trackIds={user.liked_ids} likeCount={user.liked_ids.length}/> :
+          null
+        }
+        {
+          user.followed_ids ?
+          <SidebarUserIndex userIds={user.followed_ids} followingCount={user.followed_ids.length}/> :
+          null
+        }
       </div>
     );
   }

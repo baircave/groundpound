@@ -178,6 +178,7 @@
   color: #999;
   margin-right: 10px;
   white-space: nowrap;
+  align-self: center;
 }
 
 .track-index-counts h5 {
@@ -196,5 +197,33 @@
 }
 
 .stream-waveform {
-  margin: 10px 0 15px 15px;
+  margin: 10px 0 5px 15px;
+}
+
+
+.social-button {
+  font-weight: 100;
+  font-size: 12px;
+  width: fit-content;
+  border-radius: 3px;
+  padding: 3px 8px 3px 8px;
+  margin: 0 5px 0 0;
+  background: none;
+  border: 1px solid #e5e5e5;
+  color: black;
+}
+
+.social-button:first-of-type {
+  margin: 0 5px 0 15px;
+}
+
+.social-button:hover {
+  cursor: pointer;
+  border: 1px solid #999;
+  transition: 0.5s;
+}
+
+.social-button-selected {
+  border: 1px solid #43c3d2;
+  color: #43c3d2;
 }

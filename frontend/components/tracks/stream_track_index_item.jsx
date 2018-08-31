@@ -6,6 +6,11 @@ import { withRouter } from 'react-router-dom';
 import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs, numberWithCommas } from '../../util/helpers';
 import Waveform from './waveform';
 
+const classMap = {
+  true: "social-button-selected",
+  false: "social-button"
+};
+
 class StreamTrackIndexItem extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +20,9 @@ class StreamTrackIndexItem extends React.Component {
     this.randomGradient = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.state = {
       opacityClass: "",
-      pbId: ""
+      pbId: "",
+      liked: false,
+      reposted: false
     };
   }
 
@@ -33,6 +40,18 @@ class StreamTrackIndexItem extends React.Component {
       if (!this.props.playbar.playing) {
         this.setState({showPlayButton: "hidden"});
       }
+    }
+
+    const prevLikedIds = prevProps.currUser.likedIds;
+    const prevRepostedIds= prevProps.currUser.repostedIds;
+    const likedIds = this.props.currUser.likedIds;
+    const repostedIds = this.props.currUser.repostedIds;
+
+    if (prevLikedIds !== likedIds || prevRepostedIds !== repostedIds) {
+      this.setState({
+        liked: likedIds.includes(trackId),
+        reposted: repostedIds.includes(trackId)
+      });
     }
   }
 
@@ -62,6 +81,20 @@ class StreamTrackIndexItem extends React.Component {
       }
     }
   }
+
+  toggleSocial(social) {
+    switch (social) {
+      case "like":
+        //dispatch action to toggle like
+        //set that state locally
+      case "repost":
+        //dispatch action to toggle repost
+        //set that state locally
+      default:
+
+    }
+  }
+
 
   render() {
     if (!this.props.user || !this.props.track) return null;
@@ -112,21 +145,35 @@ class StreamTrackIndexItem extends React.Component {
                 <h4 className="track-age">{trackAge}</h4>
               </div>
             </div>
+
             <Waveform
               track={this.props.track}
               color="#8c8c8c"
               height={75}
               waveformClassNames="hover-pointer stream-waveform"></Waveform>
-            <div className="track-index-counts">
-              <h5>
-                <i className="fa fa-play index-play" aria-hidden="true"></i>
-                {numberWithCommas(this.props.track.plays)}
-              </h5>
-              <h5 className="comment-count"
-                onClick={this.redirectToTrackShow}>
-                <i className="fa fa-comment comment-play"></i>
-                {this.props.track.comment_count}
-              </h5>
+
+            <div className="flex space-between">
+              <div className="flex">
+                <div className={classMap[this.state.liked]}
+                  onClick={this.toggleSocial.bind(this, "like")}>
+                  <i className="fas fa-heart"></i> {this.props.track.like_count}
+                </div>
+                <div className={classMap[this.state.reposted]}
+                  onClick={this.toggleSocial.bind(this, "repost")}>
+                  <i className="fas fa-retweet"></i> {this.props.track.repost_count}
+                </div>
+              </div>
+              <div className="track-index-counts">
+                <h5>
+                  <i className="fa fa-play index-play" aria-hidden="true"></i>
+                  {numberWithCommas(this.props.track.plays)}
+                </h5>
+                <h5 className="comment-count"
+                  onClick={this.redirectToTrackShow}>
+                  <i className="fa fa-comment comment-play"></i>
+                  {this.props.track.comment_count}
+                </h5>
+              </div>
             </div>
           </div>
         </div>
@@ -137,8 +184,10 @@ class StreamTrackIndexItem extends React.Component {
 
 
 const mapStateToProps = (state) => {
+  const currUser = state.entities.users[state.session.id];
   return {
-    playbar: state.ui.playbar
+    playbar: state.ui.playbar,
+    currUser
   }
 }
 
