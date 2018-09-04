@@ -3,13 +3,9 @@ import { connect } from 'react-redux';
 import { incrementPlays } from '../../actions/track_actions';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
-import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs, numberWithCommas } from '../../util/helpers';
+import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs } from '../../util/helpers';
 import Waveform from './waveform';
-
-const classMap = {
-  true: "social-button-selected",
-  false: "social-button"
-};
+import TrackSocials from './track_socials';
 
 class StreamTrackIndexItem extends React.Component {
   constructor(props) {
@@ -20,39 +16,8 @@ class StreamTrackIndexItem extends React.Component {
     this.randomGradient = `linear-gradient(45deg, #43c3d3, ${generateRGB()})`;
     this.state = {
       opacityClass: "",
-      pbId: "",
-      liked: false,
-      reposted: false
+      pbId: ""
     };
-  }
-
-  componentDidUpdate(prevProps) {
-    const trackId = this.props.track.id.toString();
-    const previouslyPlayingId = prevProps.playbar.currentlyPlayingId;
-    const currentlyPlayingId = this.props.playbar.currentlyPlayingId;
-    if (previouslyPlayingId !== currentlyPlayingId) {
-      if (currentlyPlayingId && currentlyPlayingId !== trackId) {
-        this.setState({showPlayButton: "hidden"});
-      }
-    }
-
-    if (prevProps.playbar.playing !== this.props.playbar.playing) {
-      if (!this.props.playbar.playing) {
-        this.setState({showPlayButton: "hidden"});
-      }
-    }
-
-    const prevLikedIds = prevProps.currUser.likedIds;
-    const prevRepostedIds= prevProps.currUser.repostedIds;
-    const likedIds = this.props.currUser.likedIds;
-    const repostedIds = this.props.currUser.repostedIds;
-
-    if (prevLikedIds !== likedIds || prevRepostedIds !== repostedIds) {
-      this.setState({
-        liked: likedIds.includes(trackId),
-        reposted: repostedIds.includes(trackId)
-      });
-    }
   }
 
   redirectToTrackShow() {
@@ -62,39 +27,6 @@ class StreamTrackIndexItem extends React.Component {
   redirectToUserProfile() {
     this.props.history.push(`/users/${this.props.track.artist_id}`);
   }
-
-  showPlayButton(enterExit) {
-    let mouseOver = true;
-    if (enterExit === "exit") {
-      mouseOver = false;
-    }
-
-    const track = this.props.track;
-    const playbar = this.props.playbar;
-    if (playbar.playing && playbar.currentlyPlayingId === track.id.toString()) {
-      this.setState({showPlayButton: "visible", mouseOver});
-    } else {
-      if (enterExit === "exit") {
-        this.setState({showPlayButton: "hidden", mouseOver});
-      } else {
-        this.setState({showPlayButton: "visible", mouseOver});
-      }
-    }
-  }
-
-  toggleSocial(social) {
-    switch (social) {
-      case "like":
-        //dispatch action to toggle like
-        //set that state locally
-      case "repost":
-        //dispatch action to toggle repost
-        //set that state locally
-      default:
-
-    }
-  }
-
 
   render() {
     if (!this.props.user || !this.props.track) return null;
@@ -152,29 +84,7 @@ class StreamTrackIndexItem extends React.Component {
               height={75}
               waveformClassNames="hover-pointer stream-waveform"></Waveform>
 
-            <div className="flex space-between">
-              <div className="flex">
-                <div className={classMap[this.state.liked]}
-                  onClick={this.toggleSocial.bind(this, "like")}>
-                  <i className="fas fa-heart"></i> {this.props.track.like_count}
-                </div>
-                <div className={classMap[this.state.reposted]}
-                  onClick={this.toggleSocial.bind(this, "repost")}>
-                  <i className="fas fa-retweet"></i> {this.props.track.repost_count}
-                </div>
-              </div>
-              <div className="track-index-counts">
-                <h5>
-                  <i className="fa fa-play index-play" aria-hidden="true"></i>
-                  {numberWithCommas(this.props.track.plays)}
-                </h5>
-                <h5 className="comment-count"
-                  onClick={this.redirectToTrackShow}>
-                  <i className="fa fa-comment comment-play"></i>
-                  {this.props.track.comment_count}
-                </h5>
-              </div>
-            </div>
+            <TrackSocials track={this.props.track}></TrackSocials>
           </div>
         </div>
       </li>
@@ -184,10 +94,8 @@ class StreamTrackIndexItem extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  const currUser = state.entities.users[state.session.id];
   return {
-    playbar: state.ui.playbar,
-    currUser
+    playbar: state.ui.playbar
   }
 }
 

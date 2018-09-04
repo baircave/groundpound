@@ -2,17 +2,17 @@ import * as RepostApiUtil from '../util/repost_api_util';
 
 export const RECEIVE_REPOST = "RECEIVE_REPOST";
 
-export const receiveRepost = (repostedIds) => {
+export const receiveRepost = (payload) => {
   return {
     type: RECEIVE_REPOST,
-    repostedIds
+    payload
   };
 };
 
 export const makeRepost = (trackId) => {
   return (dispatch) => {
     return RepostApiUtil.makeRepost(trackId).then(
-      (repostedIds) => dispatch(receiveRepost(repostedIds))
+      (payload) => dispatch(receiveRepost(payload))
     );
   };
 };
@@ -20,7 +20,7 @@ export const makeRepost = (trackId) => {
 export const deleteRepost = (trackId) => {
   return (dispatch) => {
     return RepostApiUtil.deleteRepost(trackId).then(
-      (repostedIds) => dispatch(receiveRepost(repostedIds))
+      (payload) => dispatch(receiveRepost(payload))
     );
   };
 };

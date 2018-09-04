@@ -122,6 +122,6 @@ export function ensureSession() {
   }
 }
 
-export function numberWithCommas(num){
+export function numberWithCommas(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

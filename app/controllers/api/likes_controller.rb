@@ -5,9 +5,12 @@ class Api::LikesController < ApplicationController
       track_id: params[:track_id],
       user_id: current_user.id})
     if like.save
-      render json { user_id: current_user.id, liked_ids: current_user.liked_tracks.ids }
+      @track = Track.find(params[:track_id])
+      @user = User.find(current_user.id)
+      @tracks_and_reposts = @user.get_tracks_and_reposts.column_values(0)
+      render "api/socials/update"
     else
-      render json like.errors.full_messages
+      render json: like.errors.full_messages
     end
   end
 
@@ -16,7 +19,10 @@ class Api::LikesController < ApplicationController
       track_id: params[:track_id],
       user_id: current_user.id})
     like.destroy
-    render json { user_id: current_user.id, liked_ids: current_user.liked_tracks.ids }
+    @track = Track.find(params[:track_id])
+    @user = User.find(current_user.id)
+    @tracks_and_reposts = @user.get_tracks_and_reposts.column_values(0)
+    render "api/socials/update"
   end
 
 end
