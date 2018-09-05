@@ -50,7 +50,7 @@ class StreamTrackIndexItem extends React.Component {
     }
 
     const artClassnames = `stream-track-artwork opacity-fade ${this.state.opacityClass}`
-
+    
     return (
       <li className="stream-track-index-item">
         <div className="flex">

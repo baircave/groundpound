@@ -5,6 +5,7 @@ import { makeLike, deleteLike } from '../../actions/like_actions';
 import { makeRepost, deleteRepost } from '../../actions/repost_actions';
 import { withRouter } from 'react-router-dom';
 import { numberWithCommas } from '../../util/helpers';
+import { deleteTrack } from '../../actions/track_actions';
 
 const classMap = {
   true: "social-button social-button-selected",
@@ -16,8 +17,11 @@ class TrackSocials extends React.Component {
     super(props);
     this.state = {
       liked: false,
-      reposted: false
+      reposted: false,
+      disableDelete: false
     };
+
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   loggedIn() {
@@ -82,7 +86,29 @@ class TrackSocials extends React.Component {
     this.props.history.push(`/tracks/${this.props.track.id}`);
   }
 
+  handleDelete() {
+    this.setState({disableDelete: true});
+    const userId = this.props.currUser.id;
+    this.props.deleteTrack(this.props.track.id).then(() => {
+      this.props.history.push(`/users/${userId}`);
+    });
+  }
+
   render() {
+    if (!this.props.track.id) return null;
+
+    let deleteButton = null;
+    if (this.props.currUser.id === this.props.track.artist_id && this.props.showDelete) {
+      deleteButton = (
+        <div
+          onClick={this.handleDelete}
+          className="social-button"
+          disabled={this.state.disableDelete}>
+          <i className="fa fa-trash" aria-hidden="true"></i> Delete track
+        </div>
+      );
+    }
+
     return (
       <div className="flex space-between">
         <div className="flex">
@@ -97,6 +123,7 @@ class TrackSocials extends React.Component {
             </div> :
             null
           }
+          {deleteButton}
         </div>
         <div className="track-index-counts">
           <h5>
@@ -104,7 +131,7 @@ class TrackSocials extends React.Component {
             {numberWithCommas(this.props.track.plays)}
           </h5>
           <h5 className="comment-count"
-            onClick={this.redirectToTrackShow}>
+            onClick={this.redirectToTrackShow.bind(this)}>
             <i className="fa fa-comment comment-play"></i>
             {this.props.track.comment_count}
           </h5>
@@ -127,7 +154,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteRepost: (trackId) => dispatch(deleteRepost(trackId)),
     makeLike: (trackId) => dispatch(makeLike(trackId)),
     deleteLike: (trackId) => dispatch(deleteLike(trackId)),
-    openModal: (modal) => dispatch(openModal(modal))
+    openModal: (modal) => dispatch(openModal(modal)),
+    deleteTrack: (trackId) => dispatch(deleteTrack(trackId))
   };
 };
 

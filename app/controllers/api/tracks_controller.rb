@@ -8,6 +8,7 @@ class Api::TracksController < ApplicationController
   def show
     @track = Track.includes(comments: [:author]).find(params[:id])
     if @track
+      @user = User.find(@track.artist_id)
       render :show
     else
       render json: ["No track found with that id"], status: 404

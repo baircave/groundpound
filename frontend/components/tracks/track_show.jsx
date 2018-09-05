@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchTrack, deleteTrack, incrementPlays } from '../../actions/track_actions';
+import { fetchTrack, incrementPlays } from '../../actions/track_actions';
 import { trackAgeFromMs, generateRGB, imageLoaded } from '../../util/helpers';
 import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
 import CommentForm from '../comments/comment_form';
@@ -10,6 +10,8 @@ import { openModal } from '../../actions/modal_actions';
 import Modal from '../modal';
 import { playPauseTrack } from '../../util/helpers';
 import Waveform from './waveform';
+import TrackSocials from './track_socials';
+import ProfileFollowBlock from '../users/profile_follow_block';
 
 class TrackShow extends React.Component {
 
@@ -23,7 +25,6 @@ class TrackShow extends React.Component {
     this.randomCoverGradient = `linear-gradient(45deg, ${randRGB}, #43c3d3)`;
     this.randomArtGradient = `linear-gradient(45deg, #43c3d3, ${randRGB})`;
     this.playPauseTrack = playPauseTrack.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -36,14 +37,6 @@ class TrackShow extends React.Component {
       this.setState({opacityClass: ""});
       this.props.fetchTrack(this.props.match.params.id);
     }
-  }
-
-  handleDelete() {
-    this.setState({disableDelete: true});
-    const userId = this.props.user.id;
-    this.props.deleteTrack(this.props.track.id).then(() => {
-      this.props.history.push(`/users/${userId}`);
-    });
   }
 
   render() {
@@ -66,16 +59,7 @@ class TrackShow extends React.Component {
         playPauseIcon = <img id={this.state.pbId} src={window.track_loading} onLoad={() => this.setState({pbId: "track-loading-gif"})}></img>;
       }
     }
-
-    let deleteButton = null;
-    if (this.props.sessionId === track.artist_id) {
-      deleteButton = (<button
-        onClick={this.handleDelete}
-        className="trans-button"
-        disabled={this.state.disableDelete}>
-        <i className="fa fa-trash" aria-hidden="true"></i> Delete track</button>);
-    }
-
+    
     const artClassnames = `album-art opacity-fade ${this.state.opacityClass}`;
     return (
       <div className="main-wrapper">
@@ -114,13 +98,18 @@ class TrackShow extends React.Component {
               </div>
             </section>
           </div>
-          <div className="comments-wrapper">
-            <CommentForm trackId={track.id}></CommentForm>
-            {deleteButton}
-            <div className="track-description">
-              <p>{track.description}</p>
+          <div className="social-section">
+            <div className="comments-wrapper">
+              <CommentForm trackId={track.id}></CommentForm>
+              <TrackSocials track={track} showDelete={true}></TrackSocials>
+              <div className="flex gray-top-border">
+                <ProfileFollowBlock user={this.props.user}></ProfileFollowBlock>
+                <div className="track-description">
+                  <p>{track.description}</p>
+                </div>
+              </div>
+              <CommentIndex trackId={track.id} commentIds={track.comment_ids}/>
             </div>
-            <CommentIndex trackId={track.id} commentIds={track.comment_ids}/>
           </div>
 
         </div>

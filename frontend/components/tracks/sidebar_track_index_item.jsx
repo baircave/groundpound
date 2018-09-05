@@ -64,6 +64,8 @@ class SidebarTrackIndexItem extends React.Component {
   }
 
   render() {
+    if (Object.keys(this.props.track).length === 0 || !this.props.user) return null;
+
     let playPauseIcon = <img src={window.play_button}></img>;
     let showPlayButton = this.state.showPlayButton;
 
@@ -126,11 +128,11 @@ class SidebarTrackIndexItem extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const track = state.entities.tracks[ownProps.trackId];
-  const user = state.entities.users[track.artist_id];
+  // const user = state.entities.users[track.artist_id];
   return {
     playbar: state.ui.playbar,
-    track,
-    user
+    track: track ? track : {},
+    user: track ? state.entities.users[track.artist_id] : {}
   }
 }
 

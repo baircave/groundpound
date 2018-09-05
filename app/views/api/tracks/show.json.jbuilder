@@ -5,14 +5,24 @@ audio = url_for(@track.track_file)
 json.track do
   json.extract! @track, :title, :description, :track_url, :artist_id, :id, :created_at, :plays
   json.comment_ids @track.comments.order('created_at DESC').ids
+  json.comment_count @track.comments.size
+  json.like_count @track.likes.size
+  json.repost_count @track.reposts.size
   json.artwork_file artwork
   json.track_file audio
 end
 
 json.users do
   json.set! @track.artist_id do
-    json.extract! @track.artist, :username, :nickname, :profile_url, :id
+    profile_photo = nil
+    profile_photo = url_for(@user.profile_photo) if @user.profile_photo.attached?
+
+    artist = @track.artist
+    json.extract! artist, :username, :nickname, :profile_url, :id
+    json.follower_count artist.followers.size
+    json.profile_photo profile_photo
   end
+
   @track.comments.each do |comment|
     json.set! comment.author.id do
       author = comment.author

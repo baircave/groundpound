@@ -33,7 +33,10 @@ class Waveform extends React.Component {
       cursorWidth: 0,
       height
     });
-    ws.load(this.props.track.track_file);
+
+    const trackFile = this.props.track.track_file;
+    if (trackFile) ws.load(trackFile);
+
     ws.setMute(true);
 
     ws.on('seek', this.seek.bind(this));
@@ -73,7 +76,9 @@ class Waveform extends React.Component {
   }
 
   loadWaveSurfer() {
-    this.state.waveform.load(this.props.track.track_file);
+    if (this.props.track.track_file) {
+      this.state.waveform.load(this.props.track.track_file);
+    }
   }
 
   waveformLoaded() {
@@ -86,6 +91,7 @@ class Waveform extends React.Component {
 
       this.state.waveform.seekTo(playbar.currTime);
     }
+    this.setState({ready: true});
   }
 
   seek(percentage) {

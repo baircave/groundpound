@@ -28,6 +28,12 @@ json.users do
     end
   end
 
+  user.liked_tracks.each do |track|
+    json.set! track.artist_id do
+      json.extract! track.artist, :username, :id
+    end
+  end
+
   followed_artists.each do |artist|
     profile_photo = nil
     profile_photo = url_for(artist.profile_photo) if artist.profile_photo.attached?

@@ -48,7 +48,7 @@ class SidebarUserIndexItem extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  const user = state.entities.users[ownProps.userId];
+  const user = state.entities.users[ownProps.userId] || {};
   return {
     user
   }
