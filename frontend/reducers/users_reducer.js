@@ -13,8 +13,8 @@ export default (state = {}, action) => {
     case RECEIVE_TRACKS:
     case RECEIVE_TRACK:
     case RECEIVE_CURRENT_USER:
-    case RECEIVE_USER:
       return merge(newState, action.payload.users);
+    case RECEIVE_USER:
     case RECEIVE_LIKE:
     case RECEIVE_REPOST:
       return assign(newState, action.payload.users);

@@ -13,7 +13,7 @@ export default function SidebarTrackIndex({ trackIds, likeCount }) {
       </header>
       <ul className="sidebar-track-index flex-column">
         {firstThree.map((id) => {
-          return <SidebarTrackIndexItem key={id} trackId={id}></SidebarTrackIndexItem>;
+          return <SidebarTrackIndexItem key={id} trackId={id} trackIds={firstThree}></SidebarTrackIndexItem>;
           })}
         </ul>
     </div>

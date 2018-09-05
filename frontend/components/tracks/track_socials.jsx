@@ -6,6 +6,7 @@ import { makeRepost, deleteRepost } from '../../actions/repost_actions';
 import { withRouter } from 'react-router-dom';
 import { numberWithCommas } from '../../util/helpers';
 import { deleteTrack } from '../../actions/track_actions';
+import { togglePlayPause } from '../../actions/playbar_actions';
 
 const classMap = {
   true: "social-button social-button-selected",
@@ -89,6 +90,7 @@ class TrackSocials extends React.Component {
   handleDelete() {
     this.setState({disableDelete: true});
     const userId = this.props.currUser.id;
+    // this.props.togglePlayPause(false);
     this.props.deleteTrack(this.props.track.id).then(() => {
       this.props.history.push(`/users/${userId}`);
     });
@@ -155,7 +157,8 @@ const mapDispatchToProps = (dispatch) => {
     makeLike: (trackId) => dispatch(makeLike(trackId)),
     deleteLike: (trackId) => dispatch(deleteLike(trackId)),
     openModal: (modal) => dispatch(openModal(modal)),
-    deleteTrack: (trackId) => dispatch(deleteTrack(trackId))
+    deleteTrack: (trackId) => dispatch(deleteTrack(trackId)),
+    togglePlayPause: (bool) => dispatch(togglePlayPause(bool))
   };
 };
 

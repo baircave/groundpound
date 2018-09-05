@@ -59,7 +59,7 @@ class TrackShow extends React.Component {
         playPauseIcon = <img id={this.state.pbId} src={window.track_loading} onLoad={() => this.setState({pbId: "track-loading-gif"})}></img>;
       }
     }
-    
+
     const artClassnames = `album-art opacity-fade ${this.state.opacityClass}`;
     return (
       <div className="main-wrapper">
@@ -135,7 +135,8 @@ const mapDispatchToProps = (dispatch) => {
     incrementPlays: (trackId) => dispatch(incrementPlays(trackId)),
     togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
     openModal: (modal) => dispatch(openModal(modal)),
-    deleteTrack: (trackId) => dispatch(deleteTrack(trackId))
+    deleteTrack: (trackId) => dispatch(deleteTrack(trackId)),
+    setQueue: () => { return }
   };
 };
 

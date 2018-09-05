@@ -19,6 +19,7 @@ class Api::TracksController < ApplicationController
     @track = Track.new(track_params);
     @track.artist_id = current_user.id;
     if @track.save
+      @user = User.find(current_user.id);
       render :show
     else
       render json: @track.errors.full_messages

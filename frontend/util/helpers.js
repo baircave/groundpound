@@ -98,6 +98,7 @@ export function playPauseTrack(e) {
   if (playbar.currentlyPlayingId === track.id.toString()) {
     this.props.togglePlayPause(!playbar.playing);
   } else {
+    this.props.setQueue(this.props.trackIds);
     this.props.receiveCurTrack(track.id.toString());
     this.props.incrementPlays(track.id);
     if (!playbar.playing) {

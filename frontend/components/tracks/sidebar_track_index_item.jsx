@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
+import { receiveCurTrack, togglePlayPause, setQueue } from '../../actions/playbar_actions';
 import { incrementPlays } from '../../actions/track_actions';
 import { withRouter } from 'react-router-dom';
 import { playPauseTrack, generateRGB, imageLoaded, numberWithCommas } from '../../util/helpers';
@@ -20,11 +20,11 @@ class SidebarTrackIndexItem extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const trackId = this.props.track.id.toString();
+    const trackId = this.props.track.id;
     const previouslyPlayingId = prevProps.playbar.currentlyPlayingId;
     const currentlyPlayingId = this.props.playbar.currentlyPlayingId;
     if (previouslyPlayingId !== currentlyPlayingId) {
-      if (currentlyPlayingId && currentlyPlayingId !== trackId) {
+      if (currentlyPlayingId && currentlyPlayingId != trackId) {
         this.setState({showPlayButton: "hidden"});
       }
     }
@@ -140,7 +140,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
     togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
-    incrementPlays: (trackId) => dispatch(incrementPlays(trackId))
+    incrementPlays: (trackId) => dispatch(incrementPlays(trackId)),
+    setQueue: (trackIds) => dispatch(setQueue(trackIds))
   };
 };
 

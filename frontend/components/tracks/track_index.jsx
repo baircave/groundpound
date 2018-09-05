@@ -40,7 +40,8 @@ class TrackIndex extends React.Component {
             return (
               <IndexItemComponent key={track.id}
                 user={this.props.users[track.artist_id]}
-                track={track}>
+                track={track}
+                trackIds={this.props.trackIds}>
               </IndexItemComponent>
             );
           })}
@@ -52,16 +53,20 @@ class TrackIndex extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   let tracks = [];
+  let trackIds = [];
   if (ownProps.userProf) {
     if (ownProps.trackIds) {
+      trackIds = ownProps.trackIds;
       tracks = selectUserTracks(state, ownProps.trackIds);
     }
   } else {
-    tracks = Object.values(state.entities.tracks)
+    trackIds = Object.keys(state.entities.tracks);
+    tracks = Object.values(state.entities.tracks);
   }
 
   return {
     tracks,
+    trackIds,
     users: state.entities.users
   };
 };

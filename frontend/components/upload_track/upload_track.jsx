@@ -81,7 +81,7 @@ class UploadTrack extends React.Component {
           <div className="form-wrapper">
             <h1 className="form-header">Upload to Groundpound</h1>
             <form className="upload-form">
-              <div className="color-button ref-button track-file-input"
+              <div className="color-button track-file-ref-button track-file-input"
                 onClick={(e) => this.trackFileInput.current.click()}>Choose a file to upload</div>
               <input
                 ref={this.trackFileInput}

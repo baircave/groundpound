@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { incrementPlays } from '../../actions/track_actions';
-import { receiveCurTrack, togglePlayPause } from '../../actions/playbar_actions';
+import { receiveCurTrack, togglePlayPause, setQueue } from '../../actions/playbar_actions';
 import { withRouter } from 'react-router-dom';
 import { playPauseTrack, generateRGB, imageLoaded, trackAgeFromMs } from '../../util/helpers';
 import Waveform from './waveform';
@@ -50,7 +50,7 @@ class StreamTrackIndexItem extends React.Component {
     }
 
     const artClassnames = `stream-track-artwork opacity-fade ${this.state.opacityClass}`
-    
+
     return (
       <li className="stream-track-index-item">
         <div className="flex">
@@ -103,7 +103,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     incrementPlays: (trackId) => dispatch(incrementPlays(trackId)),
     receiveCurTrack: (trackId) => dispatch(receiveCurTrack(trackId)),
-    togglePlayPause: (bool) => dispatch(togglePlayPause(bool))
+    togglePlayPause: (bool) => dispatch(togglePlayPause(bool)),
+    setQueue: (trackIds) => dispatch(setQueue(trackIds))
   };
 };
 

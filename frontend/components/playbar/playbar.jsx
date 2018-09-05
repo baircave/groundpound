@@ -162,7 +162,7 @@ class AudioFooter extends React.Component {
   }
 
   render() {
-    if (!this.props.playbar.visible) {
+    if (!this.props.playbar.visible || !this.props.track) {
       return null;
     } else {
       let volumeIcon = <i className="fa fa-volume-off"></i>;
