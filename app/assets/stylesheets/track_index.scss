@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   max-width: 1240px;
+  border-right: 1px solid #f2f2f2;
   // min-width: fit-content;
   padding-bottom: 50px;
   // overflow: auto;
@@ -30,7 +31,7 @@
 .stream-list {
   padding: 0;
   padding-right: 20px;
-  border-right: 1px solid #f2f2f2;
+  // border-right: 1px solid #f2f2f2;
   display: flex;
   flex-direction: column;
   margin: 20px 0 0 20px;

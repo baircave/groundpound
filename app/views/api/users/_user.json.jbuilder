@@ -23,18 +23,21 @@ json.users do
   end
 
   user.reposted_tracks.each do |track|
+    next if current_user && current_user.id == track.artist_id
     json.set! track.artist_id do
       json.extract! track.artist, :username, :id
     end
   end
 
   user.liked_tracks.each do |track|
+    next if current_user && current_user.id == track.artist_id
     json.set! track.artist_id do
       json.extract! track.artist, :username, :id
     end
   end
 
   followed_artists.each do |artist|
+    next if current_user && current_user.id == artist.id
     profile_photo = nil
     profile_photo = url_for(artist.profile_photo) if artist.profile_photo.attached?
 

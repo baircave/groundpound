@@ -21,6 +21,13 @@ const defaultState = {
   currTime: 0
 };
 
+Array.prototype.softIncludes = function(el) {
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] == el) return true;
+  }
+  return false;
+};
+
 export default (state = defaultState, action) => {
   Object.freeze(state);
   const newState = merge({}, state);
@@ -31,7 +38,7 @@ export default (state = defaultState, action) => {
       newState.playQueue = Object.keys(action.payload.tracks);
       return newState;
     case RECEIVE_TRACK:
-      if (newState.playQueue[newState.playQueue.length - 1] != action.payload.track.id) {
+      if (!newState.playQueue.softIncludes(action.payload.track.id)) {
         newState.playQueue.push(action.payload.track.id);
       }
       return newState;

@@ -9,7 +9,7 @@ class Api::UsersController < ApplicationController
       reposted_tracks: [:likes, :reposts, artwork_attachment: :blob],
       tracks: [:likes, :reposts, :comments],
       comments: [:track]).find(params[:id])
-    @tracks_and_reposts = @user.get_tracks_and_reposts.column_values(0);
+    @tracks_and_reposts = @user.get_tracks_and_reposts.column_values(0)
 
     if @user
       render :show
@@ -31,6 +31,7 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
+      @tracks_and_reposts = @user.get_tracks_and_reposts.column_values(0);
       render :show
     else
       render json: @user.errors.full_messages, status: 422
