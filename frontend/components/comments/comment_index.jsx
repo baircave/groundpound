@@ -12,16 +12,24 @@ const CommentIndex = ({ comments, users, trackId }) => {
   return (
     <div className="comments">
       <h3><i className="fa fa-comment"></i>{comments.length} comment{plural}</h3>
-      <ul>
-        {comments.map((comment) => {
-          return (
-            <CommentIndexItem comment={comment}
-              trackId={trackId}
-              users={users}
-              key={comment.id}></CommentIndexItem>
-          );
-        })}
-      </ul>
+      {(comments.length > 0) ?
+        <ul>
+          {comments.map((comment) => {
+            return (
+              <CommentIndexItem comment={comment}
+                trackId={trackId}
+                users={users}
+                key={comment.id}></CommentIndexItem>
+            );
+          })}
+        </ul> :
+        <div className="flex-column empty-index">
+          <img clasName="no-comments-img" src={window.no_comments}></img>
+          <h2>Seems a little quiet over here</h2>
+          <h2>Be the first to comment on this track</h2>
+        </div>
+
+      }
     </div>
   );
 };

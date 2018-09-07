@@ -7,6 +7,7 @@ import StreamTrackIndexItem from '../tracks/stream_track_index_item';
 import ProfileSidebar from './profile_sidebar';
 import { openModal } from '../../actions/modal_actions';
 import Modal from '../modal';
+import FollowButton from './follow_button';
 
 class UserProfile extends React.Component {
 
@@ -155,7 +156,7 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    let editButton = this.editButton();
+    const editButton = this.editButton();
     let chooseCoverPhoto = this.chooseCoverPhoto();
     let chooseProfilePhoto = this.chooseProfilePhoto();
 
@@ -206,6 +207,7 @@ class UserProfile extends React.Component {
                 onClick={this.menuSelect.bind(this, "reposts")}>Reposts</h2>
             </div>
             <div className="show-pages-button-wrapper">
+              <FollowButton artistId={this.props.user.id}></FollowButton>
               {editButton}
             </div>
           </div>

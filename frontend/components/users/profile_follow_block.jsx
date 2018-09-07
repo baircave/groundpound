@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { generateRGB, imageLoaded } from '../../util/helpers';
+import FollowButton from './follow_button';
 
 
 class ProfileFollowBlock extends React.Component {
@@ -39,10 +40,10 @@ class ProfileFollowBlock extends React.Component {
 
     return (
       <div className="profile-follow-block">
-        <div className="profile-block-photo"
+        <div className="profile-block-photo hover-pointer"
+          onClick={this.redirectToProfile}
           style={ { background: this.randomProfileGradient}}>
           <img className={profImgClassNames}
-            onClick={this.redirectToProfile}
             src={this.state.profilePhotoUrl}
             onLoad={this.profImageLoaded.bind(this)}></img>
         </div>
@@ -50,6 +51,11 @@ class ProfileFollowBlock extends React.Component {
           onClick={this.redirectToProfile}>
           {this.props.user.nickname}
         </h4>
+        <h5 className="follow-block-counts" onClick={this.redirectToProfile}>
+          <i className="fas fa-users"></i>
+          {this.props.user.follower_count}
+        </h5>
+        <FollowButton artistId={this.props.user.id}></FollowButton>
       </div>
     );
   }

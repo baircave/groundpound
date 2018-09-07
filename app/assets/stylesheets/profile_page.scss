@@ -73,7 +73,6 @@
 }
 
 .sidebar {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -85,7 +84,7 @@
 }
 
 .sidebar .bio {
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   font-weight: 100;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -167,4 +166,32 @@
 
 .cover-photo-input {
   display: none;
+}
+
+button.followed-button {
+  padding: 5px 7px 5px 7px;
+  font-size: 13px;
+  background: none;
+  border: 1px solid #c8c8c8;
+  color: #43c3d2;
+}
+
+button.followed-button:hover {
+  transition: 0.5s;
+  border: 1px solid #43c3d2;
+}
+
+button.unfollowed-button {
+  padding: 5px 7px 5px 7px;
+  font-size: 13px;
+  background: #43c3d2;
+  color: white;
+}
+
+.follow-block-counts {
+  font-weight: 100;
+}
+
+.follow-block-counts i {
+  margin: 5px;
 }

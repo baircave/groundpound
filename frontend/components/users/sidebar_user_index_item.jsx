@@ -24,10 +24,10 @@ class SidebarUserIndexItem extends React.Component {
     return (
       <li className="sidebar-track-index-item flex">
         <div className="sidebar-profile-photo">
-          <div className="sidebar-profile-gradient"
+          <div className="sidebar-profile-gradient hover-pointer"
+            onClick={this.redirectToUserProfile}
             style={ {background: this.randomGradient}}>
-            <img onClick={this.redirectToUserProfile}
-              className={artClassnames}
+            <img className={artClassnames}
               onLoad={imageLoaded.bind(this)}
               src={this.props.user.profile_photo}></img>
           </div>

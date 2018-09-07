@@ -4,6 +4,7 @@ import { RECEIVE_USER } from '../actions/user_actions';
 import { merge, assign } from 'lodash';
 import { RECEIVE_LIKE } from '../actions/like_actions';
 import { RECEIVE_REPOST } from '../actions/repost_actions';
+import { RECEIVE_FOLLOWS } from '../actions/follow_actions';
 
 export default (state = {}, action) => {
   Object.freeze(state);
@@ -18,6 +19,10 @@ export default (state = {}, action) => {
     case RECEIVE_LIKE:
     case RECEIVE_REPOST:
       return assign(newState, action.payload.users);
+    case RECEIVE_FOLLOWS:
+      const currUser = newState[action.userId];
+      currUser.followed_ids = action.followedIds;
+      return newState;
     case DELETE_TRACK:
       const user = newState[action.userId];
       if (user.track_ids) {
