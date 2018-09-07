@@ -7,6 +7,7 @@ class Api::SessionsController < ApplicationController
     )
     if @user
       log_in_user(@user)
+      @tracks_and_reposts = @user.get_tracks_and_reposts.column_values(0)
       render "api/users/show"
     else
       render json: ["Invalid username/password"], status: 401
