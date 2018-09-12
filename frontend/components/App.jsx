@@ -10,6 +10,7 @@ import Modal from './modal';
 import Navbar from './main_page/navbar';
 import { connect } from 'react-redux';
 import UserProfile from './users/user_profile';
+import Likes from './users/likes';
 
 class App extends React.Component {
 
@@ -25,6 +26,7 @@ class App extends React.Component {
         <AuthRoute exact path="/" component={LandingPage} />
         <ProtectedRoute exact path="/stream" component={MainPage} />
         <ProtectedRoute exact path="/upload" component={UploadTrack} />
+        <Route exact path="/users/:id/likes" component={Likes} />
         <Route exact path="/tracks/:id" component={TrackShow} />
         <Route exact path="/users/:id" component={UserProfile} />
         <AudioFooter />

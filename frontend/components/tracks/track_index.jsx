@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TrackIndexItem from './track_index_item';
 import { fetchTracks } from '../../actions/track_actions';
-import { selectUserTracks } from '../../reducers/selectors';
+import { selectTracksFromIds } from '../../reducers/selectors';
 import { withRouter } from 'react-router-dom';
 
 class TrackIndex extends React.Component {
@@ -54,11 +54,9 @@ class TrackIndex extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   let tracks = [];
   let trackIds = [];
-  if (ownProps.userProf) {
-    if (ownProps.trackIds) {
-      trackIds = ownProps.trackIds;
-      tracks = selectUserTracks(state, ownProps.trackIds);
-    }
+  if (ownProps.trackIds) {
+    trackIds = ownProps.trackIds;
+    tracks = selectTracksFromIds(state, ownProps.trackIds);
   } else {
     trackIds = Object.keys(state.entities.tracks);
     tracks = Object.values(state.entities.tracks);

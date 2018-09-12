@@ -213,8 +213,7 @@ class UserProfile extends React.Component {
           </div>
         </div>
         <div className="index-and-sidebar">
-          <TrackIndex userProf={true}
-            listType="stream-list"
+          <TrackIndex listType="stream-list"
             trackIds={trackIds}
             indexItemComponent={StreamTrackIndexItem}/>
           <ProfileSidebar user={this.props.user}></ProfileSidebar>

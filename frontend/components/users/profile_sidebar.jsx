@@ -39,7 +39,7 @@ export default class ProfileSidebar extends React.Component {
         <span className="bio">{user.bio}</span>
         {
           user.liked_ids ?
-          <SidebarTrackIndex trackIds={user.liked_ids} likeCount={user.liked_ids.length}/> :
+          <SidebarTrackIndex trackIds={user.liked_ids} likeCount={user.liked_ids.length} userId={user.id}/> :
           null
         }
         {

@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from './navbar';
 import TrackIndex from '../tracks/track_index';
 import StreamTrackIndexItem from '../tracks/stream_track_index_item';
 import StreamSidebar from '../users/stream_sidebar';
