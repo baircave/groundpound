@@ -46,7 +46,8 @@ class Likes extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const user = state.entities.users[ownProps.match.params.id];
-  const trackIds = user.liked_ids;
+  let trackIds;
+  if (user) trackIds = user.liked_ids;
   return {
     trackIds
   };

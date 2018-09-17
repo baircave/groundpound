@@ -16,6 +16,7 @@ class UploadTrack extends React.Component {
       imageFile: null,
       trackFile: null,
       trackFileName: null,
+      waveformPCM: null,
       toolTipText: "Choose a title and audio file",
     };
     this.trackFileInput = React.createRef();
@@ -24,6 +25,27 @@ class UploadTrack extends React.Component {
     this.handleTrackFile = this.handleTrackFile.bind(this);
     this.updateField = this.updateField.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.waveRef = React.createRef();
+  }
+
+  componentDidMount() {
+    const wave = this.waveRef.current;
+    const ws = WaveSurfer.create({
+      container: wave,
+      barWidth: 2,
+      progressColor: '#43c3d2',
+      responsive: true,
+      cursorWidth: 0,
+    });
+
+    ws.setMute(true);
+    ws.on('ready', this.waveformLoaded.bind(this));
+
+    this.setState({waveform: ws});
+  }
+
+  waveformLoaded() {
+    this.setState({waveformPCM: this.state.waveform.exportPCM(1024, 10000, true, 0)});
   }
 
   updateField(field) {
@@ -46,6 +68,7 @@ class UploadTrack extends React.Component {
     const file = e.currentTarget.files[0];
     if (file) {
       reader.readAsDataURL(file);
+      this.state.waveform.load(URL.createObjectURL(file));
     }
     reader.onloadend = () => this.setState({trackFile: file, trackFileName: file.name});
   }
@@ -65,6 +88,7 @@ class UploadTrack extends React.Component {
       formData.append('track[artwork]', this.state.imageFile);
     }
     formData.append('track[track_file]', this.state.trackFile);
+    formData.append('track[waveform]', this.state.waveformPCM);
     this.props.postTrack(formData).then(this.redirectToShow.bind(this));
   }
 
@@ -81,6 +105,7 @@ class UploadTrack extends React.Component {
           <div className="form-wrapper">
             <h1 className="form-header">Upload to Groundpound</h1>
             <form className="upload-form">
+              <div ref={this.waveRef}></div>
               <div className="color-button track-file-ref-button track-file-input"
                 onClick={(e) => this.trackFileInput.current.click()}>Choose a file to upload</div>
               <input
@@ -131,7 +156,7 @@ class UploadTrack extends React.Component {
                   <NavLink className="cancel" to="/">Cancel</NavLink>
                   <button onClick={this.handleSubmit}
                     className="color-button, track-form-submit-button"
-                    disabled={!Boolean(this.state.title && this.state.trackFile) || this.state.submitDisabled}>Save
+                    disabled={!Boolean(this.state.title && this.state.trackFile && this.state.waveformPCM) || this.state.submitDisabled}>Save
                     <span className="tool-tip-text">{this.state.toolTipText}</span>
                   </button>
                 </div>
