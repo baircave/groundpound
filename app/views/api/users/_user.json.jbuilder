@@ -62,7 +62,7 @@ else
         json.comment_count track.comments.size
         json.like_count track.likes.size
         json.repost_count track.reposts.size
-        json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays
+        json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays, :waveform
         json.artwork_file artwork_file
         json.track_file url_for(track.track_file)
       end
@@ -75,7 +75,7 @@ else
         json.comment_count track.comments.size
         json.like_count track.likes.size
         json.repost_count track.reposts.size
-        json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays
+        json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays, :waveform
         json.artwork_file artwork_file
         json.track_file url_for(track.track_file)
       end
@@ -88,7 +88,7 @@ else
         json.comment_count track.comments.size
         json.like_count track.likes.size
         json.repost_count track.reposts.size
-        json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays
+        json.extract! track, :id, :title, :track_url, :created_at, :artist_id, :plays, :waveform
         json.artwork_file artwork_file
         json.track_file url_for(track.track_file)
       end

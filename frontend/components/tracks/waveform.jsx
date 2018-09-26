@@ -93,7 +93,7 @@ class Waveform extends React.Component {
 
       this.state.waveform.seekTo(playbar.currTime);
     }
-    
+
     this.setState({ready: true});
   }
 
